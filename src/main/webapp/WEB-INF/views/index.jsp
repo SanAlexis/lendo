@@ -42,10 +42,6 @@
 		</div>
 		<div class="row text-center" id="">
 			<h1>PAGE D'ACCEUIL EN CONSTRUCTION</h1>
-			<form method="POST" action="">
-   <textarea cols="40" class="ckeditor" id="editeur" name="editeur" rows="10"></textarea>
-   <input type="submit" value="envoyer" />
-</form>
 		</div>
 	</div>
 	<script

@@ -97,6 +97,30 @@ public class UpdateProjetController {
 		return json;
 	}
 	@SuppressWarnings("unused")
+	@RequestMapping(value = "/updateprojetdescription",method = RequestMethod.POST)
+	//@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String updateprojetdescription(HttpServletRequest request, HttpServletResponse response)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		// Récupération du code de l'utilisateur
+		String description1 = request.getParameter("description1");
+		String code_projet = request.getParameter("code_projet");
+		/*
+		 * Fonction permettant de récupérer les informations sur l'utilisateur
+		 * dans la BD
+		 */
+
+		/*
+		 * initialisation d'un Projet à des fins de test
+		 * à supprimer
+		 */
+		ProjetBusiness projet = new ProjetBusiness();
+		ObjectMapper objectMapper = new ObjectMapper();
+		// transformation de l'objet java en json
+		String json = objectMapper.writeValueAsString(projet);
+		return json;
+	}
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/updateprojetmontantAttendu",method = RequestMethod.POST)
 	//@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody

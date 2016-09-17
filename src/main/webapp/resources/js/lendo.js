@@ -835,4 +835,68 @@ function checkinfocke(champ1, champ2, champ3, champ4, champ5, champ6, champ7,
 
 	}
 }
+/*
+ * Fonction permettant de gérer notre éditeur ckéditor
+ */
+function checkinfockeditor(champ1,champ2,champ3,champ4,champ5,champ6,champ7){
+	// champ1 = information récupérée dans la Base de données
+	// champ2 = champ boutton effacer le contenu de ckeditor
+	// champ3 = champ qui contient le boutton pour mettre à jour la description détaillée du projet à partier de ckéditor
+	// champ4 = champ qui va contenir le nom de la variable envoyée au serveur
+	// champ5 = champ contenant l'url du script qui va traiter la requette
+	// champ6 = Champ contenant le nom du textarea ou sera placé le ckéditor
+	// champ7 = couleur de l'éditeur
+	/*
+	 * Chargement de l'éditeur ckéditor
+	 */
+	 editor=CKEDITOR.replace( champ6,
+             {                                       
+              forcePasteAsPlainText : true,
+              width   : '100%',
+              uiColor : champ7                       
+              });
+
+	if ($('#' + champ1).val() == ""){
+		//si la présentation détaillée du projet est vide
+		var texte;
+		texte="<p><strong>VEUILLEZ ENTRER LA DESCRIPTION DETAILLER DE VOTRE PROJET</strong></p><hr /><p>&nbsp;</p>";
+		editor.setData(texte);
+	}else{
+		/*
+		 * Chargement de la présentation du projet récupérée dals la BD dans ckeditor
+		 */editor.setData($('#' + champ1).val());
+	}
+	$("#" + champ2).on('click', function() {
+		var texte;
+		texte="";
+		editor.setData(texte);
+	});
+	$("#" + champ3).on('click', function() {
+		if(editor.getData()==""){
+			/*
+			 * Si l'éditeur est vide, on envoit un message d'alerte à l'utilisateur
+			 */
+			alert("Veuillez entrer la présentation détaillée de votre projet dans l'éditeur");
+		}else{
+			/*
+			 * Si l'éditeur n'est pas vide on envoit les données auserveur
+			 */
+			$
+			.ajax({
+				type : "post",
+				url : champ5,
+				cache : false,
+				data : champ4 + '=' + editor.getData(),
+				success : function(response) {
+					alert("La description détaillée de votre projet a été mise à jour avec succès");
+				},
+				error : function() {
+					alert('Error while request..');
+				}
+			});
+			
+		}
+		
+	});
+}
 

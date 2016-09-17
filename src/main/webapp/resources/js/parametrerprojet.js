@@ -4,9 +4,14 @@
 $(function() {
 	//test de connexion pour l'accès à la page de connexion
 	test_connect1();
+	
+	/*
+	 * récupération des catégories des projets
+	 */
+	loadprojetcategorie();
 	window.setInterval("test_connect1()",3000);
 	$('#description').css('background', '#652C90').css('color', 'white').css(
-			'cursor', 'hand').css('border-left', 'solid 5px #FBAF3F');
+			'cursor', 'hand').css('border-bottom', 'solid 5px #FBAF3F');
 
 	$('#informations').css('border-left', 'solid 2px #652C90').css('color', '');
 	// affichage de ses éléments
@@ -30,16 +35,16 @@ $(function() {
 	$("#description").click(
 			function() {
 				$('#description').css('background', '#652C90').css('color',
-						'white').css('cursor', 'hand').css('border-left',
+						'white').css('cursor', 'hand').css('border-bottom',
 						'solid 5px #FBAF3F');
 				$('#finance').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#localisation').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#media').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#detail').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 
 				// affichage de ses éléments
 				affiche(".info_description");
@@ -57,15 +62,15 @@ $(function() {
 
 				$('#finance').css('background', '#652C90')
 						.css('color', 'white').css('cursor', 'hand').css(
-								'border-left', 'solid 5px #FBAF3F');
+								'border-bottom', 'solid 5px #FBAF3F');
 				$('#description').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#localisation').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#media').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#detail').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				// affichage de ses éléments
 				affiche(".info_finance");
 
@@ -79,15 +84,15 @@ $(function() {
 			function() {
 
 				$('#localisation').css('background', '#652C90').css('color',
-						'white').css('border-left', 'solid 5px #FBAF3F');
+						'white').css('border-bottom', 'solid 5px #FBAF3F');
 				$('#finance').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#description').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#detail').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#media').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				// affichage de ses éléments
 				affiche(".info_localisation");
 
@@ -102,15 +107,15 @@ $(function() {
 			function() {
 
 				$('#detail').css('background', '#652C90').css('color', 'white')
-						.css('border-left', 'solid 5px #FBAF3F');
+						.css('border-bottom', 'solid 5px #FBAF3F');
 				$('#localisation').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#finance').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#description').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#media').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				// affichage de ses éléments
 				affiche(".info_detail");
 
@@ -124,15 +129,15 @@ $(function() {
 			function() {
 
 				$('#media').css('background', '#652C90').css('color', 'white')
-						.css('border-left', 'solid 5px #FBAF3F');
+						.css('border-bottom', 'solid 5px #FBAF3F');
 				$('#localisation').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#finance').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#description').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#detail').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				// affichage de ses éléments
 				affiche(".info_media");
 
@@ -170,6 +175,7 @@ function loadprojet(){
 			$('#check_titre').attr('value', projet.titre);
 			$('#check_cathegorie').attr('value', projet.categorie);
 			$('#check_slogan').attr('value', projet.slogan);
+			$('#check_description').attr('value', projet.description);
 			$('#check_montantAttendu').attr('value', projet.montantAttendu);
 			$('#check_image').attr('value', projet.medias);
 			$('#check_ville').attr('value', projet.ville);
@@ -177,6 +183,8 @@ function loadprojet(){
 			$('#check_dureeCampagne').attr('value', projet.dureeCampagne);
 			$('#check_video').attr('value', projet.medias);
 			$('#check_presentation').attr('value', projet.presentation);
+			
+			
 			$('#check_busnessPlan').attr('value', projet.busnessPlan);
 			/*
 			 * titre
@@ -192,7 +200,13 @@ function loadprojet(){
 			 * slogan
 			 */
 			checkinfo("check_slogan", "slogan", "", "affiche_slogan", "Entrez  le slogan du projet"," Clickez pour modifier le slogan du projet","annule_slogan","ok_slogan");
-			updateinfo("ok_slogan","updateprojetslogan","POST","slogan","code_projet","slogan","check_slogan","affiche_slogan","annule_slogan","Erreur : Le slogan du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
+			updateinfo("ok_slogan","updateprojetslogan","POST","slogan","code_projet","slogan","check_slogan","affiche_slogan","annule_slogan","Erreur : Le slogan du projet n'a pas pu être mis à jour, veuillez reessayer plus tard");
+			/*
+			 * description
+			 */
+			checkinfo("check_description1", "description1", "", "affiche_description1", "Entrez  la description du projet"," Clickez pour modifier la description du projet","annule_description1","ok_description1");
+			updateinfo("ok_description1","updateprojetdescription","POST","description1","code_projet","description1","check_description1","affiche_description1","annule_description1","Erreur : La description du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
+			
 			/*
 			 * montant campagne
 			 */
@@ -206,8 +220,9 @@ function loadprojet(){
 			/*
 			 * presentation du projet
 			 */
-			checkinfo("check_presentation", "presentation", "", "affiche_presentation", "Entrez  la présentation du projet"," Clickez pour modifier la présentation du projet","annule_presentation","ok_presentation");
-			updateinfo("ok_presentation","updateprojetpresentation","POST","presentation","code_projet","presentation","check_presentation","affiche_presentation","annule_presentation","Erreur : La présentation du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
+			checkinfockeditor("check_presentation","annule_presentation","ok_presentation","presentation","updateprojetpresentation","presentation","#595959");
+			//checkinfo("check_presentation", "presentation", "", "affiche_presentation", "Entrez  la présentation du projet"," Clickez pour modifier la présentation du projet","annule_presentation","ok_presentation");
+			//updateinfo("ok_presentation","updateprojetpresentation","POST","presentation","code_projet","presentation","check_presentation","affiche_presentation","annule_presentation","Erreur : La présentation du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
 			/*
 			 * busuness plan
 			 */
@@ -233,7 +248,6 @@ function loadprojet(){
 			 */
 			checkinfo("check_video", "video", "", "affiche_video", "Entrez la video du projet"," Clickez pour modifier la video du projet","annule_video","ok_video");
 			updateinfo("ok_video","updateprojetvideo","POST","video","code_projet","video","check_video","affiche_video","annule_video","Erreur : La video du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
-			
 			}
 			
 
