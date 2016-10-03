@@ -3,10 +3,13 @@
  */
 package org.nyx.lw.controllers;
 
+import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -269,10 +272,11 @@ public class UpdateProjetController {
 	//@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody
 	String updateprojetimage(HttpServletRequest request, HttpServletResponse response)
-			throws JsonGenerationException, JsonMappingException, IOException {
+			throws JsonGenerationException, JsonMappingException, IOException, IllegalStateException, ServletException {
 		// Récupération du code de l'utilisateur
-		String image = request.getParameter("image");
-		String code_projet = request.getParameter("code_projet");
+		String image = request.getParameter("a");
+		String imageName = request.getParameter("blobName");
+		String code_projet = request.getParameter("blobType");
 		/*
 		 * Fonction permettant de récupérer les informations sur l'utilisateur
 		 * dans la BD
@@ -285,7 +289,7 @@ public class UpdateProjetController {
 		ProjetBusiness projet = new ProjetBusiness();
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString(image);
 		return json;
 	}
 	@SuppressWarnings("unused")

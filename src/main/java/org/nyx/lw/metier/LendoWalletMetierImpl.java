@@ -6,6 +6,8 @@ import org.nyx.lw.dao.ILendoWalletDao;
 import org.nyx.lw.entities.ActiviteProfessionel;
 import org.nyx.lw.entities.Categorie;
 import org.nyx.lw.entities.Commentaire;
+import org.nyx.lw.entities.Dette;
+import org.nyx.lw.entities.Don;
 import org.nyx.lw.entities.LendoProjet;
 import org.nyx.lw.entities.LendoUtilisateur;
 import org.nyx.lw.entities.LendoWallet;
@@ -189,7 +191,21 @@ public void approvisionnerCompte(LendoWallet lw, Double montant) {
 @Override
 public String checkEmail(String email) {
 	// TODO Auto-generated method stub
-	return "1";
+	return "0";
 }
+
+@Override
+public Projet faireDon(Projet P, Don d, Utilisateur u) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public Projet faireDette(Projet P, Dette d, Utilisateur u) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
 
 }

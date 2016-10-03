@@ -1,1 +1,9 @@
 @CHARSET "UTF-8";
+#btng_search:hover{
+	color: red;
+font-weight: bold;
+}
+#seavrch:focus{
+	color: red;
+font-weight: bold;
+}

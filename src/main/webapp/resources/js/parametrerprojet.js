@@ -9,6 +9,17 @@ $(function() {
 	 * récupération des catégories des projets
 	 */
 	loadprojetcategorie();
+	$( "#resize" ).css('border', 'solid 3px red');
+	$( "#resize" ).resizable({
+		containment : "",
+        minHeight: 100,
+        minWidth: 100,
+        maxHeight: 800,
+        maxWidth: 800
+        });
+	$("#resize").draggable ({
+        containment : "#img"
+      });
 	window.setInterval("test_connect1()",3000);
 	$('#description').css('background', '#652C90').css('color', 'white').css(
 			'cursor', 'hand').css('border-bottom', 'solid 5px #FBAF3F');
@@ -148,6 +159,33 @@ $(function() {
 				masque(".info_detail");
 
 			});
+	
+	$( "#image" ).on('change', function() {
+		$( "#select_image" ).modal("hide");
+	afficheImage(this,0,"#img");
+	resize(this);
+	var a=canvas(this,0);
+	var d=getImage(0);
+	var b= canvasToBlob(a,d);
+	uploadImage(b,d,"blob","updateprojetimage");
+		$( "#infos" ).modal();	
+		 
+	});
+	
+	$( "#modifier_photo" ).hide();
+	$( "#canvas_image" ).on('mouseover', function() {
+		$( "#modifier_photo" ).show();
+		});
+	$( "#canvas_image" ).on('mouseout', function() {
+
+		setTimeout(function() {
+			$( "#modifier_photo" ).hide();
+			}, 5000);
+		});
+	$( "#modifier_photo" ).on('click', function() {
+		
+		$( "#select_image" ).modal();
+		});
 });
 function loadprojet(){
 	//récupération du code du projet
@@ -241,8 +279,8 @@ function loadprojet(){
 			/*
 			 * image du projet
 			 */
-			checkinfo("check_image", "image", "", "affiche_image", "Entrez l'image du projet"," Clickez pour modifier l'image du projet","annule_image","ok_image");
-			updateinfo("ok_image","updateprojetimage","POST","image","code_projet","image","check_image","affiche_image","annule_image","Erreur : L'image du projet n'a pas pu être mis à jour, veuillez reessayer plus tard");
+			//checkinfo("check_image", "image", "", "affiche_image", "Entrez l'image du projet"," Clickez pour modifier l'image du projet","annule_image","ok_image");
+			//updateinfo("ok_image","updateprojetimage","POST","image","code_projet","image","check_image","affiche_image","annule_image","Erreur : L'image du projet n'a pas pu être mis à jour, veuillez reessayer plus tard");
 			/*
 			 * video du projet
 			 */

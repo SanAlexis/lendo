@@ -17,6 +17,9 @@
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
 <link rel="stylesheet" type="text/css"
@@ -29,8 +32,25 @@
 		<div class="row" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="canvas_image"
+				style="background-color:">
+				<canvas id="image_canvas"
+					style="background-color: red; height: 250px; width: 250px"></canvas>
+
+				<div class="affiche col-xs-12 col-sm-12 col-md-12 col-lg-12"
+					id="affiche_image">
+					<div
+						class="glyphicon glyphicon-camera col-xs-12 col-sm-12 col-md-12 col-lg-12"
+						id="modifier_photo"
+						style="background-color: #595959; height: 25px">Modifier</div>
+				</div>
+				
+			</div>
+
+		</div>
 		<!-- MENU 1 -->
-		<div class="row" id="">
+		<div class="row" id="" style="background-color:#FBAF3F">
 			<!-- DESCRIPTION SOMMAIRE -->
 			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="description"
 				style="background-color:">
@@ -68,7 +88,7 @@
 			placeholder="Code projet" class="form-control" id="code_projet">
 
 		<div class="row" id="">
-			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10" id="description"
+			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10" id=""
 				style="background-color:">
 				<!-- FORMULAIRES DE MISE A JOUR -->
 				<!-- CHAMP TITRE -->
@@ -188,10 +208,10 @@
 						</form>
 					</div>
 				</div>
-				
+
 				<!-- CHAMP DESCRIPTION -->
-		
-		<div class="row info_description" id="">
+
+				<div class="row info_description" id="">
 					<div
 						class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-2 col-lg-2"
 						id="" style="background-color:">
@@ -203,10 +223,10 @@
 						<form action="" name="">
 
 							<div class="" id="" style="">
-							<textarea rows="8" cols="" id="description1"
-									placeholder="Brève description du projet"  class="form-control"
-									id="presentation"></textarea> <input
-									type="hidden" name="" value="" placeholder="Nom"
+								<textarea rows="8" cols="" id="description1"
+									placeholder="Brève description du projet" class="form-control"
+									id="presentation"></textarea>
+								<input type="hidden" name="" value="" placeholder="Nom"
 									id="check_description1" class="form-control">
 							</div>
 							<div>
@@ -229,8 +249,8 @@
 						</form>
 					</div>
 				</div>
-		
-				
+
+
 				<!-- CHAMP MONTANT DE LA CAMPAGNE -->
 				<div class="row info_finance" id="">
 					<div
@@ -309,7 +329,7 @@
 					</div>
 				</div>
 
-				
+
 				<!-- CHAMP BUSNESS PLAN -->
 				<div class="row info_detail" id="">
 					<div
@@ -362,7 +382,9 @@
 						<form action="" name="">
 
 							<div class="" id="" style="">
-								<textarea name="presentation" rows="8" cols="" class="form-control" placeholder="Présentation détaillée du projet"
+								<textarea name="presentation" rows="8" cols=""
+									class="form-control"
+									placeholder="Présentation détaillée du projet"
 									id="presentation"></textarea>
 								<input type="hidden" name="" value="" placeholder="Nom"
 									id="check_presentation" class="form-control">
@@ -380,8 +402,7 @@
 								</div>
 								<div class="col-sm-3 col-md-3 col-lg-3" id="" style="">
 									<input type="button" name="" value="ok" placeholder=""
-										class="btn btn-default form-control" 
-										id="ok_presentation">
+										class="btn btn-default form-control" id="ok_presentation">
 								</div>
 							</div>
 						</form>
@@ -448,44 +469,7 @@
 						</form>
 					</div>
 				</div>
-				<!-- CHAMP IMAGE DU PROJET -->
-				<div class="row info_media" id="">
-					<div
-						class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-2 col-lg-2"
-						id="" style="background-color:">
-						<label class="control-label">Image du projet</label>
-					</div>
-					<div
-						class="col-sm-offset-2 col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-8 col-md-6 col-lg-6"
-						id="" style="background-color:">
-						<form action="" name="">
 
-							<div class="" id="" style="">
-								<input type="file" name="" value=""
-									placeholder="Image du projet" class="" id="image"> <input
-									type="hidden" name="" value="" placeholder="Nom"
-									id="check_image" class="form-control">
-							</div>
-							<div>
-								<div class="affiche col-xs-12 col-sm-12 col-md-12 col-lg-12"
-									id="affiche_image"></div>
-							</div>
-							<div class=" row " id="" style="">
-								<div
-									class="col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-sm-3 col-md-3 col-lg-3"
-									id="" style="">
-									<input type="reset" name="" value="X" class="form-control"
-										style="color: red" id="annule_image">
-								</div>
-								<div class="col-sm-3 col-md-3 col-lg-3" id="" style="">
-									<input type="button" name="" value="ok" placeholder=""
-										class="btn btn-default form-control" disabled="disabled"
-										id="ok_image">
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
 
 				<!-- CHAMP VIDEO DU PROJET -->
 				<div class="row info_media" id="">
@@ -525,6 +509,25 @@
 							</div>
 						</form>
 					</div>
+					
+				</div>
+				<!-- IFRAME DE LA VIDEO DE PRESENTATION DU PROJET -->
+				<div class="row info_media" id="">
+					<div
+						class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-2 col-lg-2"
+						id="" style="background-color:">
+						<label class="control-label"></label>
+					</div>
+					<div
+						class="col-sm-offset-2 col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-8 col-md-6 col-lg-6"
+						id="" style="background-color:">
+
+							<div class="" id="" style="">
+								<iframe title="" width="500" height="390"
+				src="http://www.youtube.com/embed/LY16fq8H8qQ" frameborder="0"
+				allowfullscreen></iframe>
+							</div>
+					</div>
 				</div>
 
 
@@ -543,15 +546,80 @@
 			</div>
 
 
+
+
+
+<!-- PAGE MODAL DE SELECTION DE L'IMAGE -->
+			<div class="modal fade" id="select_image">
+				<div class="modal-dialog" style="background-color: #595959">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color: #FBAF3F">
+
+							<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
+							<h1>Sélectionnez une image</h1>
+						</div>
+						<div class="modal-body" id=''
+							style="background-color:; height: 100%">
+							
+<form action="" name="">
+					<input type="file" name="" value="" placeholder="Image du projet"
+						class="" id="image">
+						<input type="reset" name="" value="Annuler" placeholder="Annuler"
+						class="" id="">
+				</form>
+						</div>
+						<div class="modal-footer" style="background-color: #FBAF3F">
+						<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+
+			<!-- PAGE MODAL DE REDIMENSIONNENEMENT ET DE MISE A JOUR DE LA PHOTO -->
+			<div class="modal fade" id="infos">
+				<div class="modal-dialog" style="background-color: #595959">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color: #FBAF3F">
+
+							<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
+							<h1>Paramétrez la photo de votre projet</h1>
+						</div>
+						<div class="modal-body" id='j'
+							style="background-color:; height: 100%">
+							<img src="" id="img"></img>
+
+							<div id="resize"
+								style="background-color:; height: 100px; width: 100px; top: -370px; left: 100px">
+								<button class="btn" id="rr"
+									style="background-color: transparent; height:; border-color: #595959">Upload</button>
+									<button class="btn" id="ras"
+									style="background-color: transparent; height:; border-color: #595959">Test</button>
+							</div>
+
+						</div>
+						<div class="modal-footer" style="background-color: #FBAF3F">
+
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- ESPACE VIDE DE DROITE -->
 			<div class="hidden-xs col-sm-2 col-md-2 col-lg-2" id=""
 				style="background-color: red">
 				<h4 class="text-center"></h4>
+				cccc
 			</div>
 		</div>
 	</div>
 	<script
 		src="<%=request.getContextPath()%>/resources/js/jquery-3.1.0.js"></script>
+
+	<script
+		src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/lendo.js"></script>

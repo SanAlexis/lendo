@@ -522,7 +522,7 @@ function connecte() {
 											$
 													.ajax({
 														type : "post",
-														url : "doConnexion",
+														url : "doConnexioncoockie",
 														cache : false,
 														data : "email=" + email
 																+ "&&password="
@@ -899,4 +899,134 @@ function checkinfockeditor(champ1,champ2,champ3,champ4,champ5,champ6,champ7){
 		
 	});
 }
+/*
+ * fonction permettant de l'ire une image et l'afficher
+ */
+function afficheImage(input,indice,champ) {
+/*
+ * champ = cham^p dans lequel sera affichée l'image
+ * indice = numéro de l'image à récupérer
+ */
+    if (input.files && input.files[indice]) {
+        var reader = new FileReader();
 
+        reader.onload = function (e) {
+            $(champ).attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[indice]);
+    }
+}
+
+
+function resize(input) {
+	$( "#rr" ).on('click', function() {	
+
+		var canvas=document.getElementById("image_canvas");
+	    var ctx=canvas.getContext("2d");
+	       //alert('offset: '+$('#resize').offset().top+'position: '+$('#resize').position().top);
+
+			//alert('width: '+$('#resize').width()+'outerWidth: '+$('#resize').outerWidth());
+			//alert('offset: '+$('#j').offset().left+'position: '+$('#resize').position().left);
+	        //ctx.drawImage(input.files[0],0,0,100,100,0,0,400,300);
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        	var img= new Image();
+	        	img.onload = function(){
+	        		ctx.drawImage(img,$('#resize').position().left-15,$('#resize').position().top-15,$('#resize').width(),$('#resize').height(),0,0,300,150);
+	        		ctx.fillText("Lendo Projet",200,145);
+	        	}
+	        	img.src=e.target.result;
+	        };
+
+	        reader.readAsDataURL(input.files[0]);
+		
+	}); 
+}
+/*
+ * fonction permettant de récupérer une image dans un formulaire
+ */
+function getImage(indice){
+	/*
+	 * indice = position de l'image à récupérer
+	 */
+	imageFile = event.target.files[indice];
+	var reader = new FileReader();
+    reader.onload = function (event) {
+    	var img= new Image();
+    	img.src = event.target.result;
+    };
+
+    reader.readAsDataURL(this.imageFile);
+	return imageFile;
+}
+/*
+ * fonction permettant de convertir une image en canvas
+ */
+function canvas(input,indice){
+	/*
+	 * indice = position de l'image à convertir
+	 */
+	var canvas=document.createElement('canvas');
+    var ctx=canvas.getContext("2d");
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img= new Image();
+        	img.onload = function(){
+        		ctx.drawImage(img,$('#resize').position().left-15,$('#resize').position().top-15,$('#resize').width(),$('#resize').height(),0,0,300,150);
+        		ctx.fillText("Lendo Projet",200,145);
+        	}
+        	img.src=e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[indice]);
+        return ctx.canvas;
+	
+}
+/*
+ * fonction permettant de convertir une image canvas en blob
+ */
+function canvasToBlob(canvas,image){
+	/*
+	 * image = image récupérée avec la fonction getImage(indice)
+	 */
+	var byteString = atob(canvas.toDataURL().split(",")[1]),
+	ab = new ArrayBuffer(byteString.length),
+	la = new Uint8Array(ab),
+	i;
+	for(i=0; i<byteString.length; i++){
+		la[i]=byteString.charCodeAt(i);
+	}
+	return new Blob([ab], {type:image.type});
+}
+/*
+ * fonction permettant d'envoyer une image au servaeur
+ */
+function uploadImage(blob,image,variable,url){
+	/*
+	 * canvas = canvas convertie en blob avec la fonction canvasToBlob()
+	 * image = image récupérée avec la fonction getImage()
+	 * variable = nom de la variable a envoyer au serveur
+	 * url = url du serveur qui va traiter la requete
+	 */
+	var data = new FormData();
+	data.append("blob",blob);
+	data.append("blobName",image.name);
+	data.append("blobType",image.type);
+	$.ajax({
+		type : "post",
+		url : url,
+		cache : false,
+		data : "a="+blob,
+		 // processData: false,
+		 // contentType: false,
+		success : function(response) {
+			var r = eval('(' + response + ')');
+			alert(r);
+		},
+		error : function() {
+			alert('Error while request..');
+		}
+	});
+	
+}

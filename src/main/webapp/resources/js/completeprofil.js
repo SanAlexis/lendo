@@ -6,7 +6,7 @@ $(function() {
 	test_connect1();
 	window.setInterval("test_connect1()",3000);
 	$('#identite').css('background', '#652C90').css('color', 'white').css(
-			'cursor', 'hand').css('border-left', 'solid 5px #FBAF3F');
+			'cursor', 'hand').css('border-bottom', 'solid 5px #FBAF3F');
 
 	$('#informations').css('border-left', 'solid 2px #652C90').css('color', '');
 
@@ -28,14 +28,14 @@ $(function() {
 	$("#identite").click(
 			function() {
 				$('#identite').css('background', '#652C90').css('color',
-						'white').css('cursor', 'hand').css('border-left',
+						'white').css('cursor', 'hand').css('border-bottom',
 						'solid 5px #FBAF3F');
 				$('#coordonnees').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#preferences').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#situation').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 
 				// affichage de ses éléments
 				affiche(".info_identite");
@@ -51,13 +51,13 @@ $(function() {
 			function() {
 
 				$('#coordonnees').css('background', '#652C90').css('color',
-						'white').css('border-left', 'solid 5px #FBAF3F');
+						'white').css('border-bottom', 'solid 5px #FBAF3F');
 				$('#identite').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#preferences').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#situation').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				// affichage de ses éléments
 				affiche(".info_coordonnees");
 
@@ -70,13 +70,13 @@ $(function() {
 			function() {
 
 				$('#preferences').css('background', '#652C90').css('color',
-						'white').css('border-left', 'solid 5px #FBAF3F');
+						'white').css('border-bottom', 'solid 5px #FBAF3F');
 				$('#situation').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#identite').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#coordonnees').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				// affichage de ses éléments
 				affiche(".info_preferences");
 
@@ -89,13 +89,13 @@ $(function() {
 			function() {
 
 				$('#situation').css('background', '#652C90').css('color',
-						'white').css('border-left', 'solid 5px #FBAF3F');
+						'white').css('border-bottom', 'solid 5px #FBAF3F');
 				$('#preferences').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				$('#identite').css('background', 'none').css('color', 'black')
-						.css('border-left', 'none 0px #652C90');
+						.css('border-bottom', 'none 0px #652C90');
 				$('#coordonnees').css('background', 'none').css('color',
-						'black').css('border-left', 'none 0px #652C90');
+						'black').css('border-bottom', 'none 0px #652C90');
 				// affichage de ses éléments
 				affiche(".info_situation");
 

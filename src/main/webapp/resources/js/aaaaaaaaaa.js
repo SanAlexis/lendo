@@ -1,42 +1,167 @@
-/**
- * 
- */
-function loaduser(){
-	/*
-	 * fonction permettant de récupérer les informations sur l'utilisateur identifié par son code
-	 */
-	
-	//récupération du code de l'utilisateur
-	var code_utilisateur = $('#code_utilisateur').val();
+var imageUpLoader={
+		imageFile:null,
+		canvasCtx:document.getElementById("image_canvas").getContext("2d"),
+		init:function(){
+			//document.getElementById("ras").onclick=this.uploadCanvasAsImage(this);
+			document.getElementById("image").onchange=function(event){
+				this.imageFile = event.target.files[0];
+				var reader = new FileReader();
+		        reader.onload = function (event) {
+		        	var img= new Image();
+		        	img.onload = function(){
+		        		this.drowImageOnCanvas(img);
+		        		this.displayImage(img);
+		        	}
+		        	img.src = event.target.result;
+		        };
 
-	$.ajax({
-		type : "post",
-		url : "consulterutilisateur",
-		cache : false,
-		data : 'codeU=' + code_utilisateur,
-		success : function(response) {
-			//conversion de la reponse en objet java manipulable
+		        reader.readAsDataURL(this.imageFile);
+			}
+		},
+		drowImageOnCanvas: function(img){
+
+			this.canvasCtx.drawImage(img,0,0,100,100,0,0,300,150);
+			this.canvasCtx.fillText("Lendo Projet",200,145);
+		},
+		displayImage:function(img){
 			
-			var user = eval('(' + response + ')');
-			//alert(i.nom + " "+ i.prenom);
-			
-			// chargement des champs de vérification avec les infortion de l'utilisateur
-			$('#check_nom').attr('value', user.nom);
-			$('#check_prenom').attr('value', user.prenom);
-			$('#check_date').attr('value', user.dateNaissance);
-			$('#check_ville').attr('value', user.lieuNaissance);
-			$('#check_adresse').attr('value', user.adresse);
-			$('#check_adresse1').attr('value', user.adresse2);
-			$('#check_codepostal').attr('value', user.codePostal);
-			$('#check_telephone').attr('value', user.telephone);
-			$('#check_motivation').attr('value', user.motivation);
-			$('#check_activite').attr('value', user.secteurActivite);
-			$('#check_secteurgeo').attr('value', user.secteurGeo);
-			$('#check_activitepro').attr('value', user.activitePro);
-			$('#check_experience').attr('value', user.experience);
-			$('#check_revenu').attr('value', user.sourceRevenu);
-			alert(response);
+			document.getElementById("img").src=img.src;
+		},
+		canvasToBlob: function(canvas,type){
+			var byteString = atob(canvas.toDataURL().split(",")[1]),
+			ab = new ArrayBuffer(byteString.length),
+			la = new Uint8Array(ab),
+			i;
+			for(i=0; i<byteString.length; i++){
+				la[i]=byteString.charCodeAt(i);
+			}
+			return new Blob([ab], {type:type});
+		},
+		uploadImage:function(){
+			var data = new FormData();
+			data.append("file",this.imageFile);
+			this.uploadToServer(data);
+		},
+		uploadCanvasAsImage: function(){
+			var data = new FormData();
+			var blob = this.canvasToBlob(this.canvasCtx.canvas, this.imageFile.type);
+			data.append("blob",blob);
+			data.append("blobName",this.imageFile.name);
+			data.append("blobType",this.imageFile.type);
+			this.uploadToServer(data);
+		},
+		uploadToServer: function(formData){
+			$
+			.ajax({
+				type : "post",
+				url : "",
+				cache : false,
+				data : 'data=' + formData,
+				success : function(response) {
+				},
+				error : function() {
+					alert('Error while request..');
+				}
+			});
 			
 		}
-	});
+		
+};
+
+//bonnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+
+var imageUpLoader={
+		imageFile:null,
+		canvasCtx:document.getElementById("image_canvas").getContext("2d"),
+		init:function(){
+			//document.getElementById("ras").onclick=function(event){this.uploadCanvasAsImage();}
+			document.getElementById("image").onchange=function(event){
+				this.imageFile = event.target.files[0];
+				var reader = new FileReader();
+		        reader.onload = function (event) {
+		        	var img= new Image();
+		        	img.onload = function(){
+		        		document.getElementById("img").src=img.src;
+		        		$( "#infos" ).modal();
+		        		this.drowImageOnCanvas(img);
+		        		//this.displayImage(img);
+		        	}
+		        	img.src = event.target.result;
+		        };
+
+		        reader.readAsDataURL(this.imageFile);
+			}
+		},
+		drowImageOnCanvas: function(img){
+
+			this.canvasCtx.drawImage(img,0,0,100,100,0,0,300,150);
+			this.canvasCtx.fillText("Lendo Projet",200,145);
+		},
+		displayImage:function(img){
+			
+			document.getElementById("img").src=img.src;
+		},
+		canvasToBlob: function(canvas,type){
+			var byteString = atob(canvas.toDataURL().split(",")[1]),
+			ab = new ArrayBuffer(byteString.length),
+			la = new Uint8Array(ab),
+			i;
+			for(i=0; i<byteString.length; i++){
+				la[i]=byteString.charCodeAt(i);
+			}
+			return new Blob([ab], {type:type});
+		},
+		uploadImage:function(){
+			var data = new FormData();
+			data.append("file",this.imageFile);
+			this.uploadToServer(data);
+		},
+		uploadCanvasAsImage: function(event){
+			var data = new FormData();
+			var blob = this.canvasToBlob(this.canvasCtx.canvas, this.imageFile.type);
+			data.append("blob",blob);
+			data.append("blobName",this.imageFile.name);
+			data.append("blobType",this.imageFile.type);
+			this.uploadToServer(data);
+		},
+		uploadToServer: function(formData){
+			$
+			.ajax({
+				type : "post",
+				url : "",
+				cache : false,
+				data : 'data=' + formData,
+				success : function(response) {
+				},
+				error : function() {
+					alert('Error while request..');
+				}
+			});
+			
+		}
+		
+};
+
+
+
+/*
+ * canvas to blob
+*/
+function canvas(){
+	var canvas=document.createElement('canvas');
+    var ctx=canvas.getContext("2d");
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        	var img= new Image();
+        	img.onload = function(){
+        		ctx.drawImage(img,$('#resize').position().left-15,$('#resize').position().top-15,$('#resize').width(),$('#resize').height(),0,0,300,150);
+        		ctx.fillText("Lendo Projet",200,145);alert();
+        	}
+        	img.src=e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+        return ctx;
+	
 }

@@ -6,6 +6,8 @@ import java.util.Date;
 import org.nyx.lw.entities.ActiviteProfessionel;
 import org.nyx.lw.entities.Categorie;
 import org.nyx.lw.entities.Commentaire;
+import org.nyx.lw.entities.Dette;
+import org.nyx.lw.entities.Don;
 import org.nyx.lw.entities.LendoProjet;
 import org.nyx.lw.entities.LendoUtilisateur;
 import org.nyx.lw.entities.LendoWallet;
@@ -34,7 +36,7 @@ public interface ILendoWalletMetier {
 	public SecteurActivite creerSecteurActivite(SecteurActivite sa);
 	public LendoUtilisateur creerCompteUtilisateur(LendoUtilisateur lu, Long codeU);
 	public LendoProjet creerCompteProjet(LendoProjet lp, Long codeP);
-	//par dï¿½faut tous les projets sont busness
+	//par défaut tous les projets sont busness
 	public Projet creerProjetBusiness(ProjetBusiness pb, Long codU);
 	public Projet creerProjetFlexible(ProjetFlexible pf, Long codU);
 	public Utilisateur creerUtilisateur(Utilisateur u, Long codeMot, Long codeSA, Long codeSG,Long codeAP);
@@ -49,10 +51,7 @@ public interface ILendoWalletMetier {
 	public Projet addDescription(Projet p, String titre, Categorie cat, String slogan, String montantAttentdu, String description, String pays, String ville, String dureeProjet);
 	public Projet addMedia (Projet p, Media m);
 	public Projet addCommentaires(Projet p, Commentaire com, Utilisateur u);
+	public Projet faireDon(Projet P,Don d, Utilisateur u);
+	public Projet faireDette(Projet P,Dette d, Utilisateur u);
 	public void approvisionnerCompte(LendoWallet lw, Double montant);
-	
-	
-	
-	
-	
 }

@@ -124,9 +124,10 @@ public class ConnexionController {
 	 */
 	@RequestMapping (value="/doConnexioncoockie",method = RequestMethod.POST)
 	public @ResponseBody String doConnexioncoockie(HttpServletRequest request, HttpServletResponse responsel) throws JsonGenerationException, JsonMappingException, IOException {
-		
-		byte[] email0 = Base64.getDecoder().decode(request.getParameter("email"));
-		byte[] password0 = Base64.getDecoder().decode(request.getParameter("password"));
+		String a =request.getParameter("email");
+		String b =request.getParameter("password");
+		byte[] email0 = Base64.getDecoder().decode(a);
+		byte[] password0 = Base64.getDecoder().decode(b);
 		String email=new String(email0, "utf-8");
 		String password=new String(password0, "utf-8");
 		/*

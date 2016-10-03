@@ -20,7 +20,14 @@ $(function() {
 	 * on rafraichit la liste des projets de l'utilisateur toutes les 03 minutes
 	 */
 	window.setInterval("loadprojetuser()", 180000);
-	
+	$('#search').on('focus', function() {
+		$('#btn_search').css('background', '#FBAF3F').css('color', '#652C90');
+		
+	});
+	$('#search').on('blur', function() {
+		$('#btn_search').css('background', '#652C90').css('color', '#FBAF3F');
+		
+	});
 	/*
 	 * touche de déconnexion de l'uttilisateur
 	 */
