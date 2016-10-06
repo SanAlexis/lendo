@@ -920,27 +920,68 @@ function afficheImage(input,indice,champ) {
 
 
 function resize(input) {
-	$( "#rr" ).on('click', function() {	
-
+	$( "#rr" ).on('click', function() {
+		$( "#rr" ).hide();
+		$( "#upload" ).show();
+		//document.createElement('canvas');
 		var canvas=document.getElementById("image_canvas");
 	    var ctx=canvas.getContext("2d");
 	       //alert('offset: '+$('#resize').offset().top+'position: '+$('#resize').position().top);
 
 			//alert('width: '+$('#resize').width()+'outerWidth: '+$('#resize').outerWidth());
-			//alert('offset: '+$('#j').offset().left+'position: '+$('#resize').position().left);
+			//alert('offset: '+$('#img').offset().left+'position: '+$('#img').position().left);
 	        //ctx.drawImage(input.files[0],0,0,100,100,0,0,400,300);
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
 	        	var img= new Image();
 	        	img.onload = function(){
-	        		ctx.drawImage(img,$('#resize').position().left-15,$('#resize').position().top-15,$('#resize').width(),$('#resize').height(),0,0,300,150);
+	        		ctx.drawImage(img,$('#resize').offset().left-$('#img').offset().left,$('#resize').offset().top-$('#img').offset().top,$('#resize').width(),$('#resize').height(),0,0,300,150);
 	        		ctx.fillText("Lendo Projet",200,145);
 	        	}
 	        	img.src=e.target.result;
 	        };
 
 	        reader.readAsDataURL(input.files[0]);
-		
+
+	}); 
+}
+
+function uploadImageProjet(input,url0) {
+	$( "#upload" ).on('click', function() {
+
+		//document.createElement('canvas');
+		var canvas=document.getElementById("image_canvas");
+	    var ctx=canvas.getContext("2d");
+	        var url = canvas.toDataURL("image/jpeg", 1.0);
+	        var canvas1=document.getElementById("image_canvas1");
+		    var ctx1=canvas1.getContext("2d");
+		    var img1= new Image();
+        	img1.onload = function(){
+        		ctx1.drawImage(img1,0,0);
+        		//ctx.fillText("Lendo Projet",200,145);
+        	}
+        	img1.src=url;
+        	
+        	 $.ajax({
+        			type : "post",
+        			url : url0,
+        			cache : false,
+        			data : "image="+url,
+        			  //processData: false,
+        			 // contentType: false,
+        			success : function(response) {
+        				var r = eval('(' + response + ')');
+        				//alert(r);
+        				var nouvelleImg = document.createElement("img");
+        	        	 nouvelleImg.src = url;
+        	        	 document.body.appendChild(nouvelleImg);
+        	        	 $( "#infos" ).modal("hide");
+        			},
+        			error : function() {
+        				alert('Error while request..');
+        			}
+        		});
+
 	}); 
 }
 /*
@@ -1002,7 +1043,7 @@ function canvasToBlob(canvas,image){
 /*
  * fonction permettant d'envoyer une image au servaeur
  */
-function uploadImage(blob,image,variable,url){
+function uploadImge(blob,image,variable,url){
 	/*
 	 * canvas = canvas convertie en blob avec la fonction canvasToBlob()
 	 * image = image récupérée avec la fonction getImage()
@@ -1022,11 +1063,44 @@ function uploadImage(blob,image,variable,url){
 		 // contentType: false,
 		success : function(response) {
 			var r = eval('(' + response + ')');
-			alert(r);
+			//alert(r);
 		},
 		error : function() {
 			alert('Error while request..');
 		}
 	});
 	
+}
+/*
+ * Fonction permettant e traiter l'url de la vidéo
+ */
+function testVideoUrl(url,champ){
+/*
+ * url = url de la vidéo à tester
+ * champ = champ d'affichage de la vidéo
+ */	
+	// Test du début de l'url
+	var first = /^[https://www.youtube.com/watch?v=]{32}/;
+	var second = /^[www.youtube.com/watch?v=]{24}/;
+	var tird = /^[http://www.youtube.com/watch?v=]{31}/;
+	var urllength = url.length;
+	var frame_url = "http://www.youtube.com/embed/";
+	
+		if(first.test(url)){
+			var url0 = url.substring(32,urllength);
+			$('#'+champ).attr('src', frame_url+url0);
+		}else{
+			if(second.test(url)){
+				var url0 = url.substring(24,urllength);
+				$('#'+champ).attr('src', frame_url+url0);
+		}else{
+			if(tird.test(url)){
+				var url0 = url.substring(31,urllength);
+				$('#'+champ).attr('src', frame_url+url0);
+			}else{
+				alert("Veuillez entrer une URL youtube valide");
+			}
+		}
+			
+		} 
 }

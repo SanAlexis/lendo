@@ -44,11 +44,22 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	}
 
 	@Override
+	public Utilisateur editUtilisateur (Utilisateur u) {
+		sessionFactory.getCurrentSession().update(u);
+		return u;
+	}
+	
+	@Override
+	public Utilisateur deleteUtilisateur (Utilisateur u) {
+		sessionFactory.getCurrentSession().delete(u);
+		return u;
+	}
+	
+	@Override
 	public Utilisateur addUtilisateur(Utilisateur u) {
 		em.persist(u);
 		return u;
 	}
-
 	@Override
 	public Projet addProjet(Projet p) {
 		em.persist(p);
@@ -75,6 +86,13 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public Media addMedia(Media m) {
+		em.persist(m);
+		return m;
+	}
+	@Override
+	public Media addMediaProjet(Media m, Long codeProjet) {
+		Projet p=consulterProjet(codeProjet);
+		m.setProjet(p);
 		em.persist(m);
 		return m;
 	}
@@ -232,6 +250,14 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 		if(mt==null) throw new RuntimeException("Operateur introuvalbe");
 		return mt;
 	}
+	
+	@Override
+	public ActiviteProfessionel consulterActivitePro(Long codeAct) {
+		ActiviteProfessionel mt=em.find(ActiviteProfessionel.class, codeAct);
+		if(mt==null) throw new RuntimeException("activite Pro introuvalbe");
+		return mt;
+	}
+
 
 	@Override
 	public Categorie consulterCategorie(Long codeCat) {
@@ -304,5 +330,4 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 		session.close();
 		return userFound;  
 	}
-	
 }

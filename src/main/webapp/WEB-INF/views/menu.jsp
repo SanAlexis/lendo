@@ -77,8 +77,8 @@
 						href="#" class="glyphicon glyphicon-shopping-cart"><b
 							class="caret"></b></a>
 						<ul class="dropdown-menu pull-right">
-							<li><a href="projetvue">Projet</a></li>
-							<li><a href="projetvue">Projet</a></li>
+							<li><a href="projetvue?codeP=84">Projet</a></li>
+							<li><a href="projetvue?codeP=848">Projet</a></li>
 						</ul></li>
 				</ul>
 			</div>

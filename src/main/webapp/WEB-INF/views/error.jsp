@@ -41,7 +41,7 @@
 			<%@ include file="menu.jsp"%>
 		</div>
 		<div class="row text-center" id="">
-			<h1>ERREUR, IMPOSSIBLE DE CHARGERLA PAGE</h1>
+			<h1>ERREUR, IMPOSSIBLE DE CHARGER LA PAGE</h1>
 		</div>
 	</div>
 	<script

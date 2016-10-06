@@ -20,8 +20,13 @@
 </head>
 <body>
 	<div class="container-ui" id="">
-	
-	<!-- 
+		<div class="row" id="">
+			<%@ include file="menu.jsp"%>
+		</div>
+		<div class="row" id="">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
+				style="background-color: red">1</div>
+		</div>
 		<div class="row" id="">
 			<div class="col-sm-1" id="" style="background-color: black">1</div>
 			<div class="col-sm-1" id="" style="background-color:">2</div>
@@ -36,21 +41,23 @@
 			<div class="col-sm-1" id="" style="background-color: green">11</div>
 			<div class="col-sm-1" id="" style="background-color: blue">12</div>
 		</div>
-		 -->
-		<div class="row" id="">
-			<%@ include file="menu.jsp"%>
-		</div>
+
+
 		<div class="row text-center" id="">
 			<h1>PAGE DE VUE DE PROJET EN CONSTRUCTION</h1>
 		</div>
 	</div>
 	<script
 		src="<%=request.getContextPath()%>/resources/js/jquery-3.1.0.js"></script>
+
+	<script
+		src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-		<script src="<%=request.getContextPath()%>/resources/js/lendo.js"></script>
-		<script src="<%=request.getContextPath()%>/resources/js/menu.js"></script>
-		
+	<script src="<%=request.getContextPath()%>/resources/js/lendo.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/menu.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/projetvue.js"></script>
+
 
 </body>
 </html>

@@ -9,13 +9,13 @@ $(function() {
 	 * récupération des catégories des projets
 	 */
 	loadprojetcategorie();
-	$( "#resize" ).css('border', 'solid 3px red');
+	$( "#resize" ).css('border', 'dashed 3px #652C90');
 	$( "#resize" ).resizable({
 		containment : "",
         minHeight: 100,
         minWidth: 100,
-        maxHeight: 800,
-        maxWidth: 800
+        maxHeight: 400,
+        maxWidth: 400
         });
 	$("#resize").draggable ({
         containment : "#img"
@@ -162,13 +162,13 @@ $(function() {
 	
 	$( "#image" ).on('change', function() {
 		$( "#select_image" ).modal("hide");
+		$( "#infos" ).modal();
+		$( "#rr" ).show();
+		$( "#upload" ).hide();
 	afficheImage(this,0,"#img");
 	resize(this);
-	var a=canvas(this,0);
-	var d=getImage(0);
-	var b= canvasToBlob(a,d);
-	uploadImage(b,d,"blob","updateprojetimage");
-		$( "#infos" ).modal();	
+	uploadImageProjet(this,"updateprojetimage");
+	
 		 
 	});
 	
@@ -185,6 +185,10 @@ $(function() {
 	$( "#modifier_photo" ).on('click', function() {
 		
 		$( "#select_image" ).modal();
+		});
+$( "#ok_video" ).on('click', function() {
+	testVideoUrl($( "#video" ).val(),"frame_video");
+		
 		});
 });
 function loadprojet(){

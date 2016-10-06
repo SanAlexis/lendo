@@ -17,9 +17,11 @@ import org.nyx.lw.entities.Operateur;
 import org.nyx.lw.entities.Projet;
 import org.nyx.lw.entities.ProjetBusiness;
 import org.nyx.lw.entities.ProjetFlexible;
+import org.nyx.lw.entities.Retrait;
 import org.nyx.lw.entities.SecteurActivite;
 import org.nyx.lw.entities.SecteurGeographique;
 import org.nyx.lw.entities.Utilisateur;
+import org.nyx.lw.entities.Versement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,19 +38,36 @@ public void setLwdao(ILendoWalletDao lwdao) {
 @Override
 public void verser(double mt, Long cpte, Long codeU) {
 	// TODO Auto-generated method stub
-	
+	Utilisateur ut=lwdao.consulterUtilisateur(codeU);
+	LendoUtilisateur lu=(LendoUtilisateur)ut.getLendoutilisateur().get(0);
+	LendoWallet lw1=lwdao.consulterCompte(cpte);
+	lwdao.addOperation(new Versement(mt, new Date(), ut, lw1));
+	lwdao.addOperation(new Retrait(mt, new Date(), ut, lu));
+	lw1.setSolde(lw1.getSolde()+mt);
+	lu.setSolde(lu.getSolde()-mt);
 }
 
 @Override
-public void retirer(double mt, Long cpte, Long codeU) {
+public void retirer(double mt,Long codeU) {
 	// TODO Auto-generated method stub
-	
+	Utilisateur ut=lwdao.consulterUtilisateur(codeU);
+	LendoUtilisateur lu=(LendoUtilisateur)ut.getLendoutilisateur().get(0);
+	lwdao.addOperation(new Retrait(mt, new Date(), ut, lu));
+	lu.setSolde(lu.getSolde()-mt);
 }
 
+@Override
+public void crediter(double mt,Long codeU) {
+	// TODO Auto-generated method stub
+	Utilisateur ut=lwdao.consulterUtilisateur(codeU);
+	LendoUtilisateur lu=(LendoUtilisateur)ut.getLendoutilisateur().get(0);
+	lwdao.addOperation(new Versement(mt, new Date(), ut, lu));
+	lu.setSolde(lu.getSolde()+mt);
+}
 @Override
 public void contribuerPourProjet(double mt, Long cpteProjet, Long codeU) {
 	// TODO Auto-generated method stub
-	
+	verser(mt, cpteProjet, codeU);
 }
 
 @Override
@@ -60,25 +79,25 @@ public Categorie creerCategorie(Categorie cat) {
 @Override
 public Motivation creerMotivation(Motivation mot) {
 	// TODO Auto-generated method stub
-	return null;
+	return lwdao.addMotivation(mot);
 }
 
 @Override
 public Operateur creerOperateur(Operateur op) {
 	// TODO Auto-generated method stub
-	return null;
+	return lwdao.addOperateur(op);
 }
 
 @Override
 public SecteurGeographique creerSecteurGeographique(SecteurGeographique sg) {
 	// TODO Auto-generated method stub
-	return null;
+	return lwdao.addSecteurGeo(sg);
 }
 
 @Override
 public SecteurActivite creerSecteurActivite(SecteurActivite sa) {
 	// TODO Auto-generated method stub
-	return null;
+	return lwdao.addSecteurActivite(sa);
 }
 
 @Override
@@ -114,10 +133,19 @@ public boolean checkLogin(String userName, String userPassword) {
 }
 
 @Override
-public Utilisateur creerUtilisateur(Utilisateur u, Long codeMot, Long codeSA,
+public Utilisateur updateUtilisateur(Long codeU, Long codeMot, Long codeSA,
 		Long codeSG, Long codeAP) {
-	// TODO Auto-generated method stub
-	return null;
+	Utilisateur us=lwdao.consulterUtilisateur(codeU);
+	Motivation mot=lwdao.consulterMotivation(codeMot);
+	SecteurActivite sa=lwdao.consulterSecteurActi(codeSA);
+	SecteurGeographique sg=lwdao.consulterSecteurGeo(codeSG);
+	ActiviteProfessionel ap=lwdao.consulterActivitePro(codeAP);
+	us.setActivitePro(ap);
+	us.setSecteurActivite(sa);
+	us.setSecteurGeo(sg);
+	us.setMotivation(mot);
+	lwdao.editUtilisateur(us);
+	return us;
 }
 
 @Override
@@ -129,17 +157,25 @@ public Utilisateur creerUtilisateur(String nom, String prenom, String email,
 
 @Override
 public Utilisateur addInformation(Utilisateur u, String nom, String prenom,
-		Date date_nais, String lieu_naiss, String nation) {
-	// TODO Auto-generated method stub
-	return null;
+		Date date_nais, String lieu_naiss, String email) {
+	u.setNom(nom);
+	u.setPrenom(prenom);
+	u.setDateNaissance(date_nais);
+	u.setLieuNaissance(lieu_naiss);
+	u.setEmail(email);
+	lwdao.editUtilisateur(u);
+	return u;
 }
 
 @Override
 public Utilisateur addCoordonnee(Utilisateur u, String adresse,
-		String complAdress, String codePostal, String pays, String ville,
-		String telephone) {
-	// TODO Auto-generated method stub
-	return null;
+		String complAdress, String codePostal,String telephone) {
+	u.setAdresse(adresse);
+	u.setAdresse2(complAdress);
+	u.setCodePostal(codePostal);
+	u.setTelephone(telephone);
+	lwdao.editUtilisateur(u);
+	return u;
 }
 
 @Override
@@ -171,15 +207,18 @@ public Projet addDescription(Projet p, String titre, Categorie cat,
 }
 
 @Override
-public Projet addMedia(Projet p, Media m) {
+public Media addMedia(Long codePr, Media m) {
 	// TODO Auto-generated method stub
-	return null;
+	return lwdao.addMediaProjet(m,codePr);
 }
 
 @Override
-public Projet addCommentaires(Projet p, Commentaire com, Utilisateur u) {
+public Commentaire addCommentaires(Projet p, Commentaire com, Utilisateur u) {
 	// TODO Auto-generated method stub
-	return null;
+	com.setProjet(p);
+	com.setUtilisateur(u);
+	lwdao.addCommentaire(com);
+	return lwdao.addCommentaire(com);
 }
 
 @Override

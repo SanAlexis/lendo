@@ -29,10 +29,11 @@ public class Commentaire implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Commentaire(String titre, String description) {
+	public Commentaire(String titre, String description,Date datePost) {
 		super();
 		this.titre = titre;
 		this.description = description;
+		this.datePost=datePost;
 	}
 
 	public Long getCodeCommentaire() {

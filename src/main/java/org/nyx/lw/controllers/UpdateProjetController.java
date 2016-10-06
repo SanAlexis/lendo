@@ -274,9 +274,9 @@ public class UpdateProjetController {
 	String updateprojetimage(HttpServletRequest request, HttpServletResponse response)
 			throws JsonGenerationException, JsonMappingException, IOException, IllegalStateException, ServletException {
 		// Récupération du code de l'utilisateur
-		String image = request.getParameter("a");
-		String imageName = request.getParameter("blobName");
-		String code_projet = request.getParameter("blobType");
+		String image = request.getParameter("image");
+		//String imageName = request.getParameter("blobName");
+		//String code_projet = request.getParameter("blobType");
 		/*
 		 * Fonction permettant de récupérer les informations sur l'utilisateur
 		 * dans la BD

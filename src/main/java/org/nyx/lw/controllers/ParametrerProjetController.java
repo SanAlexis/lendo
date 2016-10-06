@@ -27,9 +27,7 @@ public class ParametrerProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code du projet
 		String codeP = request.getParameter("codeP");
-		if(codeP.isEmpty()){
-			return "error";
-		}else{
+		if(codeP!=null && !codeP.isEmpty()){
 			/*
 			 * on stocke le code du rojet dans une session
 			 */
@@ -42,6 +40,9 @@ public class ParametrerProjetController {
 			 *
 			 */
 			return "parametrerprojet";
+			
+		}else{
+			return "error";
 		}
 		
 		

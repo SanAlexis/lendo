@@ -57,4 +57,9 @@ public interface ILendoWalletDao {
 	public List<Media> getMediaByProject(Long codeProjet);
 	public List<Categorie> getCaterogie();
 	public boolean checkLogin(String email, String password);
+	public Media addMediaProjet(Media m, Long p);
+	public Utilisateur editUtilisateur(Utilisateur u);
+	public Utilisateur deleteUtilisateur(Utilisateur u);
+	public ActiviteProfessionel consulterActivitePro(Long codeAct);
+	
 }

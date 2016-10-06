@@ -37,7 +37,8 @@
 				style="background-color:">
 				<canvas id="image_canvas"
 					style="background-color: red; height: 250px; width: 250px"></canvas>
-
+				<canvas id="image_canvas1"
+					style="background-color: blue; height: 250px; width: 250px"></canvas>
 				<div class="affiche col-xs-12 col-sm-12 col-md-12 col-lg-12"
 					id="affiche_image">
 					<div
@@ -46,8 +47,9 @@
 						style="background-color: #595959; height: 25px">Modifier</div>
 				</div>
 				
+								
+				
 			</div>
-
 		</div>
 		<!-- MENU 1 -->
 		<div class="row" id="" style="background-color:#FBAF3F">
@@ -522,10 +524,9 @@
 						class="col-sm-offset-2 col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-8 col-md-6 col-lg-6"
 						id="" style="background-color:">
 
-							<div class="" id="" style="">
-								<iframe title="" width="500" height="390"
-				src="http://www.youtube.com/embed/LY16fq8H8qQ" frameborder="0"
-				allowfullscreen></iframe>
+							<div class="embed-responsive embed-responsive-16by9" id="" style="">
+								<iframe title="" class = "embed-responsive-item"
+				src="http://www.youtube.com/embed/" frameborder="0"	allowfullscreen id="frame_video" width="" height=""></iframe>
 							</div>
 					</div>
 				</div>
@@ -590,15 +591,15 @@
 						</div>
 						<div class="modal-body" id='j'
 							style="background-color:; height: 100%">
-							<img src="" id="img"></img>
+							<img src="" id="img" class="center-block"></img>
 
 							<div id="resize"
 								style="background-color:; height: 100px; width: 100px; top: -370px; left: 100px">
 								<button class="btn" id="rr"
+									style="background-color: transparent; height:; border-color: #595959">Rogner</button>
+									<button class="btn" id="upload"
 									style="background-color: transparent; height:; border-color: #595959">Upload</button>
-									<button class="btn" id="ras"
-									style="background-color: transparent; height:; border-color: #595959">Test</button>
-							</div>
+									</div>
 
 						</div>
 						<div class="modal-footer" style="background-color: #FBAF3F">

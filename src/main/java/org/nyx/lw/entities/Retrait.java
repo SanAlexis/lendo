@@ -13,7 +13,7 @@ public class Retrait extends Operation{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Retrait(double montant, Date dateOperation) {
+	public Retrait(double montant, Date dateOperation, Utilisateur utilisateur,LendoWallet lendowallet) {
 		super(montant, dateOperation);
 		// TODO Auto-generated constructor stub
 	}
