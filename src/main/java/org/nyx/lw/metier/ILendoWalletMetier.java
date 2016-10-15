@@ -2,10 +2,12 @@ package org.nyx.lw.metier;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.nyx.lw.entities.ActiviteProfessionel;
 import org.nyx.lw.entities.Categorie;
 import org.nyx.lw.entities.Commentaire;
+import org.nyx.lw.entities.Contribution;
 import org.nyx.lw.entities.Dette;
 import org.nyx.lw.entities.Don;
 import org.nyx.lw.entities.LendoProjet;
@@ -25,22 +27,30 @@ import org.nyx.lw.entities.Utilisateur;
 
 
 public interface ILendoWalletMetier {
-	
+	public Projet creerProjet(Projet p);
+	public ProjetFlexible creerProjetFlexible(ProjetFlexible pf);
+	public ProjetBusiness creerProjetBusiness(ProjetBusiness pb);
+	public Utilisateur creerUtilisateur(Utilisateur U);
 	public void verser(double mt, Long cpte, Long codeU);
 	public void retirer(double mt,Long codeU);
 	public void contribuerPourProjet(double mt, Long cpteProjet, Long codeU);
 	public Categorie creerCategorie(Categorie cat);
 	public Motivation creerMotivation(Motivation mot);
+	public Commentaire creerCommentaire(Commentaire c);
 	public Operateur creerOperateur(Operateur op);
 	public SecteurGeographique creerSecteurGeographique(SecteurGeographique sg);
 	public SecteurActivite creerSecteurActivite(SecteurActivite sa);
 	public LendoUtilisateur creerCompteUtilisateur(LendoUtilisateur lu, Long codeU);
 	public LendoProjet creerCompteProjet(LendoProjet lp, Long codeP);
+
 	//par défaut tous les projets sont busness
 	public Projet creerProjetBusiness(ProjetBusiness pb, Long codU);
+	public Projet creerProjetBusiness(ProjetBusiness pb, Long codU, Long codeCat);
 	public Projet creerProjetFlexible(ProjetFlexible pf, Long codU);
+	public Projet creerProjetFlexible(ProjetFlexible pf, Long codU, Long codeCat);
 	public Utilisateur updateUtilisateur(Long u, Long codeMot, Long codeSA, Long codeSG,Long codeAP);
 	public boolean checkLogin(String userName, String userPassword);
+	public Utilisateur checkUser(String userName, String userPassword);
 	public String checkEmail(String email);
 	public Utilisateur creerUtilisateur(String nom, String prenom, String email, String pass,String ville, String pays);
 	public Utilisateur addInformation(Utilisateur u,String nom, String prenom, Date date_nais, String lieu_naiss, String email);
@@ -55,4 +65,17 @@ public interface ILendoWalletMetier {
 	public Projet faireDette(Projet P,Dette d, Utilisateur u);
 	public void approvisionnerCompte(LendoWallet lw, Double montant);
 	void crediter(double mt, Long codeU);
+	
+	public List<Projet> getProjetUtilisateur(Long codeU);
+	public List<Categorie> getCategories();
+	public List<Contribution> getContributionProjetUtilisateur(Long codeU);
+	public List<Motivation>getMotivations();
+	public List<SecteurActivite> getSecteurActivites();
+	public List<SecteurGeographique> getSecteurGeos();
+	public List<Commentaire> getCommentaireProjet(Long codeP);
+	public List<Contribution> getContributionProjet(Long codeP);
+	public Boolean isYour(Projet P, Utilisateur U);
+	public Projet consulterProjet(Long codeP);
+	public Utilisateur consulterUtilisateur(Long codeU);
+	
 }

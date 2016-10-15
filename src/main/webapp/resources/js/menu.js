@@ -7,6 +7,10 @@ $(function() {
 	 * on vérifie si un utilisateur est connecté
 	 */
 	connecte();
+	/*
+	 * récupération de la date courante du serveur
+	 */
+	getServerDate("date");
 
 	/*
 	 * on refait la vérification toutes les 03 secondes

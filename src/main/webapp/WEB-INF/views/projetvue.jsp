@@ -20,13 +20,85 @@
 </head>
 <body>
 	<div class="container-ui" id="">
+		<input type="hidden" id="code_p"
+			value=<%=session.getAttribute("codeP")%>>
 		<div class="row" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
+
+
 		<div class="row" id="">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
-				style="background-color: red">1</div>
+				style="background-color:">
+
+
+				<!-- Bloc contenant l'image, le titre,le slogan, la description, la catégorie du projet -->
+				<div class="row" id="">
+					<div class="col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
+						style="background-color: ">
+						<!-- IFRAME DE LA VIDEO DE PRESENTATION DU PROJET -->
+						<div class="row" id="">
+							<div class="col-lg-offset-2 col-xs-12 col-sm-12 col-md-12 col-lg-6"
+								id="" style="background-color:">
+						<div class="embed-responsive embed-responsive-16by9" id=""
+							style="">
+							<iframe title="" class="embed-responsive-item"
+								src="http://www.youtube.com/embed/" frameborder="0"
+								allowfullscreen id="frame_video" width="" height=""></iframe>
+						</div>
+						</div>
+						</div>
+						<!-- Ligne contenant la catégorie -->
+						<div class="row" id="" style="background-color:#FBAF3F">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+								id="categorie" style="background-color:"></div>
+						</div>
+
+						<div class="row" id="" style="background-color:#FBAF3F">
+							<!-- Colonne contenant l'image du projet-->
+							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" id=""
+								style="background-color:">
+								<img alt="Image du projet" id="image"
+									class="img-responsive center-block" src="">
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" id=""
+								style="background-color:">
+								<div class="row" id="">
+									<!-- Colonne contenant le titre du projet-->
+									<div
+										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
+										id="titre" style="background-color:"></div>
+									<!-- Colonne contenant le slogan du projet-->
+									<div
+										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
+										id="slogan" style="background-color:"></div>
+									<!-- Colonne contenant la description du projet-->
+									<div
+										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify"
+										id="description" style="background-color:"></div>
+
+									<!-- Barre de progression-->
+									<div
+										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify"
+										id="progress" style="background-color:"></div>
+
+									<!-- Colonne contenant le temps rstant du projet-->
+									<div
+										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
+										id="temps_restant" style="background-color:"></div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
+
+		
 		<div class="row" id="">
 			<div class="col-sm-1" id="" style="background-color: black">1</div>
 			<div class="col-sm-1" id="" style="background-color:">2</div>
@@ -40,11 +112,6 @@
 			<div class="col-sm-1" id="" style="background-color: red">10</div>
 			<div class="col-sm-1" id="" style="background-color: green">11</div>
 			<div class="col-sm-1" id="" style="background-color: blue">12</div>
-		</div>
-
-
-		<div class="row text-center" id="">
-			<h1>PAGE DE VUE DE PROJET EN CONSTRUCTION</h1>
 		</div>
 	</div>
 	<script

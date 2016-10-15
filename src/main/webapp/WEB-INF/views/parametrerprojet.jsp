@@ -28,7 +28,7 @@
 <body>
 	<div class="container-ui" id="">
 
-
+<input type="hidden" id="code_p" value=<%=  session.getAttribute( "codeP" ) %>>
 		<div class="row" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
@@ -515,6 +515,8 @@
 				</div>
 				<!-- IFRAME DE LA VIDEO DE PRESENTATION DU PROJET -->
 				<div class="row info_media" id="">
+				<div class="" id="aa">
+</div>
 					<div
 						class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-2 col-lg-2"
 						id="" style="background-color:">
@@ -545,7 +547,6 @@
 				</div>
 
 			</div>
-
 
 
 

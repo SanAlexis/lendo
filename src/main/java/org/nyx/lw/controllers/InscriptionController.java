@@ -39,26 +39,13 @@ public class InscriptionController {
 		String prenom = request.getParameter("prenom");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		/*
-		 * méthode permettant d'ajouter l'utilisateur dans la BD
-		 */
-		/*
-		 * retirer les champs ville et pays de la méthode
-		 */
-		//Utilisateur user=metier.creerUtilisateur(nom, prenom, email, password, password, password);
-		/*
-		 * foction de création du compte Lendowallet de l'utilisateur
-		 */
 		
-		/*
-		 * Utilisateur de test
-		 */
 		Utilisateur user = new Utilisateur();
-		user.setCodeUtilisateur((long) 151515);
 		user.setNom(nom);
 		user.setPrenom(prenom);
 		user.setEmail(email);
 		user.setPassword(password);
+		Utilisateur usercree = metier.creerUtilisateur(user);
 		/*
 		 * on stocke l'adresse email de l'utilisateur dans une variable de session
 		 */
@@ -66,7 +53,7 @@ public class InscriptionController {
 		session.setAttribute("email", user.getEmail());
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(user);
+		String json = objectMapper.writeValueAsString(usercree);
 		return json;
 	}
 

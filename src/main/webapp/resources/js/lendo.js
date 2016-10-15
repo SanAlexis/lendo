@@ -838,7 +838,7 @@ function checkinfocke(champ1, champ2, champ3, champ4, champ5, champ6, champ7,
 /*
  * Fonction permettant de gérer notre éditeur ckéditor
  */
-function checkinfockeditor(champ1,champ2,champ3,champ4,champ5,champ6,champ7){
+function checkinfockeditor(champ1,champ2,champ3,champ4,champ5,champ6,champ7,champ8,champ9){
 	// champ1 = information récupérée dans la Base de données
 	// champ2 = champ boutton effacer le contenu de ckeditor
 	// champ3 = champ qui contient le boutton pour mettre à jour la description détaillée du projet à partier de ckéditor
@@ -846,6 +846,8 @@ function checkinfockeditor(champ1,champ2,champ3,champ4,champ5,champ6,champ7){
 	// champ5 = champ contenant l'url du script qui va traiter la requette
 	// champ6 = Champ contenant le nom du textarea ou sera placé le ckéditor
 	// champ7 = couleur de l'éditeur
+	// champ8 = variable passé au serveur et qui contiendra le code du projet
+	// cahmp9 = valeur du code du projet
 	/*
 	 * Chargement de l'éditeur ckéditor
 	 */
@@ -886,9 +888,9 @@ function checkinfockeditor(champ1,champ2,champ3,champ4,champ5,champ6,champ7){
 				type : "post",
 				url : champ5,
 				cache : false,
-				data : champ4 + '=' + editor.getData(),
+				data : champ4 + '=' + editor.getData()+'&&'+champ8+'='+champ9,
 				success : function(response) {
-					alert("La description détaillée de votre projet a été mise à jour avec succès");
+					alert(editor.getData()+"La description détaillée de votre projet a été mise à jour avec succès");
 				},
 				error : function() {
 					alert('Error while request..');
@@ -953,6 +955,7 @@ function uploadImageProjet(input,url0) {
 		var canvas=document.getElementById("image_canvas");
 	    var ctx=canvas.getContext("2d");
 	        var url = canvas.toDataURL("image/jpeg", 1.0);
+	        $('#aa').html(url);
 	        var canvas1=document.getElementById("image_canvas1");
 		    var ctx1=canvas1.getContext("2d");
 		    var img1= new Image();
@@ -1103,4 +1106,27 @@ function testVideoUrl(url,champ){
 		}
 			
 		} 
+}
+/*
+ * fonction permettant de récupérer la date courante du serveur
+ */
+function getServerDate(champ){
+/*
+ * champ = variable dans laquelle sera stockée le résultat
+ */
+	 $.ajax({
+			type : "post",
+			url : "GetServerDate",
+			cache : false ,
+			  //processData: false,
+			 // contentType: false,
+			success : function(response) {
+				var r = eval('(' + response + ')');
+				$('#'+champ).attr('value',r);
+				
+			},
+			error : function() {
+				alert('Impossible de récupérer la date du serveur');
+			}
+		});
 }

@@ -4,6 +4,8 @@
 package org.nyx.lw.controllers;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.nyx.lw.entities.Categorie;
 import org.nyx.lw.entities.Projet;
 import org.nyx.lw.entities.ProjetBusiness;
+import org.nyx.lw.entities.ProjetFlexible;
+import org.nyx.lw.entities.Utilisateur;
 import org.nyx.lw.metier.ILendoWalletMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,34 +38,66 @@ public class CreerProjetController {
 	
 	@RequestMapping (value="/docreerprojet",method = RequestMethod.POST)
 	public @ResponseBody String docreerprojet (HttpServletRequest request, HttpServletResponse response) throws JsonGenerationException, JsonMappingException, IOException {
-		String titre = request.getParameter("titre");
-		String cathegorie = request.getParameter("cathegorie");
-		String montant = request.getParameter("montant");
-		String duree = request.getParameter("duree");
+		String titre = request.getParameter("titre").toUpperCase();
+		long cathegorie = Long.parseLong(request.getParameter("cathegorie"));
+		double montant = Double.parseDouble(request.getParameter("montant"));
+		int duree = Integer.parseInt(request.getParameter("duree"));
 		String type = request.getParameter("type");
-		String taux = request.getParameter("taux");
+		double taux = Double.parseDouble(request.getParameter("taux"));
 		String periode = request.getParameter("periode");
+		SimpleDateFormat ceation = new SimpleDateFormat("dd/MM/yyyy");
+	    Date DateCreation = new Date();
+		//long a = Long.parseLong(titre);
 		/*
 		 * récupération du code de l'utilisateur dans la variable de session
 		 */
 		HttpSession session = request.getSession();
 		long codU=(Long) session.getAttribute("codeU");
-		/*
-		 * initialisation de la catégorie du projet
-		 */
-		Categorie categorie = new Categorie();
-		categorie.setCodeCategorie(null);
 		
-		ProjetBusiness projet = new ProjetBusiness();
-		projet.setCodeProjet((long) 15455);
-		projet.setTitre(titre);
-		projet.setCategorie(categorie);
-		projet.setMontantAttendu(10115);
-		//metier.creerProjetBusiness(projet, codU);
+		Utilisateur user = new Utilisateur();
+		user.setCodeUtilisateur(codU);
+		
+		Categorie categorie = new Categorie();
+		categorie.setCodeCategorie(cathegorie);
 		ObjectMapper objectMapper = new ObjectMapper();
-		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
-		return json;
+		
+		if(type.equals("don")){
+			ProjetFlexible projet = new ProjetFlexible();
+			projet.setTitre(titre);
+			projet.setCategorie(categorie);
+			projet.setMontantAttendu(montant);
+			projet.setDureeCampagne(duree);
+			projet.setPromoteur(user);
+			projet.setDateCreation(DateCreation);
+			
+			ProjetFlexible projet1 = metier.creerProjetFlexible(projet);
+			
+			// transformation de l'objet java en json
+			String json = objectMapper.writeValueAsString(projet1);
+			return json;
+			
+			
+			
+		}else{
+			
+			ProjetBusiness projet = new ProjetBusiness();
+			projet.setTitre(titre);
+			projet.setCategorie(categorie);
+			projet.setMontantAttendu(montant);
+			projet.setDureeCampagne(duree);
+			projet.setPromoteur(user);
+			projet.setTauxFixe(taux);
+			projet.setDateCreation(DateCreation);
+			projet.setDateRemboursement(null);
+			
+			ProjetBusiness projet1 = metier.creerProjetBusiness(projet);
+			
+			// transformation de l'objet java en json
+			String json = objectMapper.writeValueAsString(projet1);
+			return json;
+		}
+		
+		
 	}
 
 }

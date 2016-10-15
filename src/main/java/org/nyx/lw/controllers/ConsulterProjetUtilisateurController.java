@@ -1,14 +1,20 @@
 package org.nyx.lw.controllers;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.nyx.lw.entities.Categorie;
+import org.nyx.lw.entities.Projet;
 import org.nyx.lw.entities.ProjetBusiness;
+import org.nyx.lw.entities.Utilisateur;
 import org.nyx.lw.metier.ILendoWalletMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,27 +36,29 @@ public class ConsulterProjetUtilisateurController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String codeU = request.getParameter("codeU");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
 
 		/*
-		 * initialisation d'un projet à des fins de test
+		 * récupération du code de l'utilisateur dans la variable de session
 		 */
-		ProjetBusiness projet = new ProjetBusiness();
-		projet.setCodeProjet((long) 22);
-		projet.setTitre("construction");
-		projet.setTauxFixe(10000000);
-		ProjetBusiness projet1 = new ProjetBusiness();
-		projet1.setTitre("aménagement");
-		projet1.setCodeProjet((long) 848);
-		projet1.setTauxFixe(2545511);
-		ProjetBusiness result[]={projet,projet1};
+		HttpSession session = request.getSession();
+		long codU=(Long) session.getAttribute("codeU");
+		
+		Utilisateur user = new Utilisateur();
+		user.setCodeUtilisateur(codU);
+		
+		List <Projet>  projetU = (List<Projet>) metier.getProjetUtilisateur(codU);
+		List <Projet> projetUser =  new LinkedList<Projet>();
+		for(int i=0; i< projetU.size(); i++){
+			Long code = projetU.get(i).getCodeProjet();
+			String titre = projetU.get(i).getTitre();
+			Projet pro = new Projet();
+			pro.setCodeProjet(code);
+			pro.setTitre(titre);
+			projetUser.add(pro);
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(result);
-		String a = null;
+		String json = objectMapper.writeValueAsString(projetUser);
 		return json;
 		//return a;
 

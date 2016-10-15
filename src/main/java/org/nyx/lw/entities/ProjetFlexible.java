@@ -21,6 +21,7 @@ public class ProjetFlexible extends Projet{
 		super(titre, description, montantAttendu, slogan, pays, ville, dureeCampagne,
 				busnessPlan, presentation, dateDebutCampagne);
 		// TODO Auto-generated constructor stub
+		taux=0;
 	}
 
 	public double getTaux() {

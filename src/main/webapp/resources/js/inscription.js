@@ -38,11 +38,13 @@ $(function() {
 	$('#email').on(
 			'keyup click',
 			function() {
+				
 				var a = $('#email').val();
 				var b = testformatemail(a);
-				check();
+				
 				if (b == 0) {
 					$('#a').attr('value', b);
+					check();
 					$('#div-email').removeClass('has-success').addClass(
 							'has-error').addClass('has-feedback');
 					$('#glyph-email').removeClass('glyphicon-ok').addClass(
@@ -56,6 +58,7 @@ $(function() {
 						data : 'email=' + a,
 						success : function(response) {
 							$('#a').attr('value', response);
+							check();
 							if (response == 0) {
 								$('#div-email').removeClass('has-success')
 										.addClass('has-error').addClass(
@@ -141,8 +144,8 @@ function check() {
  * fonction permettant d'inscrire un utilisateur
  */
 function inscription() {
-	var nom = $('#nom').val();
-	var prenom = $('#prenom').val();
+	var nom = $('#nom').val().toUpperCase();
+	var prenom = $('#prenom').val().toLowerCase();
 	var email = $('#email').val();
 	var password = $('#password').val();
 	$

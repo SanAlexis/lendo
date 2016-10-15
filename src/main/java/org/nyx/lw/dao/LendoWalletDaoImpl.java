@@ -22,6 +22,8 @@ import org.nyx.lw.entities.Motivation;
 import org.nyx.lw.entities.Operateur;
 import org.nyx.lw.entities.Operation;
 import org.nyx.lw.entities.Projet;
+import org.nyx.lw.entities.ProjetBusiness;
+import org.nyx.lw.entities.ProjetFlexible;
 import org.nyx.lw.entities.SecteurActivite;
 import org.nyx.lw.entities.SecteurGeographique;
 import org.nyx.lw.entities.TypeMedia;
@@ -34,7 +36,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	@PersistenceContext
 	private EntityManager em;
 
-	protected SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory ;
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -163,56 +165,36 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public List<Projet> consulterProjets(String titre) {
-		Query req=em.createQuery("select c from projet c where c.titre like :x");
+		Query req=em.createQuery("select c from Projet c where c.titre like :x");
 		req.setParameter("x", "%"+titre+"%");
 		return req.getResultList();
 	}
 
-	@Override
-	public List<Projet> getProjetByUtilisateur(Long codeU) {
-		Query req=em.createQuery("select c from projet c where c.promoteur.codeUtilisateur=:x");
-		req.setParameter("x",codeU);
-		return req.getResultList();
-	}
-
-	@Override
-	public List<Contribution> getContributionByProjet(Long codeProjet) {
-		Query req=em.createQuery("select c from contribution c where c.projet.codeProjet=:x");
-		req.setParameter("x",codeProjet);
-		return req.getResultList();
-	}
-
-	@Override
-	public List<Commentaire> getCommentaireByProjet(Long codeProjet) {
-		Query req=em.createQuery("select c from commentaire c where c.projet.codeProjet=:x");
-		req.setParameter("x",codeProjet);
-		return req.getResultList();
-	}
 
 	@Override
 	public List<Operation> getOperationByLendoWallet(Long numeroLendo) {
-		Query req=em.createQuery("select c from operation c where c.lendowallet.numeroCompte=:x");
+		Query req=em.createQuery("select c from Operation c where c.LendoWallet.numeroCompte=:x");
 		req.setParameter("x",numeroLendo);
 		return req.getResultList();
 	}
 
 	@Override
 	public List<ActiviteProfessionel> getActiviteProByUtilisateur(Long codeU) {
-		Query req=em.createQuery("select c from ActiviteProfessionel c where c.utilisateur.codeUtilisateur=:x");
+		Query req=em.createQuery("select c from ActiviteProfessionel c where c.Utilisateur.codeUtilisateur=:x");
 		req.setParameter("x",codeU);
 		return req.getResultList();
 	}
 
 	@Override
 	public List<Projet> getProjetByCategorie(Long codeCat) {
-		Query req=em.createQuery("select c from projet c where c.categorie.codeCategorie=:x");
+		Query req=em.createQuery("select c from Projet c where c.Categorie.codeCategorie=:x");
 		req.setParameter("x",codeCat);
 		return req.getResultList();
 	}
 
 	@Override
 	public List<Media> getMediaByProject(Long codeProjet) {
-		Query req=em.createQuery("select c from media c where c.projet.codeProjet=:x");
+		Query req=em.createQuery("select c from Media c where c.Projet.codeProjet=:x");
 		req.setParameter("x",codeProjet);
 		return req.getResultList();
 	}
@@ -289,7 +271,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public LendoProjet getCompteByProjet(Long codeProjet) {
-		Query req=em.createQuery("select c from lendowallet c where c.projet.codeProjet=:x");
+		Query req=em.createQuery("select c from LendoWallet c where c.Projet.codeProjet=:x");
 		req.setParameter("x",codeProjet);
 		List<LendoProjet> lps=req.getResultList();
 		LendoProjet lpro=null;
@@ -301,7 +283,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public LendoUtilisateur getCompteByUtilisateur(Long codeUser) {
-		Query req=em.createQuery("select c from lendowallet c where c.projet.codeUtilisateur=:x");
+		Query req=em.createQuery("select c from LendoWallet c where c.Projet.codeUtilisateur=:x");
 		req.setParameter("x",codeUser);
 		List<LendoUtilisateur> lps=req.getResultList();
 		LendoUtilisateur lpro=null;
@@ -314,20 +296,119 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	@Override
 	public boolean checkLogin(String userName, String userPassword) {
 		System.out.println("In Check login");
-		Session session = sessionFactory.openSession();
 		boolean userFound = false;
-		//Query using Hibernate Query Language
-		String SQL_QUERY =" from utilisateur as o where o.userName=? and o.userPassword=?";
-		Query query = session.createQuery(SQL_QUERY);
-		query.setParameter(0,userName);
-		query.setParameter(1,userPassword);
-		List list = ((org.hibernate.Query) query).list();
+		Query req=em.createQuery("select u from Utilisateur u where u.email=:x and u.password=:y");
+		req.setParameter("x",userName);
+		req.setParameter("y",userPassword);
+		
+		List list = req.getResultList();
 
 		if ((list != null) && (list.size() > 0)) {
 			userFound= true;
 		}
+		return userFound;  
+	}
+
+	@Override
+	public List<Projet> getProjetUtilisateur(Long codeU) {
+		Query req=em.createQuery("select c from Projet p where p.promoteur.codePromoteur=:x");
+		req.setParameter("x",codeU);
+		return req.getResultList();
+	}
+
+	@Override
+	public List<Categorie> getCategories() {
+		Query req=em.createQuery("select e from Categorie e");
+		return req.getResultList();
+	}
+
+	@Override
+	public List<Contribution> getContributionProjetUtilisateur(Long codeU) {
+		Query req=em.createQuery("select c from Contribution c where c.utilisateur.codeUtilisateur=:x");
+		req.setParameter("x",codeU);
+		return req.getResultList();
+	}
+
+	@Override
+	public List<Motivation> getMotivations() {
+		Query req=em.createQuery("select e from Motivation e");
+		return req.getResultList();
+	}
+
+	@Override
+	public List<SecteurActivite> getSecteurActivites() {
+		Query req=em.createQuery("select e from SecteurActivite e");
+		return req.getResultList();
+	}
+
+	@Override
+	public List<SecteurGeographique> getSecteurGeos() {
+		Query req=em.createQuery("select e from SecteurGeographique e");
+		return req.getResultList();
+	}
+
+	@Override
+	public List<Commentaire> getCommentaireProjet(Long codeP) {
+		Query req=em.createQuery("select c from Commentaire c where c.Projet.codeProjet=:x");
+		req.setParameter("x",codeP);
+		return req.getResultList();
+	}
+
+	@Override
+	public List<Contribution> getContributionProjet(Long codeP) {
+		Query req=em.createQuery("select c from Contribution c where c.Projet.codeProjet=:x");
+		req.setParameter("x",codeP);
+		return req.getResultList();
+	}
+
+	@Override
+	public Boolean isYour(Projet P, Utilisateur U) {
+		// TODO Auto-generated method stub
+		return (P.getPromoteur().getCodeUtilisateur()==U.getCodeUtilisateur());
+	}
+
+	@Override
+	/*public Utilisateur checkUser(String email, String password) {
+		System.out.println("In Check login");
+		Utilisateur u=null;
+		Session session = sessionFactory.openSession();
+		//Query using Hibernate Query Language
+		String SQL_QUERY =" from Utilisateur as o where o.userName=? and o.userPassword=?";
+		Query query = session.createQuery(SQL_QUERY);
+		query.setParameter(0,email);
+		query.setParameter(1,password);
+		List list = ((org.hibernate.Query) query).list();
+
+		if ((list != null) && (list.size() > 0)) {
+			u=(Utilisateur)list.get(0);
+		}
 
 		session.close();
-		return userFound;  
+		return u;
+	}*/
+	public Utilisateur checkUser(String email, String password) {
+		System.out.println("In Check login");
+		Utilisateur u=new Utilisateur();
+		Query req=em.createQuery("select u from Utilisateur u where u.email=:x and u.password=:y");
+		req.setParameter("x",email);
+		req.setParameter("y",password);
+		
+		List list = req.getResultList();
+
+		if ((list != null) && (list.size() > 0)) {
+			u=(Utilisateur)list.get(0);
+		}
+		return u;
+	}
+	@Override
+	public ProjetBusiness addProjetBusiness(ProjetBusiness pb) {
+		em.persist(pb);
+		return pb;
+	}
+
+	@Override
+	public ProjetFlexible addProjetFlexible(ProjetFlexible pf) {
+		em.persist(pf);
+		return pf;
 	}
 }
