@@ -196,18 +196,22 @@ public Utilisateur addExperience(Utilisateur u, ActiviteProfessionel ap,
 	return null;
 }
 
-@Override
-public Projet creerProjet(String titre, Categorie cat, Double montantAttendu) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 @Override
 public Projet addDescription(Projet p, String titre, Categorie cat,
-		String slogan, String montantAttentdu, String description, String pays,
-		String ville, String dureeProjet) {
+		String slogan, double montantAttentdu, String description, String pays,
+		String ville, int dureeProjet) {
 	// TODO Auto-generated method stub
-	return null;
+	p.setTitre(titre);
+	p.setCategorie(cat);
+	p.setSlogan(slogan);
+	p.setMontantAttendu(montantAttentdu);
+	p.setDescription(description);
+	p.setPays(pays);
+	p.setVille(ville);
+	p.setDureeCampagne(dureeProjet);
+	lwdao.editProjet(p);
+	return p;
 }
 
 @Override
@@ -232,9 +236,9 @@ public void approvisionnerCompte(LendoWallet lw, Double montant) {
 }
 
 @Override
-public String checkEmail(String email) {
+public boolean checkEmail(String email) {
 	// TODO Auto-generated method stub
-	return "1";
+	return lwdao.checkEmail(email);
 }
 
 @Override
@@ -266,6 +270,11 @@ public Utilisateur creerUtilisateur(Utilisateur u) {
 public List<Projet> getProjetUtilisateur(Long codeU) {
 	// TODO Auto-generated method stub
 	return lwdao.getProjetUtilisateur(codeU);
+}
+@Override
+public List<Projet> getProjetByCategorie(Long codeCat){
+	return lwdao.getProjetByCategorie(codeCat);
+	
 }
 
 @Override
@@ -366,6 +375,78 @@ public Projet creerProjetFlexible(ProjetFlexible pf, Long codU, Long codeCat) {
 	pf.setCategorie(lwdao.consulterCategorie(codeCat));
 	pf.setPromoteur(lwdao.consulterUtilisateur(codU));
 	return lwdao.addProjetFlexible(pf);
+}
+
+@Override
+public Utilisateur updateUtilisateur(Utilisateur u) {
+	// TODO Auto-generated method stub
+	return lwdao.editUtilisateur(u);
+}
+
+@Override
+public Projet updateProjet(Projet p) {
+	// TODO Auto-generated method stub
+	return lwdao.editProjet(p);
+}
+
+@Override
+public Projet deleteProjet(Projet p) {
+	// TODO Auto-generated method stub
+	return lwdao.deleteProjet(p);
+}
+
+@Override
+public ProjetBusiness updateProjetBusiness(ProjetBusiness pb) {
+	// TODO Auto-generated method stub
+	return lwdao.editProjetBusiness(pb);
+}
+
+@Override
+public ProjetFlexible updateProjetFlexible(ProjetFlexible pf) {
+	// TODO Auto-generated method stub
+	return lwdao.editProjetFlexible(pf);
+}
+
+@Override
+public List<Media> getMediaByProjet(Long codeP) {
+	// TODO Auto-generated method stub
+	return lwdao.getMediaByProject(codeP);
+}
+
+@Override
+public boolean isDon(Contribution c) {
+	// TODO Auto-generated method stub
+	return lwdao.isDon(c);
+}
+
+@Override
+public boolean isFlexible(Projet p) {
+	// TODO Auto-generated method stub
+	return lwdao.isFlexible(p);
+}
+
+@Override
+public ProjetFlexible consulterProjetFlexible(Long codeProjet) {
+	// TODO Auto-generated method stub
+	return lwdao.consulterProjetFlexible(codeProjet);
+}
+
+@Override
+public ProjetBusiness consulterProjetBusiness(Long codeProjet) {
+	// TODO Auto-generated method stub
+	return lwdao.consulterProjetBusiness(codeProjet);
+}
+
+@Override
+public List<Projet> getProjet() {
+	// TODO Auto-generated method stub
+	return lwdao.getProjet();
+}
+
+@Override
+public List<Projet> consulterProjets(String titre) {
+	// TODO Auto-generated method stub
+	return lwdao.consulterProjets(titre);
 }
 
 

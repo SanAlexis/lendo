@@ -47,13 +47,13 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public Utilisateur editUtilisateur (Utilisateur u) {
-		sessionFactory.getCurrentSession().update(u);
-		return u;
+			em.merge(u);
+		  return u;
 	}
 	
 	@Override
 	public Utilisateur deleteUtilisateur (Utilisateur u) {
-		sessionFactory.getCurrentSession().delete(u);
+		em.remove(u);
 		return u;
 	}
 	
@@ -138,7 +138,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	@Override
 	public SecteurActivite addSecteurActivite(SecteurActivite sa) {
 		em.persist(sa);
-		return null;
+		return sa;
 	}
 
 	@Override
@@ -187,14 +187,14 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public List<Projet> getProjetByCategorie(Long codeCat) {
-		Query req=em.createQuery("select c from Projet c where c.Categorie.codeCategorie=:x");
+		Query req=em.createQuery("select c from Projet c where c.categorie.codeCategorie=:x");
 		req.setParameter("x",codeCat);
 		return req.getResultList();
 	}
 
 	@Override
 	public List<Media> getMediaByProject(Long codeProjet) {
-		Query req=em.createQuery("select c from Media c where c.Projet.codeProjet=:x");
+		Query req=em.createQuery("select c from Media c where c.projet.codeProjet=:x");
 		req.setParameter("x",codeProjet);
 		return req.getResultList();
 	}
@@ -202,7 +202,8 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	@Override
 	public List<Categorie> getCaterogie() {
 		// TODO Auto-generated method stub
-		return null;
+		Query req=em.createQuery("select e from Categorie e");
+		return req.getResultList();
 	}
 
 	@Override
@@ -311,7 +312,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public List<Projet> getProjetUtilisateur(Long codeU) {
-		Query req=em.createQuery("select c from Projet p where p.promoteur.codePromoteur=:x");
+		Query req=em.createQuery("select p from Projet p where p.promoteur.codeUtilisateur=:x");
 		req.setParameter("x",codeU);
 		return req.getResultList();
 	}
@@ -388,7 +389,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	}*/
 	public Utilisateur checkUser(String email, String password) {
 		System.out.println("In Check login");
-		Utilisateur u=new Utilisateur();
+		Utilisateur u=null;
 		Query req=em.createQuery("select u from Utilisateur u where u.email=:x and u.password=:y");
 		req.setParameter("x",email);
 		req.setParameter("y",password);
@@ -411,4 +412,86 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 		em.persist(pf);
 		return pf;
 	}
+
+	@Override
+	public Projet editProjet(Projet p) {
+		em.merge(p);
+		return null;
+	}
+
+	@Override
+	public Projet deleteProjet(Projet p) {
+		// TODO Auto-generated method stub
+		em.remove(p);
+		return p;
+	}
+
+	@Override
+	public boolean checkEmail(String email) {
+		System.out.println("In Check login");
+		boolean userFound = false;
+		Query req=em.createQuery("select u from Utilisateur u where u.email=:x ");
+		req.setParameter("x",email);
+		List list = req.getResultList();
+
+		if ((list != null) && (list.size() > 0)) {
+			userFound= true;
+		}
+		return userFound;
+	}
+
+	@Override
+	public ProjetFlexible editProjetFlexible(ProjetFlexible pf) {
+		// TODO Auto-generated method stub
+		em.merge(pf);
+		return pf;
+	}
+
+	@Override
+	public ProjetBusiness editProjetBusiness(ProjetBusiness pb) {
+		// TODO Auto-generated method stub
+		em.merge(pb);
+		return pb;
+	}
+
+	@Override
+	public boolean isDon(Contribution c) {
+		boolean userFound = false;
+		Query req=em.createQuery("select p from Contribution p where TYPE_CONTRIB='DO' AND p.codeContribution=:x");
+		req.setParameter("x",c.getCodeContribution());
+		List list = req.getResultList();
+		if(!list.isEmpty()) userFound=true;
+		return userFound;
+	}
+
+	@Override
+	public boolean isFlexible(Projet p) {
+		boolean userFound = false;
+		Query req=em.createQuery("select p from Projet p where TYPE_PROJET='PF' AND p.codeProjet=:x");
+		req.setParameter("x",p.getCodeProjet());
+		List list = req.getResultList();
+		if(!list.isEmpty()) userFound=true;
+		return userFound;
+	}
+
+	@Override
+	public ProjetFlexible consulterProjetFlexible(Long codeProjet) {
+		ProjetFlexible pj=em.find(ProjetFlexible.class, codeProjet);
+		if(pj==null) throw new RuntimeException("Projet introuvalbe");
+		return pj;
+	}
+
+	@Override
+	public ProjetBusiness consulterProjetBusiness(Long codeProjet) {
+		ProjetBusiness pj=em.find(ProjetBusiness.class, codeProjet);
+		if(pj==null) throw new RuntimeException("Projet introuvalbe");
+		return pj;
+	}
+
+	@Override
+	public List<Projet> getProjet() {
+		Query req=em.createQuery("select p from Projet p");
+		return req.getResultList();
+	}
+
 }

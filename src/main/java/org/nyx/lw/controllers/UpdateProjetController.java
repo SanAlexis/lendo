@@ -5,6 +5,9 @@ package org.nyx.lw.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +17,9 @@ import javax.servlet.http.Part;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.nyx.lw.entities.Categorie;
+import org.nyx.lw.entities.Media;
+import org.nyx.lw.entities.Projet;
 import org.nyx.lw.entities.ProjetBusiness;
 import org.nyx.lw.metier.ILendoWalletMetier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,20 +41,14 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String titre = request.getParameter("titre");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
-
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setTitre(titre);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -58,21 +58,18 @@ public class UpdateProjetController {
 	String updateprojetcathegorie(HttpServletRequest request, HttpServletResponse response)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
-		String cathegorie = request.getParameter("cathegorie");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long cathegorie = Long.parseLong(request.getParameter("cathegorie"));
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		Categorie categorie = new Categorie();
+		categorie.setCodeCategorie(cathegorie);
+		p.setCategorie(categorie);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -83,20 +80,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String slogan = request.getParameter("slogan");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setSlogan(slogan);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -107,20 +99,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String description1 = request.getParameter("description1");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setDescription(description1);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -131,20 +118,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String montantAttendu = request.getParameter("montantAttendu");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setMontantAttendu(Double.parseDouble(montantAttendu));
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -155,20 +137,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String dureeCampagne = request.getParameter("dureeCampagne");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setDureeCampagne(Integer.parseInt(dureeCampagne));
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -179,20 +156,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String presentation = request.getParameter("presentation");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("code_p"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setPresentation(presentation);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -203,20 +175,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String busnessPlan = request.getParameter("busnessPlan");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setBusnessPlan(busnessPlan);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -227,20 +194,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String ville = request.getParameter("ville");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setVille(ville);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -251,20 +213,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String pays = request.getParameter("pays");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
 
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setPays(pays);
+		metier.updateProjet(p);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 	@SuppressWarnings("unused")
@@ -275,22 +232,15 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException, IllegalStateException, ServletException {
 		// Récupération du code de l'utilisateur
 		String image = request.getParameter("image");
-		//String imageName = request.getParameter("blobName");
-		//String code_projet = request.getParameter("blobType");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
-
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
-		ObjectMapper objectMapper = new ObjectMapper();
-		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(image);
-		return json;
+				long code_projet = Long.parseLong(request.getParameter("codeu"));
+				Media media = new Media();
+				media.setChemin(image);
+				metier.addMedia(code_projet, media);
+				
+				ObjectMapper objectMapper = new ObjectMapper();
+				// transformation de l'objet java en json
+				String json = objectMapper.writeValueAsString(request.getParameter("image"));
+				return json;
 	}
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/updateprojetvideo",method = RequestMethod.POST)
@@ -300,23 +250,55 @@ public class UpdateProjetController {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
 		String video = request.getParameter("video");
-		String code_projet = request.getParameter("code_projet");
-		/*
-		 * Fonction permettant de récupérer les informations sur l'utilisateur
-		 * dans la BD
-		 */
-
-		/*
-		 * initialisation d'un Projet à des fins de test
-		 * à supprimer
-		 */
-		ProjetBusiness projet = new ProjetBusiness();
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
+		Media media = new Media();
+		media.setUrl(video);
+		//media.setProjet(pro);
+		metier.addMedia(code_projet, media);
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projet);
+		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
 
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/updateprojetdatedebut",method = RequestMethod.POST)
+	//@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String updateprojetdatedebut(HttpServletRequest request, HttpServletResponse response)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		// Récupération du code de l'utilisateur
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
+		Date DateDebut = new Date();
+		Projet p = metier.consulterProjet((long) code_projet);
+		p.setDateDebutCampagne(DateDebut);
+		metier.updateProjet(p);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		// transformation de l'objet java en json
+		String json = objectMapper.writeValueAsString("");
+		return json;
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/deleteprojet",method = RequestMethod.POST)
+	//@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String deleteprojet(HttpServletRequest request, HttpServletResponse response)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		// Récupération du code de l'utilisateur
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
+		Projet projet = new Projet();
+		projet.setCodeProjet(code_projet);
+		Projet p = metier.consulterProjet((long) code_projet);
+		metier.deleteProjet(p);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		// transformation de l'objet java en json
+		String json = objectMapper.writeValueAsString("");
+		return json;
+	}
 	
 	
 }

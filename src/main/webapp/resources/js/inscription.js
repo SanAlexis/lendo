@@ -42,7 +42,7 @@ $(function() {
 				var a = $('#email').val();
 				var b = testformatemail(a);
 				
-				if (b == 0) {
+				if (b == true) {
 					$('#a').attr('value', b);
 					check();
 					$('#div-email').removeClass('has-success').addClass(
@@ -57,9 +57,10 @@ $(function() {
 						cache : false,
 						data : 'email=' + a,
 						success : function(response) {
-							$('#a').attr('value', response);
+						var r = eval('(' + response + ')');
+							$('#a').attr('value', r);
 							check();
-							if (response == 0) {
+							if (r == true) {
 								$('#div-email').removeClass('has-success')
 										.addClass('has-error').addClass(
 												'has-feedback');
@@ -133,7 +134,7 @@ $(function() {
  * corrects
  */
 function check() {
-	if ($('#a').val() == 1 && $('#b').val() == 1 && $('#c').val() == 1
+	if ($('#a').val() == "false" && $('#b').val() == 1 && $('#c').val() == 1
 			&& $(':radio[name="check"]:checked').val()=="true") {
 		$("#submit").removeAttr("disabled");
 	} else {

@@ -56,6 +56,7 @@ function loadprojetcomplet(){
 				 */
 				var date_fin_campagne = projet.dureeCampagne*24*60*60*1000+projet.dateDebutCampagne;
 				var d = new Date(date_fin_campagne);
+				
 				//alert(d);
 				/*
 				 * récupération de la date courante du serveur

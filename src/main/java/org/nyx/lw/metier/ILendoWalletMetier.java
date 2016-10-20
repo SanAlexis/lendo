@@ -43,22 +43,24 @@ public interface ILendoWalletMetier {
 	public LendoUtilisateur creerCompteUtilisateur(LendoUtilisateur lu, Long codeU);
 	public LendoProjet creerCompteProjet(LendoProjet lp, Long codeP);
 
-	//par défaut tous les projets sont busness
+	//par dï¿½faut tous les projets sont busness
 	public Projet creerProjetBusiness(ProjetBusiness pb, Long codU);
 	public Projet creerProjetBusiness(ProjetBusiness pb, Long codU, Long codeCat);
 	public Projet creerProjetFlexible(ProjetFlexible pf, Long codU);
 	public Projet creerProjetFlexible(ProjetFlexible pf, Long codU, Long codeCat);
 	public Utilisateur updateUtilisateur(Long u, Long codeMot, Long codeSA, Long codeSG,Long codeAP);
+	public Utilisateur updateUtilisateur(Utilisateur u);
+	public Projet updateProjet(Projet p);
+	public Projet deleteProjet(Projet p);
 	public boolean checkLogin(String userName, String userPassword);
 	public Utilisateur checkUser(String userName, String userPassword);
-	public String checkEmail(String email);
+	public boolean checkEmail(String email);
 	public Utilisateur creerUtilisateur(String nom, String prenom, String email, String pass,String ville, String pays);
 	public Utilisateur addInformation(Utilisateur u,String nom, String prenom, Date date_nais, String lieu_naiss, String email);
 	public Utilisateur addCoordonnee(Utilisateur u, String adresse, String complAdress, String codePostal,String telephone);
 	public Utilisateur addPreferences(Utilisateur u, Motivation mo, SecteurActivite sa, SecteurGeographique sg);
 	public Utilisateur addExperience(Utilisateur u, ActiviteProfessionel ap, String provenanceFond);
-	public Projet creerProjet(String titre, Categorie cat, Double montantAttendu);
-	public Projet addDescription(Projet p, String titre, Categorie cat, String slogan, String montantAttentdu, String description, String pays, String ville, String dureeProjet);
+	public Projet addDescription(Projet p, String titre, Categorie cat, String slogan, double montantAttentdu, String description, String pays, String ville, int dureeProjet);
 	public Media addMedia (Long p, Media m);
 	public Commentaire addCommentaires(Projet p, Commentaire com, Utilisateur u);
 	public Projet faireDon(Projet P,Don d, Utilisateur u);
@@ -74,8 +76,17 @@ public interface ILendoWalletMetier {
 	public List<SecteurGeographique> getSecteurGeos();
 	public List<Commentaire> getCommentaireProjet(Long codeP);
 	public List<Contribution> getContributionProjet(Long codeP);
+	public List<Media> getMediaByProjet(Long codeP);
 	public Boolean isYour(Projet P, Utilisateur U);
 	public Projet consulterProjet(Long codeP);
 	public Utilisateur consulterUtilisateur(Long codeU);
-	
+	public ProjetBusiness updateProjetBusiness(ProjetBusiness pb);
+	public ProjetFlexible updateProjetFlexible(ProjetFlexible pf);
+	public boolean isDon(Contribution c);
+	public boolean isFlexible(Projet p);
+	public ProjetFlexible consulterProjetFlexible(Long codeProjet);
+	public ProjetBusiness consulterProjetBusiness(Long codeProjet);
+	public List<Projet> getProjet();
+	public List<Projet> consulterProjets(String titre);
+	public List<Projet> getProjetByCategorie(Long codeCat);
 }

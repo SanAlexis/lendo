@@ -35,32 +35,37 @@ public class ConsulterProjetUtilisateurController {
 	String consulterprojetutilisateur(HttpServletRequest request, HttpServletResponse response)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		// Récupération du code de l'utilisateur
-		String codeU = request.getParameter("codeU");
+		//String codeU = request.getParameter("codeU");
+		ObjectMapper objectMapper = new ObjectMapper();
 
 		/*
 		 * récupération du code de l'utilisateur dans la variable de session
 		 */
 		HttpSession session = request.getSession();
-		long codU=(Long) session.getAttribute("codeU");
-		
-		Utilisateur user = new Utilisateur();
-		user.setCodeUtilisateur(codU);
-		
-		List <Projet>  projetU = (List<Projet>) metier.getProjetUtilisateur(codU);
-		List <Projet> projetUser =  new LinkedList<Projet>();
-		for(int i=0; i< projetU.size(); i++){
-			Long code = projetU.get(i).getCodeProjet();
-			String titre = projetU.get(i).getTitre();
-			Projet pro = new Projet();
-			pro.setCodeProjet(code);
-			pro.setTitre(titre);
-			projetUser.add(pro);
+		if(session.getAttribute("codeU")!=null){
+			Long codUser= (Long) session.getAttribute( "codeU" );
+			
+			
+			List <Projet>  projetU = (List<Projet>) metier.getProjetUtilisateur(codUser);
+			List <Projet> projetUser =  new LinkedList<Projet>();
+			for(int i=0; i< projetU.size(); i++){
+				Long code = projetU.get(i).getCodeProjet();
+				String titre = projetU.get(i).getTitre();
+				Projet pro = new Projet();
+				pro.setCodeProjet(code);
+				pro.setTitre(titre);
+				projetUser.add(pro);
+			}
+			
+			// transformation de l'objet java en json
+			String json = objectMapper.writeValueAsString(projetUser);
+			return json;
+		}else{
+			String json = objectMapper.writeValueAsString("");
+			return json;
 		}
-		ObjectMapper objectMapper = new ObjectMapper();
-		// transformation de l'objet java en json
-		String json = objectMapper.writeValueAsString(projetUser);
-		return json;
-		//return a;
+		
+		
 
 	}
 

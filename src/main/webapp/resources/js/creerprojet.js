@@ -168,7 +168,10 @@ $(function() {
 });
 
 function check() {
-	if ($('#a').val() == 1 && $('#b').val() == 1 && $('#c').val() == 1 && $('#d').val() == 1) {
+	var remboursement = $('#periode').val();
+		var date = new Date();
+		var date1 = new Date(remboursement);
+	if ($('#a').val() == 1 && $('#b').val() == 1 && $('#c').val() == 1 && $('#d').val() == 1 && date <date1) {
 		if($(':radio[name="type_contribution"]:checked').val()=="don"){
 			$("#submit").removeAttr("disabled");
 		}

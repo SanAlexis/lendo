@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div class="container-ui" id="">
-
+<input type="hidden" id="cat" value=<%=  session.getAttribute( "codecat" ) %>>
 		<!-- 
 		<div class="row" id="">
 			<div class="col-sm-1" id="" style="background-color: black">1</div>
@@ -42,7 +42,11 @@
 		</div>
 		<!-- Block de chargement des catégories des projets -->
 		<div class="btn-group-horizontal row" data-toggle="buttons">
-			<label class="categorie"></label>
+			
+		</div><label id="categorie"></label>
+				<!-- Ligne contenant les projets -->
+		<div class="row" id="projets">
+			
 		</div>
 		<div class="row" id="">
 			<div class="col-sm-1" id="" style="background-color: black">1</div>
@@ -62,9 +66,6 @@
 				<h1>PAGE D'EXPLORATION DE PROJET EN CONSTRUCTION</h1>
 
 			</div>
-			<iframe title="" width="500" height="390"
-				src="http://www.youtube.com/embed/LY16fq8H8qQ" frameborder="0"
-				allowfullscreen></iframe>
 
 		</div>
 	</div>

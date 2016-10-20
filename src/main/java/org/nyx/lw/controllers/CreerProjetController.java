@@ -4,6 +4,8 @@
 package org.nyx.lw.controllers;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,7 +17,6 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.nyx.lw.entities.Categorie;
-import org.nyx.lw.entities.Projet;
 import org.nyx.lw.entities.ProjetBusiness;
 import org.nyx.lw.entities.ProjetFlexible;
 import org.nyx.lw.entities.Utilisateur;
@@ -37,7 +38,7 @@ public class CreerProjetController {
 	}
 	
 	@RequestMapping (value="/docreerprojet",method = RequestMethod.POST)
-	public @ResponseBody String docreerprojet (HttpServletRequest request, HttpServletResponse response) throws JsonGenerationException, JsonMappingException, IOException {
+	public @ResponseBody String docreerprojet (HttpServletRequest request, HttpServletResponse response) throws JsonGenerationException, JsonMappingException, IOException, ParseException {
 		String titre = request.getParameter("titre").toUpperCase();
 		long cathegorie = Long.parseLong(request.getParameter("cathegorie"));
 		double montant = Double.parseDouble(request.getParameter("montant"));
@@ -45,8 +46,10 @@ public class CreerProjetController {
 		String type = request.getParameter("type");
 		double taux = Double.parseDouble(request.getParameter("taux"));
 		String periode = request.getParameter("periode");
-		SimpleDateFormat ceation = new SimpleDateFormat("dd/MM/yyyy");
 	    Date DateCreation = new Date();
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    Date DateRemboursement = df.parse(periode);
+	    
 		//long a = Long.parseLong(titre);
 		/*
 		 * récupération du code de l'utilisateur dans la variable de session
@@ -88,7 +91,7 @@ public class CreerProjetController {
 			projet.setPromoteur(user);
 			projet.setTauxFixe(taux);
 			projet.setDateCreation(DateCreation);
-			projet.setDateRemboursement(null);
+			projet.setDateRemboursement(DateRemboursement);
 			
 			ProjetBusiness projet1 = metier.creerProjetBusiness(projet);
 			

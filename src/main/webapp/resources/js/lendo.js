@@ -11,7 +11,7 @@ function testformatemail(str) {
 
 	if (autorisation.test(str)) {
 		// s'il y'a un caratère non autorisé, on retourne 0 et le test s'arrête
-		return 0;
+		return true;
 	} else {
 		// Tous les caractères sont autorisés, on continu le test
 		// vérification du format de l'adresse email
@@ -24,17 +24,17 @@ function testformatemail(str) {
 		if (format1.test(str) || format2.test(str)) {
 			// si le premier ou de le dernier caractère de la chaine est
 			// incorrecte on renvoit 0
-			return 0;
+			return true;
 		} else {
 			// si le premier ou de le dernier caractère de la chaine est
 			// correcte on teste la chaine
 			var format = /[a-z0-9]+@+[a-z]+\.[a-z]/;
 			if (format.test(str)) {
 				// Si le format est valide on renvoit 1
-				return 1;
+				return false;
 			} else {
 				// Si le format est invalide on renvoit 0
-				return 0;
+				return true;
 			}
 		}
 
@@ -363,13 +363,14 @@ function loadprojetuser() {
 				cache : false,
 				data : 'codeU=' + code_utilisateur,
 				success : function(response) {
-					if (response == "") {
+					var projet = eval('(' + response + ')');
+					if (projet == "") {
 						var b = '<li class="projet0"><a href="creerprojet">Vous n avez aucun projet, créez un projet ici</a></li>';
 						$('.projet0').replaceWith(b);
 					} else {
 						// conversion de la reponse en objet javascript
 						// manipulable
-						var projet = eval('(' + response + ')');
+						
 						var a = "";
 						// on parcourt tous les éléments du tableau
 						for ( var id in projet) {
@@ -678,30 +679,20 @@ function loadprojetcategorie1() {
 						// manipulable
 						var categorie = eval('(' + response + ')');
 						var a = "";
+						var b = "";
 						// on parcourt tous les éléments du tableau
 						for ( var id in categorie) {
 							/*
 							 * affichage des catégories et réglage de l'affichge
 							 * à l'écran
 							 */
-							a += '<label class="btn btn-success visible-xs col-xs-12"><input type="radio" class="" value="'
+							a += '<label class="btn btn-success  col-xs-6 col-sm-4 col-md-2 col-lg-2 "><input type="radio" name="categorie" class="cat" id="ca" value="'
 									+ categorie[id].codeCategorie
 									+ '">'
-									+ categorie[id].libelle
-									+ '</label><label class="btn btn-success visible-sm col-sm-3"><input type="radio" class="" value="'
-									+ categorie[id].codeCategorie
-									+ '">'
-									+ categorie[id].libelle
-									+ '</label><label class="btn btn-success visible-md col-md-3"><input type="radio" class="" value="'
-									+ categorie[id].codeCategorie
-									+ '">'
-									+ categorie[id].libelle
-									+ '</label><label class="btn btn-success visible-lg col-lg-3"><input type="radio" class="" value="'
-									+ categorie[id].codeCategorie
-									+ '">'
-									+ categorie[id].libelle + '</label>';
+									+ categorie[id].libelle+ '</label>';
+							b+='<a href="decouvrir?cat='+ categorie[id].codeCategorie+'">'+ categorie[id].libelle+'</a>';
 						}
-						$('.categorie').replaceWith(a);
+						$('#categorie').html(b);
 					}
 
 				},
@@ -888,9 +879,11 @@ function checkinfockeditor(champ1,champ2,champ3,champ4,champ5,champ6,champ7,cham
 				type : "post",
 				url : champ5,
 				cache : false,
-				data : champ4 + '=' + editor.getData()+'&&'+champ8+'='+champ9,
+				data : {presentation:editor.getData(),code_p:champ9},
 				success : function(response) {
-					alert(editor.getData()+"La description détaillée de votre projet a été mise à jour avec succès");
+					$('#'+champ1).attr('value',
+							editor.getData());
+					alert("La description détaillée de votre projet a été mise à jour avec succès");
 				},
 				error : function() {
 					alert('Error while request..');
@@ -921,12 +914,14 @@ function afficheImage(input,indice,champ) {
 }
 
 
-function resize(input) {
+function resize(input,largeur,hauteur) {
 	$( "#rr" ).on('click', function() {
 		$( "#rr" ).hide();
 		$( "#upload" ).show();
 		//document.createElement('canvas');
 		var canvas=document.getElementById("image_canvas");
+		canvas.width = largeur;
+		canvas.height = hauteur;
 	    var ctx=canvas.getContext("2d");
 	       //alert('offset: '+$('#resize').offset().top+'position: '+$('#resize').position().top);
 
@@ -937,8 +932,14 @@ function resize(input) {
 	        reader.onload = function (e) {
 	        	var img= new Image();
 	        	img.onload = function(){
-	        		ctx.drawImage(img,$('#resize').offset().left-$('#img').offset().left,$('#resize').offset().top-$('#img').offset().top,$('#resize').width(),$('#resize').height(),0,0,300,150);
-	        		ctx.fillText("Lendo Projet",200,145);
+	        		/*
+					 * récupération de la date courante du serveur
+					 */
+					var current = $('#date').val();
+					var date = new Date(current*1);
+	        		ctx.drawImage(img,0,0,$('#img1').width(),$('#img1').height(),0,0,largeur,hauteur);
+	        		ctx.fillText(date,largeur-128,hauteur-30);
+	        		ctx.strokeText("Projet sur LENDO", largeur-100,hauteur-50);
 	        	}
 	        	img.src=e.target.result;
 	        };
@@ -948,36 +949,24 @@ function resize(input) {
 	}); 
 }
 
-function uploadImageProjet(input,url0) {
+function uploadImageProjet(input,url0,champ) {
+	//champ=variable contenant le code du projet
 	$( "#upload" ).on('click', function() {
-
-		//document.createElement('canvas');
 		var canvas=document.getElementById("image_canvas");
 	    var ctx=canvas.getContext("2d");
-	        var url = canvas.toDataURL("image/jpeg", 1.0);
-	        $('#aa').html(url);
-	        var canvas1=document.getElementById("image_canvas1");
-		    var ctx1=canvas1.getContext("2d");
-		    var img1= new Image();
-        	img1.onload = function(){
-        		ctx1.drawImage(img1,0,0);
-        		//ctx.fillText("Lendo Projet",200,145);
-        	}
-        	img1.src=url;
-        	
+	        var url = canvas.toDataURL();
+	        $('#da').attr('src',url);
+
         	 $.ajax({
         			type : "post",
         			url : url0,
         			cache : false,
-        			data : "image="+url,
+        			data : { image:url, codeu:champ },
+        			contentType:"application/x-www-form-urlencoded",
         			  //processData: false,
         			 // contentType: false,
         			success : function(response) {
         				var r = eval('(' + response + ')');
-        				//alert(r);
-        				var nouvelleImg = document.createElement("img");
-        	        	 nouvelleImg.src = url;
-        	        	 document.body.appendChild(nouvelleImg);
         	        	 $( "#infos" ).modal("hide");
         			},
         			error : function() {
@@ -1130,3 +1119,52 @@ function getServerDate(champ){
 			}
 		});
 }
+/*
+ * fonction permettant de réccupérer tous les projets de la BD
+ */
+
+function loadprojetallprojet() {
+	$
+			.ajax({
+				type : "post",
+				url : "consulterprojetallprojet",
+				cache : false,
+				data : {},
+				success : function(response) {
+					//alert(response);
+					var projet = eval('(' + response + ')');
+					
+					var a = "";
+					
+					for ( var id in projet) {
+						var video = [];
+						var image = [];
+						for ( var id0 in projet[id].medias) {
+							if (projet[id].medias[id0].url != null
+									&& projet[id].medias[id0].url != "") {
+								video.push(projet[id].medias[id0].url);
+							}
+							if (projet[id].medias[id0].chemin != null
+									&& projet[id].medias[id0].chemin != "") {
+								image.push(projet[id].medias[id0].chemin);
+							}
+
+						}
+						//alert(projet[id].medias[projet[id].medias.length-1].chemin);
+						a += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2" id=""><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
+								+ projet[id].categorie.libelle
+								+ '</a></div></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><img alt="'+ projet[id].titre+'" class="img-responsive center-block" src="'
+								+ image[image.length - 1]+ '"></div></div><div class="row" id=""><a href="projetvue?codeP='+projet[id].codeProjet+'"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'
+								+ projet[id].titre
+								+ '</div></a></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify" id="">'
+								+ projet[id].description + '</div></div></div>';
+					}
+					$("#projets").html(a);
+
+				},
+				error : function() {
+					alert('Error while request..');
+				}
+			});
+}
+

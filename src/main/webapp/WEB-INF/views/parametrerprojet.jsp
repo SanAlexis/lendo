@@ -27,32 +27,63 @@
 </head>
 <body>
 	<div class="container-ui" id="">
+		<div class="row" id="s"></div>
 
-<input type="hidden" id="code_p" value=<%=  session.getAttribute( "codeP" ) %>>
+		<input type="hidden" id="code_p"
+			value=<%=session.getAttribute("codeP")%>>
 		<div class="row" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
+		<div class="row" id="">
+			<div class="col-lg-offset-1 col-xs-12 col-sm-12 col-md-2 col-lg-2"
+				id="" style="background-color: #FBAF3F; overflow: auto">
+				<img id="da" alt="IMAGE PROJET" class="img-responsive center-block"
+					src="">
+			</div>
+
+		</div>
+		<div class="row" id="">
+			<div
+				class="glyphicon glyphicon-camera col-lg-offset-1 col-xs-12 col-sm-12 col-md-12 col-lg-2"
+				id="modifier_photo" style="background-color: #595959; height: 25px">Modifier</div>
+		</div>
+		<div class="row" id="">
+		<div
+					class="col-xs-offset-0 col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-xs-12 col-sm-3 col-md-3 col-lg-3"
+					id="" style="background-color:">
+
+					<div class="form-group">
+						<input type="button" name="" value="Supprimer mon projet" placeholder=""
+							class="btn btn-default form-control" disabled="disabled"
+							id="delete_projet">
+					</div>
+				</div>
+				<div
+					class="col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-3 col-md-3 col-lg-3"
+					id="" style="background-color:">
+
+					<div class="form-group">
+						<input type="button" name="" value="Publier mon Projet" placeholder=""
+							class="btn btn-default form-control" disabled="disabled"
+							id="publier">
+					</div>
+				</div>
+			</div>
+		
 		<div class="row">
 			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="canvas_image"
 				style="background-color:">
 				<canvas id="image_canvas"
-					style="background-color: red; height: 250px; width: 250px"></canvas>
-				<canvas id="image_canvas1"
-					style="background-color: blue; height: 250px; width: 250px"></canvas>
+					style="background-color: ; height: ; width: "></canvas>
 				<div class="affiche col-xs-12 col-sm-12 col-md-12 col-lg-12"
-					id="affiche_image">
-					<div
-						class="glyphicon glyphicon-camera col-xs-12 col-sm-12 col-md-12 col-lg-12"
-						id="modifier_photo"
-						style="background-color: #595959; height: 25px">Modifier</div>
-				</div>
-				
-								
-				
+					id="affiche_image"></div>
+
+
+
 			</div>
 		</div>
 		<!-- MENU 1 -->
-		<div class="row" id="" style="background-color:#FBAF3F">
+		<div class="row" id="" style="background-color: #FBAF3F">
 			<!-- DESCRIPTION SOMMAIRE -->
 			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="description"
 				style="background-color:">
@@ -88,7 +119,9 @@
 		<!-- Champs permettant de stocker le code du projet -->
 		<input type="hidden" name="" value=<%=session.getAttribute("codeP")%>
 			placeholder="Code projet" class="form-control" id="code_projet">
-
+	<input type="hidden" name="" value="" placeholder=""
+								id="check_debut" class="form-control"> <input type="hidden" name="" value="" placeholder=""
+			id="check_ifimage" class="form-control">
 		<div class="row" id="">
 			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10" id=""
 				style="background-color:">
@@ -511,12 +544,11 @@
 							</div>
 						</form>
 					</div>
-					
+
 				</div>
 				<!-- IFRAME DE LA VIDEO DE PRESENTATION DU PROJET -->
 				<div class="row info_media" id="">
-				<div class="" id="aa">
-</div>
+					<div class="" id="aa"></div>
 					<div
 						class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-2 col-lg-2"
 						id="" style="background-color:">
@@ -526,10 +558,12 @@
 						class="col-sm-offset-2 col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-8 col-md-6 col-lg-6"
 						id="" style="background-color:">
 
-							<div class="embed-responsive embed-responsive-16by9" id="" style="">
-								<iframe title="" class = "embed-responsive-item"
-				src="http://www.youtube.com/embed/" frameborder="0"	allowfullscreen id="frame_video" width="" height=""></iframe>
-							</div>
+						<div class="embed-responsive embed-responsive-16by9" id=""
+							style="">
+							<iframe title="" class="embed-responsive-item"
+								src="http://www.youtube.com/embed/" frameborder="0"
+								allowfullscreen id="frame_video" width="" height=""></iframe>
+						</div>
 					</div>
 				</div>
 
@@ -551,35 +585,35 @@
 
 
 
-<!-- PAGE MODAL DE SELECTION DE L'IMAGE -->
+			<!-- PAGE MODAL DE SELECTION DE L'IMAGE -->
 			<div class="modal fade" id="select_image">
 				<div class="modal-dialog" style="background-color: #595959">
 					<div class="modal-content">
 						<div class="modal-header" style="background-color: #FBAF3F">
 
 							<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
-							<h1>Sélectionnez une image</h1>
+							<h4>Sélectionnez une image</h4>
 						</div>
 						<div class="modal-body" id=''
 							style="background-color:; height: 100%">
-							
-<form action="" name="">
-					<input type="file" name="" value="" placeholder="Image du projet"
-						class="" id="image">
-						<input type="reset" name="" value="Annuler" placeholder="Annuler"
-						class="" id="">
-				</form>
+
+							<form action="" name="">
+								<input type="file" name="" value=""
+									placeholder="Image du projet" class="" id="image"> <input
+									type="reset" name="" value="Annuler" placeholder="Annuler"
+									class="" id="">
+							</form>
 						</div>
 						<div class="modal-footer" style="background-color: #FBAF3F">
-						<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+							<button id="c_modal" class="btn btn-default" data-dismiss="modal">Fermer</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
+
+
+
+
 
 			<!-- PAGE MODAL DE REDIMENSIONNENEMENT ET DE MISE A JOUR DE LA PHOTO -->
 			<div class="modal fade" id="infos">
@@ -589,18 +623,30 @@
 
 							<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
 							<h1>Paramétrez la photo de votre projet</h1>
+							<div
+								class="col-lg-offset-9 col-xs-12 col-sm-12 col-md-12 col-lg-3"
+								id="" style="background-color: #FBAF3F; overflow:">
+								<button class="btn" id="rr"
+									style="background-color: transparent; height:; border-color: #595959">Valider</button>
+								<button class="btn" id="upload"
+									style="background-color: transparent; height:; border-color: #595959">Sauvegarder</button>
+
+							</div>
 						</div>
 						<div class="modal-body" id='j'
-							style="background-color:; height: 100%">
-							<img src="" id="img" class="center-block"></img>
+							style="background-color:; height:; overflow: visible">
+							<div class="row" id="">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
+									style="background-color: #FBAF3F; overflow: auto">
+									<img id="img" alt="IMAGE PROJET"
+										class="img-responsive center-block" src="">
+								</div>
+							</div>
+							<img id="img1" alt="IMAGE PROJET" class=" center-block" src="">
+
 
 							<div id="resize"
-								style="background-color:; height: 100px; width: 100px; top: -370px; left: 100px">
-								<button class="btn" id="rr"
-									style="background-color: transparent; height:; border-color: #595959">Rogner</button>
-									<button class="btn" id="upload"
-									style="background-color: transparent; height:; border-color: #595959">Upload</button>
-									</div>
+								style="background-color:; height:; width:; top:; left:"></div>
 
 						</div>
 						<div class="modal-footer" style="background-color: #FBAF3F">

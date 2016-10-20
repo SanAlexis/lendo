@@ -22,6 +22,8 @@
 									type="button" style="width: ; height: 33px; color: #FBAF3F"></button>
 							</span>
 						</div>
+						
+						<ul id='result_search'></ul>
 				</form>
 
 			</div>
@@ -32,21 +34,12 @@
 						class="glyphicon glyphicon-plus" id="nouveauprojet">Créer</a></li>
 
 				</ul>
-				<ul class="nav navbar-nav deconnecte">
-					<li class="dropdown" id="inscription_connexion"><a
-						data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"><b
-							class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="inscription" class="deconnecte">Inscription</a></li>
-							<li class="divider"></li>
-							<li><a href="connexion">Connexion</a></li>
-						</ul></li>
-				</ul>
+				
 			</div>
 			<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" id=""
 				style="background-color: ">
 				<ul class="nav navbar-nav">
-					<li class="connecte"><a href="decouvrir" class=""
+					<li class=""><a href="decouvrir" class=""
 						id="parcourir"> Parcourir </a></li>
 
 				</ul>
@@ -67,6 +60,16 @@
 							<li class="divider"></li>
 							<li id="deconnexion"><a href=""
 								class="glyphicon glyphicon-off"> Déconnexion</a></li>
+						</ul></li>
+				</ul>
+				<ul class="nav navbar-nav deconnecte">
+					<li class="dropdown" id="inscription_connexion"><a
+						data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"><b
+							class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="inscription" class="deconnecte">Inscription</a></li>
+							<li class="divider"></li>
+							<li><a href="connexion">Connexion</a></li>
 						</ul></li>
 				</ul>
 

@@ -40,6 +40,8 @@ public interface ILendoWalletDao {
 	public SecteurActivite addSecteurActivite(SecteurActivite sa);
 	
 	public Projet consulterProjet(Long codeProjet);
+	public ProjetFlexible consulterProjetFlexible(Long codeProjet);
+	public ProjetBusiness consulterProjetBusiness(Long codeProjet);
 	public Utilisateur consulterUtilisateur(Long codeU);
 	public LendoWallet consulterCompte(Long numeroC);
 	public Operateur consulterOperateur(Long codeOperateur);
@@ -62,6 +64,11 @@ public interface ILendoWalletDao {
 	public Utilisateur checkUser(String email, String password);
 	public Media addMediaProjet(Media m, Long p);
 	public Utilisateur editUtilisateur(Utilisateur u);
+	public Projet editProjet(Projet p);
+	public ProjetFlexible editProjetFlexible(ProjetFlexible pf);
+	public ProjetBusiness editProjetBusiness(ProjetBusiness pb);
+	public Projet deleteProjet(Projet p);
+	public boolean checkEmail(String email);
 	public Utilisateur deleteUtilisateur(Utilisateur u);
 	public ActiviteProfessionel consulterActivitePro(Long codeAct);
 	
@@ -74,6 +81,8 @@ public interface ILendoWalletDao {
 	public List<Commentaire> getCommentaireProjet(Long codeP);
 	public List<Contribution> getContributionProjet(Long codeP);
 	public Boolean isYour(Projet P, Utilisateur U);
-
+	public boolean isDon(Contribution c);
+	public boolean isFlexible(Projet p);
+	public List<Projet> getProjet();
 	
 }

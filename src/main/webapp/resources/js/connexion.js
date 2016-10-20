@@ -17,7 +17,7 @@ $(function() {
 				var b = testformatemail(a);
 				$('#a').attr('value', b);
 				check();
-				if (b == 0) {
+				if (b == true) {
 
 					$('#div-email').removeClass('has-success').addClass(
 							'has-error').addClass('has-feedback');
@@ -72,7 +72,7 @@ $(function() {
 
 });
 function check() {
-	if ($('#a').val() == 1 && $('#b').val() == 1) {
+	if ($('#a').val() == "false" && $('#b').val() == 1) {
 		$("#submit").removeAttr("disabled");
 	} else {
 		$('#submit').attr('disabled', 'disabled');

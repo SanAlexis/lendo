@@ -90,51 +90,9 @@ public class ConnexionController {
 		byte[] password0 = Base64.getDecoder().decode(b);
 		String email=new String(email0, "utf-8");
 		String password=new String(password0, "utf-8");
-		/*
-		 * méthode permettant de connecter l'utilisateur
-		 */
-//		boolean connexion = metier.checkLogin(email, password);
-//		if(connexion){
-//			// en cas de succès de connexion on retourne le code de l'utilisateur
-			
-			
-			
-			
-				/*
-				 * on stocke l'adresse email et le code de l'utilisateur dans une variable de session
-				 */
-//				HttpSession session = request.getSession();
-//				session.setAttribute("codeU", user.getCodeUtilisateur());
-//				session.setAttribute("email", user.getEmail());
-//		}
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		 transformation de l'objet java en json
-//		String json = objectMapper.writeValueAsString(connexion);
-//		return json;
-		
-		/*
-		 * test
-		 */
-		Utilisateur user = new Utilisateur();
-		user.setCodeUtilisateur((long) 151515);
-		if(user.getCodeUtilisateur()==null){
-		//en cas d'échec de connxion, on ne retourne rien
-			boolean reponse=false;
-			ObjectMapper objectMapper = new ObjectMapper();
-			// transformation de l'objet java en json
-			String json = objectMapper.writeValueAsString(reponse);
-			return json;
-		}else{
-			// en cas de succès de connexion on retourne le code de l'utilisateur
-			
-			
-			//on vérifie si l'utilisateur veut garder sa session active à la fermeture du navigateur
-			
-			user.setEmail(email);
-			user.setPassword(password);
-			/*
-			 * on stocke l'adresse email et le code de l'utilisateur dans une variable de session
-			 */
+
+		Utilisateur user = metier.checkUser(email, password);
+		if(user.getCodeUtilisateur()!=null){
 			HttpSession session = request.getSession();
 			session.setAttribute("codeU", user.getCodeUtilisateur());
 			session.setAttribute("email", user.getEmail());
@@ -144,6 +102,16 @@ public class ConnexionController {
 			// transformation de l'objet java en json
 			String json = objectMapper.writeValueAsString(reponse);
 			return json;
+			
+		
+		}else{
+			//en cas d'échec de connxion, on ne retourne rien
+			boolean reponse=false;
+			ObjectMapper objectMapper = new ObjectMapper();
+			// transformation de l'objet java en json
+			String json = objectMapper.writeValueAsString(reponse);
+			return json;
+			
 		}
 	}
 }
