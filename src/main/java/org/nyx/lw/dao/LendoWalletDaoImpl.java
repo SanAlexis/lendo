@@ -350,14 +350,14 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 
 	@Override
 	public List<Commentaire> getCommentaireProjet(Long codeP) {
-		Query req=em.createQuery("select c from Commentaire c where c.Projet.codeProjet=:x");
+		Query req=em.createQuery("select c from Commentaire c where c.projet.codeProjet=:x");
 		req.setParameter("x",codeP);
 		return req.getResultList();
 	}
 
 	@Override
 	public List<Contribution> getContributionProjet(Long codeP) {
-		Query req=em.createQuery("select c from Contribution c where c.Projet.codeProjet=:x");
+		Query req=em.createQuery("select c from Contribution c where c.projet.codeProjet=:x");
 		req.setParameter("x",codeP);
 		return req.getResultList();
 	}

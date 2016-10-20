@@ -12,15 +12,18 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.nyx.lw.entities.Categorie;
+import org.nyx.lw.entities.Commentaire;
 import org.nyx.lw.entities.Media;
 import org.nyx.lw.entities.Projet;
 import org.nyx.lw.entities.ProjetBusiness;
+import org.nyx.lw.entities.Utilisateur;
 import org.nyx.lw.metier.ILendoWalletMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -280,6 +283,36 @@ public class UpdateProjetController {
 		String json = objectMapper.writeValueAsString("");
 		return json;
 	}
+	
+	@RequestMapping(value = "/updateprojetsetcommentaire",method = RequestMethod.POST)
+	//@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String updateprojetsetcommentaire(HttpServletRequest request, HttpServletResponse response)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		// Récupération du code de l'utilisateur
+		long code_projet = Long.parseLong(request.getParameter("codeu"));
+		String commentaire = request.getParameter("commentaire");
+		
+		HttpSession session = request.getSession();
+		long codU=(Long) session.getAttribute("codeU");
+		
+		Projet p = new Projet();
+		p.setCodeProjet(code_projet);
+		
+		Commentaire moncommentaire = new Commentaire();
+		moncommentaire.setDescription(commentaire);
+		
+		Utilisateur user = new Utilisateur();
+		user.setCodeUtilisateur(codU);
+		
+		metier.addCommentaires(p, moncommentaire, user);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		// transformation de l'objet java en json
+		String json = objectMapper.writeValueAsString("");
+		return json;
+	}
+	
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/deleteprojet",method = RequestMethod.POST)
