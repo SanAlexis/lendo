@@ -145,6 +145,8 @@ function check() {
  * fonction permettant d'inscrire un utilisateur
  */
 function inscription() {
+	ajax_requete_lance_desactive_fenetre();
+	
 	var nom = $('#nom').val().toUpperCase();
 	var prenom = $('#prenom').val().toLowerCase();
 	var email = $('#email').val();
@@ -162,6 +164,8 @@ function inscription() {
 					 * on vérifie si la fonction a réussi (si on a un code d'utilisateur
 					 */
 					if(!user.codeUtilisateur){
+						
+						ajax_requete_termine_active_fenetre();
 						/*
 						 * en cas d'échec on envoi un message d'alerte in vitant l'utilisateur à réessayer
 						 */

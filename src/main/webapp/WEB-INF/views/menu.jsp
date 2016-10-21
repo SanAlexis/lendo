@@ -15,11 +15,11 @@
 						<div class=" input-group">
 							<input type="text"
 								class="form-control glyphicon glyphicon-search" id="search"
-								placeholder="Chercher un projet"> <span
+								placeholder="Cherchez un projet"> <span
 								class="input-group-btn" style="width:; height: 3px">
 								<button id="btn_search"
 									class="btn btn-default glyphicon glyphicon-search"
-									type="button" style="width: ; height: 33px; color: #FBAF3F"></button>
+									type="button" style="width: 60px; height: 33px; color: #FBAF3F; border-radius:3px"></button>
 							</span>
 						</div>
 						
@@ -87,3 +87,16 @@
 				</ul>
 			</div>
 		</div>
+		
+		
+		
+		
+			<!-- PAGE MODAL DE DESACTIVATION DE L4AFFICHAGE LORS d'UNE REQUETE AJAX -->
+			<div class="modal fade" id="ajax_req_desactive">
+				<!--
+				<div class="modal-dialog" style="background-color: #595959">
+					<div class="modal-content">
+					</div>
+				</div>
+				-->
+			</div>

@@ -599,7 +599,7 @@ function deconnexion() {
 		url : "deconnexion",
 		cache : false,
 		success : function(response) {
-
+				
 		}
 	});
 }
@@ -1132,8 +1132,7 @@ function loadprojetallprojet() {
 				data : {},
 				success : function(response) {
 					//alert(response);
-					var projet = eval('(' + response + ')');
-					
+					var projet = eval('(' + response + ')');		
 					var a = "";
 					
 					for ( var id in projet) {
@@ -1168,3 +1167,15 @@ function loadprojetallprojet() {
 			});
 }
 
+function ajax_requete_lance_desactive_fenetre(){
+	$("#ajax_req_desactive").modal({
+		backdrop : 'static',
+		keyboard : false,
+		show : true
+	});
+}
+
+
+function ajax_requete_termine_active_fenetre(){
+	$("#ajax_req_desactive").modal("hide");
+}

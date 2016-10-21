@@ -285,7 +285,6 @@ public class UpdateProjetController {
 	}
 	
 	@RequestMapping(value = "/updateprojetsetcommentaire",method = RequestMethod.POST)
-	//@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody
 	String updateprojetsetcommentaire(HttpServletRequest request, HttpServletResponse response)
 			throws JsonGenerationException, JsonMappingException, IOException {

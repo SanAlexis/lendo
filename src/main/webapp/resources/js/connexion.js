@@ -82,6 +82,8 @@ function check() {
  * fonction permettant d'inscrire un utilisateur
  */
 function connexion() {
+	ajax_requete_lance_desactive_fenetre();
+	
 	var email = $('#email').val();
 	var password = $('#password').val();
 	var check =$(':radio[name="check"]:checked').val();
@@ -96,6 +98,8 @@ function connexion() {
 				 * on vérifie si la fonction a réussi (si on a un code d'utilisateur
 				 */
 				if(!connexion){
+					
+					ajax_requete_termine_active_fenetre();
 					/*
 					 * en cas d'échec on envoi un message d'alerte in vitant l'utilisateur à réessayer
 					 */

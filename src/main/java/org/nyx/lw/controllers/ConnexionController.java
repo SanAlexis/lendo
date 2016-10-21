@@ -40,8 +40,8 @@ public class ConnexionController {
 		String check = request.getParameter("check");
 
 		Utilisateur user = metier.checkUser(email, password);
-		Long code = user.getCodeUtilisateur();
-		if(code!=null){
+		//Long code = user.getCodeUtilisateur();
+		if(user!=null){
 		// en cas de succès de connexion on retourne true
 			/*
 			 * on stocke l'adresse email et le code de l'utilisateur dans une variable de session

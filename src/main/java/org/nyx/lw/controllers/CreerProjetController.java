@@ -44,11 +44,11 @@ public class CreerProjetController {
 		double montant = Double.parseDouble(request.getParameter("montant"));
 		int duree = Integer.parseInt(request.getParameter("duree"));
 		String type = request.getParameter("type");
-		double taux = Double.parseDouble(request.getParameter("taux"));
-		String periode = request.getParameter("periode");
+		
+		
 	    Date DateCreation = new Date();
 	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-	    Date DateRemboursement = df.parse(periode);
+	    
 	    
 		//long a = Long.parseLong(titre);
 		/*
@@ -82,7 +82,11 @@ public class CreerProjetController {
 			
 			
 		}else{
+			double taux = Double.parseDouble(request.getParameter("taux"));
 			
+			String periode = request.getParameter("periode");
+		    Date DateRemboursement = df.parse(periode);
+		    
 			ProjetBusiness projet = new ProjetBusiness();
 			projet.setTitre(titre);
 			projet.setCategorie(categorie);

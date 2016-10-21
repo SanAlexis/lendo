@@ -171,12 +171,12 @@ function check() {
 	var remboursement = $('#periode').val();
 		var date = new Date();
 		var date1 = new Date(remboursement);
-	if ($('#a').val() == 1 && $('#b').val() == 1 && $('#c').val() == 1 && $('#d').val() == 1 && date <date1) {
+	if ($('#a').val() == 1 && $('#b').val() == 1 && $('#c').val() == 1 && $('#d').val() == 1) {
 		if($(':radio[name="type_contribution"]:checked').val()=="don"){
 			$("#submit").removeAttr("disabled");
 		}
 		if($(':radio[name="type_contribution"]:checked').val()=="pret"){
-			if($('#e').val() == 1 && $('#periode').val() !=""){
+			if($('#e').val() == 1 && $('#periode').val() !=""  && date <date1){
 				$("#submit").removeAttr("disabled");
 			}else{
 				$('#submit').attr('disabled', 'disabled');
@@ -191,6 +191,8 @@ function check() {
  * fonction permettant de créer un nouveau projet
  */
 function creerprojet(){
+	ajax_requete_lance_desactive_fenetre();
+	
 	var titre = $('#titre').val();
 	var cathegorie = $('#cathegorie').val();
 	var montant = $('#montant').val();
@@ -206,6 +208,7 @@ function creerprojet(){
 		cache : false,
 		data :"titre="+titre+"&cathegorie="+cathegorie+"&montant="+montant+"&duree="+duree+"&type="+type+"&taux="+taux+"&periode="+periode ,
 		success : function(data) {
+			
 			// conversion de la reponse en objet javascript
 			// manipulable
 			var projet = eval('(' + data + ')');
@@ -213,6 +216,7 @@ function creerprojet(){
 				/*
 				 * si le projet n'a pas été crée on ne fait rien
 				 */
+				ajax_requete_termine_active_fenetre();
 				alert("Votre projet n'a pas pu être créé, veuillez reessayer plus tard");
 			}else{
 				/*
