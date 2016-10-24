@@ -111,7 +111,7 @@
 			</div>
 			<!-- ESPACE VIDE DE DROITE -->
 			<div class="hidden-xs col-sm-2 col-md-2 col-lg-2" id=""
-				style="background-color: red">
+				style="background-color: ">
 				<h4 class="text-center"></h4>
 			</div>
 		</div>
@@ -657,9 +657,9 @@
 			</div>
 			<!-- ESPACE VIDE DE DROITE -->
 			<div class="hidden-xs col-sm-2 col-md-2 col-lg-2" id=""
-				style="background-color: red">
+				style="background-color: ">
 				<h4 class="text-center"></h4>
-				cccc
+				
 			</div>
 		</div>
 	</div>

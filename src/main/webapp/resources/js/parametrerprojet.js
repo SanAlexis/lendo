@@ -11,7 +11,7 @@ $(function() {
 	 * récupération des catégories des projets
 	 */
 	loadprojetcategorie();
-	
+	transformecurseur('#modifier_photo', 'pointer');
 	$("#resize").css('border', 'dashed 3px #652C90');
 	$("#resize").resizable({
 		containment : "",
@@ -298,12 +298,13 @@ function loadprojet() {
 						}
 						// alert(image[image.length-1].length);
 						// $('#s').html(image[image.length-1]);
-						if (image.length > 0) {
-							$('#da').attr('src', image[image.length - 1]);
-						} else {
-
+						var i;
+						if(image.length<1){
+							i=$("#alt_image").val();
+						}else{
+							i=image[image.length - 1];
 						}
-						$('#da').attr('src', image[image.length - 1]);
+						$('#da').attr('src', i);
 						$('#check_ifimage')
 						.attr('value',image.length );
 						$('#check_video')

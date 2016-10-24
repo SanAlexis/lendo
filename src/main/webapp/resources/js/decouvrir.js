@@ -83,8 +83,14 @@ function loadprojetbycategorie(champ) {
 						var catego ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
 						+ projet[id].categorie.libelle
 						+ '</a></div></div>';
+						var i;
+						if(image.length<1){
+							i=$("#alt_image").val();
+						}else{
+							i=image[image.length - 1];
+						}
 						var imag='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><img alt="'+ projet[id].titre+'" class="img-responsive center-block" src="'
-						+ image[image.length - 1]+ '"></div></div>';
+						+ i+ '"></div></div>';
 						var titr='<div class="row" id=""><a href="projetvue?codeP='+projet[id].codeProjet+'"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'
 						+ projet[id].titre
 						+ '</div></a></div>';

@@ -1,5 +1,6 @@
 		<input type="hidden" id="code_utilisateur" value=<%=  session.getAttribute( "codeU" ) %>>
 		<input type="hidden" id="date" value="">
+		<input type="hidden" id="alt_image" value="">
 		<div class="row" id="" style="background-color: #652C90">
 			<div
 				class="col-xs-offset-0 col-sm-offset-1 col-xs-12 col-sm-1 col-md-1 col-lg-1"
@@ -100,3 +101,6 @@
 				</div>
 				-->
 			</div>
+			
+			<ul id='r_search'>
+			</ul>

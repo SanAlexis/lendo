@@ -250,8 +250,17 @@ function loadprojetcomplet() {
 							}
 
 						}
-						testVideoUrl(video[video.length - 1], "frame_video");
-						$('#image').attr("src", image[image.length - 1]);
+						if(video.length>0){
+							testVideoUrl(video[video.length - 1], "frame_video");	
+						}
+						
+						var i;
+						if(image.length<1){
+							i=$("#alt_image").val();
+						}else{
+							i=image[image.length - 1];
+						}
+						$('#image').attr("src", i);
 					}
 
 				},
