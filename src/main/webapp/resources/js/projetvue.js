@@ -130,6 +130,7 @@ function commenterProjet(champ1, champ2, champ3, champ4, champ5) {
 										success : function(response) {
 											ajax_requete_termine_active_fenetre();
 											alert("Votre commentaire a été posté avec succès avec succès");
+											loadprojetcommentaires();
 											$("#" + champ1).Attr("value", "");
 										},
 										error : function() {
@@ -145,7 +146,6 @@ function commenterProjet(champ1, champ2, champ3, champ4, champ5) {
 function loadprojetcomplet() {
 	// récupération du code du projet
 	var code_projet = $('#code_p').val();
-	var code_utilisateur = $('#code_utilisateur').val();
 	$
 			.ajax({
 				type : "post",
@@ -182,65 +182,23 @@ function loadprojetcomplet() {
 						/*
 						 * contributions
 						 */
-						var contrib = 0;
-						for ( var id in projet.contributions) {
-
-							contrib += projet.contributions[id].montant;
-
-						}
-						var pourcentage = (contrib / projet.montantAttendu) * 100;
-						$('#test_progress').html(
-								'<h4>' + contrib + ' FCFA Collectés par '
-										+ projet.contributions.length
-										+ ' Lenders sur '
-										+ projet.montantAttendu
-										+ ' FCFA attendus de la campagne</h4>');
-
-						$('#progress')
-								.html(
-										'<div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:'
-												+ pourcentage
-												+ '%">'
-												+ pourcentage
-												+ ' %</div></div>');
-
-						/*
-						 * commentaires alert(projet.commentaires.length);
-						 */
-
-						var commentaire = "";
-						for ( var id in projet.commentaires) {
-
-							commentaire += '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:"><a href="">'
-									+ projet.commentaires[id].utilisateur.nom
-									+ ' '
-									+ projet.commentaires[id].utilisateur.prenom
-									+ '</a></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:">'
-									+ projet.commentaires[id].description
-									+ '</div>';
-
-						}
-						$('#contenu_commentaires').html(commentaire);
 						
+						loadprojetcontributions();
+						window.setInterval("loadprojetcontributions()", 60000);
 						
 						
 						/*
-						 * contributions alert(projet.commentaires.length);
+						 * type du projet
 						 */
-
-						var contrib = "";
-						for ( var id in projet.contributions) {
-
-							contrib += '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:"><a href="">'
-									+ projet.contributions[id].utilisateur.nom
-									+ ' '
-									+ projet.contributions[id].utilisateur.prenom
-									+ '</a></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:">'
-									+ projet.contributions[id].montant
-									+ '</div>';
-
-						}
-						$('#contenu_contributions').html(contrib);
+						if(projet.typeProjet=="don"){
+							$('#type_projet').html('<a id="projet_don" data-toggle="tooltip" href="#" title="En soutenant ce projet vous faites un don non remboursable">Projet à contributions de type Don (non remboursable)</a>');
+						}else{
+							var date_remboursement = new Date(projet.dateRemboursement).toLocaleDateString();
+							var tauxFixe =projet.tauxFixe;
+							$('#type_projet').html('<a id="projet_pret" data-toggle="tooltip" href="#" title="En soutenant ce projet vous faites un prêt à un taux de '+tauxFixe+' % qui vous sera remboursé dès le '+date_remboursement+' ">Projet à contributions de type Prèt (à un taux de '+tauxFixe+' % remboursable dès le '+date_remboursement+' )</a>');
+							}
+						
+					
 						
 						
 						/*
@@ -268,7 +226,13 @@ function loadprojetcomplet() {
 						$('#decal').attr("value", decalage_navigateur);
 						projet_temp_restant();
 						window.setInterval("projet_temp_restant()", 1000);
-
+						
+						/*
+						 * mise à jour des commentaires sur le projet toutes les 60 secondes
+						 */
+						loadprojetcommentaires();
+						window.setInterval("loadprojetcommentaires()", 60000);
+						
 						/*
 						 * affichage de la vidéo on parcourt le tableau des
 						 * vidéos et on affiche la dernière vidéo
@@ -340,10 +304,19 @@ function projet_temp_restant() {
 	var nbre_seconde = Math.floor(diff3);
 	// alert(nbre_jour+" Jours "+nbre_heure+" Heures "+nbre_minute+" Minutes
 	// "+nbre_seconde+ " Secondes");
-	$('#temps_restant').html(
-			"<h4>Temps restant: " + nbre_jour + " Jours " + nbre_heure
-					+ " Heures " + nbre_minute + " Minutes " + nbre_seconde
-					+ " Secondes" + "</h4>");
+	
+	if(nbre_jour==0){
+		$('#temps_restant').html(
+				"<h4>Les contributions à ce projet seront cloturées dans: " + nbre_heure
+						+ " Heures " + nbre_minute + " Minutes " + nbre_seconde
+						+ " Secondes" + "</h4>");
+	}else{
+		$('#temps_restant').html(
+				"<h4>Les contributions à ce projet seront cloturées dans: " + nbre_jour + " Jours " + nbre_heure
+						+ " Heures " + nbre_minute + " Minutes " + nbre_seconde
+						+ " Secondes" + "</h4>");
+	}
+	
 
 }
 
@@ -369,6 +342,7 @@ function contribuer(champ1, champ2, champ3, champ4) {
 		success : function(response) {
 			ajax_requete_termine_active_fenetre();
 			
+			loadprojetcontributions();
 			alert("Votre contribution a été enrégistrée avec succès");
 			$("#" + champ4).modal("hide");
 		},
@@ -377,4 +351,105 @@ function contribuer(champ1, champ2, champ3, champ4) {
 		}
 	});
 
+}
+
+/*
+ * fonction permettant de récupérer les commentaires d'un projet
+ */
+function loadprojetcommentaires(){
+	
+	var code_projet = $('#code_p').val();
+	
+	$.ajax({
+		type : "post",
+		url : "consulterprojetcommentaires",
+		cache : false,
+		data : {
+			codeP: code_projet
+		},
+		success : function(response) {
+			var projet = eval('(' + response + ')');
+			
+			/*
+			 * commentaires alert(projet.commentaires.length);
+			 */
+
+			var commentaire = "";
+			for ( var id in projet.commentaires) {
+
+				commentaire += '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:"><a href="">'
+						+ projet.commentaires[id].utilisateur.nom
+						+ ' '
+						+ projet.commentaires[id].utilisateur.prenom
+						+ '</a></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:">'
+						+ projet.commentaires[id].description
+						+ '</div>';
+
+			}
+			$('#contenu_commentaires').html(commentaire);
+		},
+		error : function() {
+			alert('Error while request..');
+		}
+	});
+	
+}
+
+
+/*
+ * fonction permettant de récupérer les contributions d'un projet
+ */
+function loadprojetcontributions(){
+	
+	var code_projet = $('#code_p').val();
+	
+	$.ajax({
+		type : "post",
+		url : "consulterprojetcontributions",
+		cache : false,
+		data : {
+			codeP: code_projet
+		},
+		success : function(response) {
+			var projet = eval('(' + response + ')');
+			
+			var contrib_montant = 0;
+			var contrib = "";
+			for ( var id in projet.contributions) {
+
+				contrib_montant += projet.contributions[id].montant;
+				contrib += '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:"><a href="">'
+					+ projet.contributions[id].utilisateur.nom
+					+ ' '
+					+ projet.contributions[id].utilisateur.prenom
+					+ '</a></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"	id="" style="background-color:">'
+					+ projet.contributions[id].montant
+					+ '</div>';
+			}
+			
+			$('#contenu_contributions').html(contrib);
+			
+			var pourcentage = (contrib_montant / projet.montantAttendu) * 100;
+			$('#test_progress').html(
+					'<h4>' + contrib_montant + ' FCFA Collectés par '
+							+ projet.contributions.length
+							+ ' Lenders sur '
+							+ projet.montantAttendu
+							+ ' FCFA attendus de la campagne</h4>');
+
+			$('#progress')
+					.html(
+							'<div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:'
+									+ pourcentage
+									+ '%">'
+									+ pourcentage
+									+ ' %</div></div>');
+
+			
+		},
+		error : function() {
+			alert('Error while request..');
+		}
+	});
+	
 }

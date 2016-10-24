@@ -113,6 +113,7 @@ public class ConsulterProjetController {
 				projet.setDateCreation(projet0.getDateCreation());
 				projet.setDateDebutCampagne(projet0.getDateDebutCampagne());
 				projet.setTaux(projet0.getTaux());
+				projet.setTypeProjet("don");;
 				
 				Categorie categorie = new Categorie();
 				categorie.setCodeCategorie(projet0.getCategorie().getCodeCategorie());
@@ -203,6 +204,7 @@ public class ConsulterProjetController {
 				projet.setDateCreation(projet0.getDateCreation());
 				projet.setDateDebutCampagne(projet0.getDateDebutCampagne());
 				projet.setTauxFixe(projet0.getTauxFixe());
+				projet.setTypeProjet("pret");
 				projet.setDateRemboursement(projet0.getDateRemboursement());
 				Categorie categorie = new Categorie();
 				categorie.setCodeCategorie(projet0.getCategorie().getCodeCategorie());
@@ -314,37 +316,64 @@ public class ConsulterProjetController {
 		List<Projet> projets= metier.getProjet();
 		List <Projet> projet =  new LinkedList<Projet>();
 		for(int i=0; i< projets.size(); i++){
-			Long code = projets.get(i).getCodeProjet();
-			String titrep = projets.get(i).getTitre();
-			String description = projets.get(i).getDescription();
-			Categorie categorie = new Categorie();
-			categorie.setCodeCategorie(projets.get(i).getCategorie().getCodeCategorie());
-			categorie.setLibelle(projets.get(i).getCategorie().getLibelle());
-			
-			List <Media> media = metier.getMediaByProjet(code);
-			List <Media> medias =  new LinkedList<Media>();
-			for(int j=0; j< media.size(); j++){
-				Long codem = media.get(j).getCodeMedia();
-				String chemin = media.get(j).getChemin();
-				String descriptionm = media.get(j).getDescription();
-				String Url = media.get(j).getUrl();
-				Media media1 = new Media();
-				media1.setCodeMedia(codem);
-				media1.setChemin(chemin);
-				media1.setDescription(descriptionm);
-				media1.setUrl(Url);
-				medias.add(media1);
+			if(projets.get(i).getDateDebutCampagne()!=null){
+
+				Long code = projets.get(i).getCodeProjet();
+				String titrep = projets.get(i).getTitre();
+				String description = projets.get(i).getDescription();
+				Categorie categorie = new Categorie();
+				categorie.setCodeCategorie(projets.get(i).getCategorie().getCodeCategorie());
+				categorie.setLibelle(projets.get(i).getCategorie().getLibelle());
+				
+				List <Media> media = metier.getMediaByProjet(code);
+				List <Media> medias =  new LinkedList<Media>();
+				for(int j=0; j< media.size(); j++){
+					Long codem = media.get(j).getCodeMedia();
+					String chemin = media.get(j).getChemin();
+					String descriptionm = media.get(j).getDescription();
+					String Url = media.get(j).getUrl();
+					Media media1 = new Media();
+					media1.setCodeMedia(codem);
+					media1.setChemin(chemin);
+					media1.setDescription(descriptionm);
+					media1.setUrl(Url);
+					medias.add(media1);
+				}
+				
+				List<Contribution> contribution = metier.getContributionProjet(projets.get(i).getCodeProjet());
+				List<Contribution> contributions = new LinkedList<Contribution>();
+				for (int k=0; k<contribution.size(); k++){
+					Contribution con = new Contribution();
+					con.setCodeContribution(contribution.get(k).getCodeContribution());
+					con.setMontant(contribution.get(k).getMontant());
+					con.setDateVersement(contribution.get(k).getDateVersement());
+					
+					Utilisateur us = new Utilisateur();
+					us.setCodeUtilisateur(contribution.get(k).getUtilisateur().getCodeUtilisateur());
+					us.setNom(contribution.get(k).getUtilisateur().getNom());
+					us.setPrenom(contribution.get(k).getUtilisateur().getPrenom());
+					
+					con.setUtilisateur(us);
+					
+					contributions.add(con);
+					
+				}
+				
+				
+				Projet p = new Projet();
+				p.setCodeProjet(code);
+				p.setTitre(titrep);
+				p.setCategorie(categorie);
+				p.setDescription(description);
+				p.setDateDebutCampagne(projets.get(i).getDateDebutCampagne());
+				p.setDureeCampagne(projets.get(i).getDureeCampagne());
+				p.setMedias(medias);
+				p.setMontantAttendu(projets.get(i).getMontantAttendu());
+				p.setContributions(contributions);
+				p.setVille(projets.get(i).getVille());
+				p.setPays(projets.get(i).getPays());
+				projet.add(p);
 			}
-			
-			Projet p = new Projet();
-			p.setCodeProjet(code);
-			p.setTitre(titrep);
-			p.setCategorie(categorie);
-			p.setDescription(description);
-			p.setDateDebutCampagne(projets.get(i).getDateDebutCampagne());
-			p.setDureeCampagne(projets.get(i).getDureeCampagne());
-			p.setMedias(medias);
-			projet.add(p);
 		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
@@ -363,42 +392,140 @@ public class ConsulterProjetController {
 		List<Projet> projets= metier.getProjetByCategorie(cat);
 		List <Projet> projet =  new LinkedList<Projet>();
 		for(int i=0; i< projets.size(); i++){
-			Long code = projets.get(i).getCodeProjet();
-			String titrep = projets.get(i).getTitre();
-			String description = projets.get(i).getDescription();
-			Categorie categorie = new Categorie();
-			categorie.setCodeCategorie(projets.get(i).getCategorie().getCodeCategorie());
-			categorie.setLibelle(projets.get(i).getCategorie().getLibelle());
-			
-			List <Media> media = metier.getMediaByProjet(code);
-			List <Media> medias =  new LinkedList<Media>();
-			for(int j=0; j< media.size(); j++){
-				Long codem = media.get(j).getCodeMedia();
-				String chemin = media.get(j).getChemin();
-				String descriptionm = media.get(j).getDescription();
-				String Url = media.get(j).getUrl();
-				Media media1 = new Media();
-				media1.setCodeMedia(codem);
-				media1.setChemin(chemin);
-				media1.setDescription(descriptionm);
-				media1.setUrl(Url);
-				medias.add(media1);
+			if(projets.get(i).getDateDebutCampagne()!=null){
+				Long code = projets.get(i).getCodeProjet();
+				String titrep = projets.get(i).getTitre();
+				String description = projets.get(i).getDescription();
+				Categorie categorie = new Categorie();
+				categorie.setCodeCategorie(projets.get(i).getCategorie().getCodeCategorie());
+				categorie.setLibelle(projets.get(i).getCategorie().getLibelle());
+				
+				List <Media> media = metier.getMediaByProjet(code);
+				List <Media> medias =  new LinkedList<Media>();
+				for(int j=0; j< media.size(); j++){
+					Long codem = media.get(j).getCodeMedia();
+					String chemin = media.get(j).getChemin();
+					String descriptionm = media.get(j).getDescription();
+					String Url = media.get(j).getUrl();
+					Media media1 = new Media();
+					media1.setCodeMedia(codem);
+					media1.setChemin(chemin);
+					media1.setDescription(descriptionm);
+					media1.setUrl(Url);
+					medias.add(media1);
+				}
+				
+				List<Contribution> contribution = metier.getContributionProjet(projets.get(i).getCodeProjet());
+				List<Contribution> contributions = new LinkedList<Contribution>();
+				for (int k=0; k<contribution.size(); k++){
+					Contribution con = new Contribution();
+					con.setCodeContribution(contribution.get(k).getCodeContribution());
+					con.setMontant(contribution.get(k).getMontant());
+					con.setDateVersement(contribution.get(k).getDateVersement());
+					
+					Utilisateur us = new Utilisateur();
+					us.setCodeUtilisateur(contribution.get(k).getUtilisateur().getCodeUtilisateur());
+					us.setNom(contribution.get(k).getUtilisateur().getNom());
+					us.setPrenom(contribution.get(k).getUtilisateur().getPrenom());
+					
+					con.setUtilisateur(us);
+					
+					contributions.add(con);
+					
+				}
+				
+				Projet p = new Projet();
+				p.setCodeProjet(code);
+				p.setTitre(titrep);
+				p.setCategorie(categorie);
+				p.setDescription(description);
+				p.setDateDebutCampagne(projets.get(i).getDateDebutCampagne());
+				p.setDureeCampagne(projets.get(i).getDureeCampagne());
+				p.setMedias(medias);
+				p.setMontantAttendu(projets.get(i).getMontantAttendu());
+				p.setContributions(contributions);
+				p.setVille(projets.get(i).getVille());
+				p.setPays(projets.get(i).getPays());
+				projet.add(p);
 			}
-			
-			Projet p = new Projet();
-			p.setCodeProjet(code);
-			p.setTitre(titrep);
-			p.setCategorie(categorie);
-			p.setDescription(description);
-			p.setDateDebutCampagne(projets.get(i).getDateDebutCampagne());
-			p.setDureeCampagne(projets.get(i).getDureeCampagne());
-			p.setMedias(medias);
-			projet.add(p);
 		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		// transformation de l'objet java en json
 		String json = objectMapper.writeValueAsString(projet);
 		return json;
 	}
+	
+	@RequestMapping(value = "/consulterprojetcommentaires",method = RequestMethod.POST)
+	//@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String consulterprojetcommentaires(HttpServletRequest request, HttpServletResponse response)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		
+		Long codeP = Long.parseLong(request.getParameter("codeP"));
+		
+		Projet projet = new Projet();
+		List <Commentaire> commentaire = metier.getCommentaireProjet(codeP);
+		List <Commentaire> commentaires =  new LinkedList<Commentaire>();
+		for (int i=0; i<commentaire.size(); i++){
+			Commentaire co = new Commentaire();
+			co.setCodeCommentaire(commentaire.get(i).getCodeCommentaire());
+			co.setDatePost(commentaire.get(i).getDatePost());
+			co.setTitre(commentaire.get(i).getTitre());
+			co.setDescription(commentaire.get(i).getDescription());
+			
+			Utilisateur u = new Utilisateur();
+			u.setCodeUtilisateur(commentaire.get(i).getUtilisateur().getCodeUtilisateur());
+			u.setNom(commentaire.get(i).getUtilisateur().getNom());
+			u.setPrenom(commentaire.get(i).getUtilisateur().getPrenom());
+			
+			co.setUtilisateur(u);
 
+			commentaires.add(co);
+		}
+		projet.setCommentaires(commentaires);
+		
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		// transformation de l'objet java en json
+		String json = objectMapper.writeValueAsString(projet);
+		return json;
+	}
+	
+	@RequestMapping(value = "/consulterprojetcontributions",method = RequestMethod.POST)
+	//@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String consulterprojetcontributions(HttpServletRequest request, HttpServletResponse response)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		
+		Long codeP = Long.parseLong(request.getParameter("codeP"));
+		
+		Projet projet = new Projet();
+		List<Contribution> contribution = metier.getContributionProjet(codeP);
+		List<Contribution> contributions = new LinkedList<Contribution>();
+		for (int k=0; k<contribution.size(); k++){
+			Contribution con = new Contribution();
+			con.setCodeContribution(contribution.get(k).getCodeContribution());
+			con.setMontant(contribution.get(k).getMontant());
+			con.setDateVersement(contribution.get(k).getDateVersement());
+			
+			Utilisateur us = new Utilisateur();
+			us.setCodeUtilisateur(contribution.get(k).getUtilisateur().getCodeUtilisateur());
+			us.setNom(contribution.get(k).getUtilisateur().getNom());
+			us.setPrenom(contribution.get(k).getUtilisateur().getPrenom());
+			
+			con.setUtilisateur(us);
+			
+			contributions.add(con);
+			
+		}
+		projet.setContributions(contributions);
+		
+		Projet p = metier.consulterProjet(codeP);
+		projet.setMontantAttendu(p.getMontantAttendu());
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		// transformation de l'objet java en json
+		String json = objectMapper.writeValueAsString(projet);
+		return json;
+	}
 }

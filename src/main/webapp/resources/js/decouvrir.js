@@ -34,8 +34,7 @@ function loadprojetbycategorie(champ) {
 				data : {categorie:champ},
 				success : function(response) {
 					//alert(response);
-					var projet = eval('(' + response + ')');
-					
+					var projet = eval('(' + response + ')');		
 					var a = "";
 					
 					for ( var id in projet) {
@@ -52,14 +51,44 @@ function loadprojetbycategorie(champ) {
 							}
 
 						}
+						
+						var contrib_montant = 0;
+
+
+						for ( var id2 in projet[id].contributions) {
+
+							contrib_montant += projet[id].contributions[id2].montant;
+							
+						}
+						
+						
+						
+						var pourcentage = (contrib_montant / projet[id].montantAttendu) * 100;
+						var test_progress = '<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">' + contrib_montant + ' FCFA Collectés par '
+										+ projet[id].contributions.length
+										+ ' Lenders sur '
+										+ projet[id].montantAttendu
+										+ ' FCFA</div></div>';
+
+						var progress = '<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:'
+												+ pourcentage
+												+ '%">'
+												+ pourcentage
+												+ ' %</div></div></div></div>';
+						
+						var date_fin_campagne = projet[id].dureeCampagne * 24 * 60 * 60 * 1000 + projet[id].dateDebutCampagne;
+						var date_fin = new Date(date_fin_campagne).toLocaleDateString();
+						var fin ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">Fermeture le '+date_fin+'</div></div>';
+						var localisation ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'+projet[id].ville+'-'+projet[id].pays+'</div></div>';
+						
 						//alert(projet[id].medias[projet[id].medias.length-1].chemin);
-						a += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2" id=""><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
-						+ projet[id].categorie.libelle
-						+ '</a></div></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><img alt="'+ projet[id].titre+'" class="img-responsive center-block" src="'
-						+ image[image.length - 1]+ '"></div></div><div class="row" id=""><a href="projetvue?codeP='+projet[id].codeProjet+'"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'
-						+ projet[id].titre
-						+ '</div></a></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify" id="">'
-						+ projet[id].description + '</div></div></div>';
+						a += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2" id=""><div class="row" id="" style="background-color: #FBAF3F; width: %; margin-left:1%; margin-top:1%"><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
+								+ projet[id].categorie.libelle
+								+ '</a></div></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><img alt="'+ projet[id].titre+'" class="img-responsive center-block" src="'
+								+ image[image.length - 1]+ '"></div></div><div class="row" id=""><a href="projetvue?codeP='+projet[id].codeProjet+'"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'
+								+ projet[id].titre
+								+ '</div></a></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify" id="" >'
+								+ projet[id].description + '</div></div>'+test_progress+''+progress+localisation+''+fin+'</div></div>';
 					}
 					$("#projets").html(a);
 

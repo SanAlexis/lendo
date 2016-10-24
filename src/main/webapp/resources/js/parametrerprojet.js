@@ -103,6 +103,7 @@ $(function() {
 					cache : false,
 					data : {codeu:$("#code_p").val()},
 					success : function(response) {
+						$('#check_debut').attr('value',new Date());
 						alert("Votre Projet a été publié avec succès");
 					},
 					error : function() {
@@ -318,6 +319,7 @@ function loadprojet() {
 								projet.busnessPlan);
 						
 						check();
+						window.setInterval("check()", 3000);
 						/*
 						 * titre
 						 */
@@ -411,17 +413,6 @@ function loadprojet() {
 								"Entrez  le montant attendu de la campagne du projet",
 								" Clickez pour modifier le montant attendu de la campagne du projet",
 								"annule_montantAttendu", "ok_montantAttendu");
-						updateinfo(
-								"ok_montantAttendu",
-								"updateprojetmontantAttendu",
-								"POST",
-								"montantAttendu",
-								"code_p",
-								"montantAttendu",
-								"check_montantAttendu",
-								"affiche_montantAttendu",
-								"annule_montantAttendu",
-								"Erreur : Le montant attendu de la campagne du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
 						/*
 						 * durée de la campagne
 						 */
@@ -433,18 +424,7 @@ function loadprojet() {
 								"Entrez  la durée de la campagne du projet",
 								" Clickez pour modifier la durée de la campagne du projet",
 								"annule_dureeCampagne", "ok_dureeCampagne");
-						updateinfo(
-								"ok_dureeCampagne",
-								"updateprojetdureeCampagne",
-								"POST",
-								"dureeCampagne",
-								"code_p",
-								"dureeCampagne",
-								"check_dureeCampagne",
-								"affiche_dureeCampagne",
-								"annule_dureeCampagne",
-								"Erreur : La durée de la campagne du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
-						/*
+							/*
 						 * presentation du projet
 						 */
 						checkinfockeditor("check_presentation",
@@ -527,6 +507,34 @@ function loadprojet() {
 						// updateinfo("ok_image","updateprojetimage","POST","image","code_projet","image","check_image","affiche_image","annule_image","Erreur
 						// : L'image du projet n'a pas pu être mis à jour,
 						// veuillez reessayer plus tard");
+						
+						if($('#check_debut').val()=="" || $('#check_debut').val()=="null"){
+							updateinfo(
+									"ok_dureeCampagne",
+									"updateprojetdureeCampagne",
+									"POST",
+									"dureeCampagne",
+									"code_p",
+									"dureeCampagne",
+									"check_dureeCampagne",
+									"affiche_dureeCampagne",
+									"annule_dureeCampagne",
+									"Erreur : La durée de la campagne du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
+						
+						
+							updateinfo(
+									"ok_montantAttendu",
+									"updateprojetmontantAttendu",
+									"POST",
+									"montantAttendu",
+									"code_p",
+									"montantAttendu",
+									"check_montantAttendu",
+									"affiche_montantAttendu",
+									"annule_montantAttendu",
+									"Erreur : Le montant attendu de la campagne du projet n'a pas pu être mise à jour, veuillez reessayer plus tard");
+						
+						}
 						/*
 						 * video du projet
 						 */
@@ -554,7 +562,11 @@ function loadprojet() {
 			});
 }
 function check(){
-	if ($('#check_ifimage').val()>0 && $('#check_debut').val()=="" && $('#check_titre').val()!="" && $('#check_cathegorie').val()!="" && $('#check_slogan').val()!="" && $('#check_description1').val()!="" && $('#check_montantAttendu').val()!="" && $('#check_dureeCampagne').val()!="" && $('#check_presentation').val()!="" && $('#check_ville').val()!="" && $('#check_pays').val()!="" && $('#check_video').val()!="") {
+	if ( $('#check_debut').val()=="" && $('#check_titre').val()!="" && $('#check_cathegorie').val()!="" && $('#check_slogan').val()!="" && $('#check_description1').val()!="" && $('#check_montantAttendu').val()!="" && $('#check_dureeCampagne').val()!="" && $('#check_presentation').val()!="" && $('#check_ville').val()!="" && $('#check_pays').val()!="") {
+		/*
+		 * $('#check_ifimage').val()>0 &&
+		 *  && $('#check_video').val()!=""
+		 */
 		$("#publier").removeAttr("disabled");
 	} else {
 		$('#publier').attr('disabled', 'disabled');
@@ -562,6 +574,7 @@ function check(){
 	if ($('#check_debut').val()=="") {
 		$("#delete_projet").removeAttr("disabled");
 	} else {
+		$('#publier').attr('disabled', 'disabled');
 		$('#delete_projet').attr('disabled', 'disabled');
 	}
 }

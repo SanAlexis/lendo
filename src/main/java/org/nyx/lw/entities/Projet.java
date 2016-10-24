@@ -35,6 +35,7 @@ public class Projet implements Serializable{
 	private String presentation;
 	private Date dateCreation;
 	private Date dateDebutCampagne;
+	private String typeProjet;
 	@ManyToOne
 	@JoinColumn(name="codePromoteur")
 	private Utilisateur promoteur;
@@ -220,6 +221,14 @@ public class Projet implements Serializable{
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+
+	public String getTypeProjet() {
+		return typeProjet;
+	}
+
+	public void setTypeProjet(String typeProjet) {
+		this.typeProjet = typeProjet;
 	}
 	
 	
