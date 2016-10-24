@@ -78,17 +78,20 @@ function loadprojetbycategorie(champ) {
 						
 						var date_fin_campagne = projet[id].dureeCampagne * 24 * 60 * 60 * 1000 + projet[id].dateDebutCampagne;
 						var date_fin = new Date(date_fin_campagne).toLocaleDateString();
-						var fin ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">Fermeture le '+date_fin+'</div></div>';
-						var localisation ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'+projet[id].ville+'-'+projet[id].pays+'</div></div>';
-						
+						var fin ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" id="">Fermeture le '+date_fin+'</div></div>';
+						var localisation ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" id="">'+projet[id].ville+'-'+projet[id].pays+'</div></div>';
+						var catego ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
+						+ projet[id].categorie.libelle
+						+ '</a></div></div>';
+						var imag='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><img alt="'+ projet[id].titre+'" class="img-responsive center-block" src="'
+						+ image[image.length - 1]+ '"></div></div>';
+						var titr='<div class="row" id=""><a href="projetvue?codeP='+projet[id].codeProjet+'"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'
+						+ projet[id].titre
+						+ '</div></a></div>';
+						var descript='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify" id="" >'
+							+ projet[id].description + '</div></div>';
 						//alert(projet[id].medias[projet[id].medias.length-1].chemin);
-						a += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2" id=""><div class="row" id="" style="background-color: #FBAF3F; width: %; margin-left:1%; margin-top:1%"><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
-								+ projet[id].categorie.libelle
-								+ '</a></div></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><img alt="'+ projet[id].titre+'" class="img-responsive center-block" src="'
-								+ image[image.length - 1]+ '"></div></div><div class="row" id=""><a href="projetvue?codeP='+projet[id].codeProjet+'"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'
-								+ projet[id].titre
-								+ '</div></a></div><div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify" id="" >'
-								+ projet[id].description + '</div></div>'+test_progress+''+progress+localisation+''+fin+'</div></div>';
+						a += '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 cadre_projet" id=""><div class="row " id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cadre_projet2" id="" >'+catego+imag+titr+descript+test_progress+progress+localisation+fin+'</div></div></div>';
 					}
 					$("#projets").html(a);
 

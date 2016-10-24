@@ -13,6 +13,8 @@
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
 <link rel="stylesheet" type="text/css"
@@ -41,32 +43,12 @@
 			<%@ include file="menu.jsp"%>
 		</div>
 		<!-- Block de chargement des catégories des projets -->
-		<div class="btn-group-horizontal row" data-toggle="buttons">
-			
-		</div><label id="categorie"></label>
+		<div class="row" style="background-color: #FBAF3F">
+			<div id="categorie"></div>
+		</div>
 				<!-- Ligne contenant les projets -->
 		<div class="row" id="projets">
 			
-		</div>
-		<div class="row" id="">
-			<div class="col-sm-1" id="" style="background-color: black">1</div>
-			<div class="col-sm-1" id="" style="background-color:">2</div>
-			<div class="col-sm-1" id="" style="background-color: blue">3</div>
-			<div class="col-sm-1" id="" style="background-color: green">4</div>
-			<div class="col-sm-1" id="" style="background-color: yellow">5</div>
-			<div class="col-sm-1" id="" style="background-color: purple">6</div>
-			<div class="col-sm-1" id="" style="background-color: indigo">7</div>
-			<div class="col-sm-1" id="" style="background-color: black">8</div>
-			<div class="col-sm-1" id="" style="background-color: grey">9</div>
-			<div class="col-sm-1" id="" style="background-color: red">10</div>
-			<div class="col-sm-1" id="" style="background-color: green">11</div>
-			<div class="col-sm-1" id="" style="background-color: blue">12</div>
-
-			<div class="row text-center" id="">
-				<h1>PAGE D'EXPLORATION DE PROJET EN CONSTRUCTION</h1>
-
-			</div>
-
 		</div>
 	</div>
 	<script

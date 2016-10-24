@@ -13,6 +13,8 @@
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
 <link rel="stylesheet" type="text/css"
@@ -45,30 +47,7 @@
 
 		<!-- Ligne contenant les projets -->
 		<div class="row" id="projets">
-			<div class="col-xs-12 col-sm-6 col-md-3 col-lg-2" id="">
-				<!-- Ligne contenant la catégorie -->
-				<div class="row" id="">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""></div>
-				</div>
-				<!-- Ligne contenant l'image -->
-				<div class="row" id="">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""></div>
-				</div>
-				<!-- Ligne contenant le titre -->
-				<div class="row" id="">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""></div>
-				</div>
-				<!-- Ligne contenant la description -->
-				<div class="row" id="">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""></div>
-				</div>
-			</div>
-		</div>
-
-
-
-		<div class="row text-center" id="">
-			<h1>PAGE D'ACCEUIL EN CONSTRUCTION</h1>
+			
 		</div>
 	</div>
 	<script

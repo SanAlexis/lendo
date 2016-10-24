@@ -1,9 +1,17 @@
 @CHARSET "UTF-8";
-#btng_search:hover{
-	color: red;
-font-weight: bold;
+.cadre_projet{
+ 
 }
-#seavrch:focus{
-	color: red;
-font-weight: bold;
+.cadre_projet1_font{
+	background-color:red;
+	
+}
+.cadre_projet2{
+	
+	width:97%;
+	margin: 2px;
+	background-color: ;
+	border-width:2px;
+ border-style: groove;
+ border-color: #FBAF3F;
 }

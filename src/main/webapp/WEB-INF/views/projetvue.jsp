@@ -29,7 +29,7 @@
 
 
 		<div class="row" id="">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-9" id=""
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
 				style="background-color:">
 
 
@@ -120,7 +120,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
 						style="background-color:">
 						<!-- Bloc contenant le menu -->
-						<div class="row" id="" style="background-color: #FBAF3F">
+						<div class="row" id="" style="background-color: #595959">
 							<!-- Presentation detaillée -->
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"
 								id="menu_presentation" style="background-color:">
