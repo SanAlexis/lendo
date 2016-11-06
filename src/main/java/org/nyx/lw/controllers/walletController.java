@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.nyx.lw.entities.Commentaire;
 import org.nyx.lw.entities.Dette;
 import org.nyx.lw.entities.Don;
 import org.nyx.lw.entities.Projet;

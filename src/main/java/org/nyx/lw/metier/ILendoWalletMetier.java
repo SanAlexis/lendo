@@ -42,7 +42,7 @@ public interface ILendoWalletMetier {
 	public SecteurActivite creerSecteurActivite(SecteurActivite sa);
 	public LendoUtilisateur creerCompteUtilisateur(LendoUtilisateur lu, Long codeU);
 	public LendoProjet creerCompteProjet(LendoProjet lp, Long codeP);
-
+	public void deleteMedia(Media m);
 	//par d�faut tous les projets sont busness
 	public Projet creerProjetBusiness(ProjetBusiness pb, Long codU);
 	public Projet creerProjetBusiness(ProjetBusiness pb, Long codU, Long codeCat);
@@ -52,6 +52,8 @@ public interface ILendoWalletMetier {
 	public Utilisateur updateUtilisateur(Utilisateur u);
 	public Projet updateProjet(Projet p);
 	public Projet deleteProjet(Projet p);
+	public ProjetFlexible deleteProjetFlexible(ProjetFlexible pf);
+	public ProjetBusiness deleteProjetBusiness(ProjetBusiness pb);
 	public boolean checkLogin(String userName, String userPassword);
 	public Utilisateur checkUser(String userName, String userPassword);
 	public boolean checkEmail(String email);
@@ -65,6 +67,8 @@ public interface ILendoWalletMetier {
 	public Commentaire addCommentaires(Projet p, Commentaire com, Utilisateur u);
 	public Projet faireDon(Projet P,Don d, Utilisateur u);
 	public Projet faireDette(Projet P,Dette d, Utilisateur u);
+	public void faireDon(Don d);
+	public void faireDette(Dette d);
 	public void approvisionnerCompte(LendoWallet lw, Double montant);
 	void crediter(double mt, Long codeU);
 	
@@ -89,4 +93,6 @@ public interface ILendoWalletMetier {
 	public List<Projet> getProjet();
 	public List<Projet> consulterProjets(String titre);
 	public List<Projet> getProjetByCategorie(Long codeCat);
+	public boolean checkTitre(String titre);
+	public void delete(Commentaire c);
 }

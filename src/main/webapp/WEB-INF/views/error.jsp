@@ -37,7 +37,7 @@
 			<div class="col-sm-1" id="" style="background-color: blue">12</div>
 		</div>
 		 -->
-		<div class="row" id="">
+		<div class="" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
 		<div class="row text-center" id="">

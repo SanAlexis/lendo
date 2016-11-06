@@ -166,10 +166,10 @@ function loadprojetcomplet() {
 					} else {
 
 						$('#categorie').html(
-								"<a href='decouvrir?cat="
+								"Catégorie: <a href='decouvrir?cat="
 										+ projet.categorie.codeCategorie
-										+ "'><h4>" + projet.categorie.libelle
-										+ "</h4><a>");
+										+ "'>" + projet.categorie.libelle
+										+ "<a>");
 						$('#titre')
 								.html("<u><h3>" + projet.titre + "</h3></u>");
 
@@ -191,12 +191,20 @@ function loadprojetcomplet() {
 						 * type du projet
 						 */
 						if(projet.typeProjet=="don"){
-							$('#type_projet').html('<a id="projet_don" data-toggle="tooltip" href="#" title="En soutenant ce projet vous faites un don non remboursable">Projet à contributions de type Don (non remboursable)</a>');
+							$('#taux').html("Taux d'intéret: 0%");
+							$('#types_conn').html("Type: donations");
+							$('#date_remboursement').html("Remboursement: contribution non remboursable");
+							//$('#type_projet').html('<a id="projet_don" data-toggle="tooltip" href="#" title="En soutenant ce projet vous faites un don non remboursable">Projet à contributions de type Don (non remboursable)</a>');
 						}else{
+							
 							var date_remboursement = new Date(projet.dateRemboursement).toLocaleDateString();
 							var tauxFixe =projet.tauxFixe;
-							$('#type_projet').html('<a id="projet_pret" data-toggle="tooltip" href="#" title="En soutenant ce projet vous faites un prêt à un taux de '+tauxFixe+' % qui vous sera remboursé dès le '+date_remboursement+' ">Projet à contributions de type Prèt (à un taux de '+tauxFixe+' % remboursable dès le '+date_remboursement+' )</a>');
-							}
+							//$('#type_projet').html('<a id="projet_pret" data-toggle="tooltip" href="#" title="En soutenant ce projet vous faites un prêt à un taux de '+tauxFixe+' % qui vous sera remboursé dès le '+date_remboursement+' ">Projet à contributions de type Prèt (à un taux de '+tauxFixe+' % remboursable dès le '+date_remboursement+' )</a>');
+
+							$('#taux').html("Taux d'intéret: "+tauxFixe+"%");
+							$('#types_conn').html("Type: Prèts");
+							$('#date_remboursement').html("Remboursement dès le: "+date_remboursement);	
+						}
 						
 					
 						
@@ -252,6 +260,8 @@ function loadprojetcomplet() {
 						}
 						if(video.length>0){
 							testVideoUrl(video[video.length - 1], "frame_video");	
+						}else{
+							$("#c_frame_video").hide();
 						}
 						
 						var i;
@@ -395,6 +405,7 @@ function loadprojetcommentaires(){
 						+ '</div>';
 
 			}
+			$("#menu_commentaires").html('<h5 class=" control-label text-center">Commentaires <span class="badge" style="background-color: #595959">'+projet.commentaires.length+'</span></h5>');
 			$('#contenu_commentaires').html(commentaire);
 		},
 		error : function() {
@@ -436,8 +447,23 @@ function loadprojetcontributions(){
 					+ '</div>';
 			}
 			
-			$('#contenu_contributions').html(contrib);
+			var recolte = '<span class="glyphicon glyphicon-piggy-bank  " style="color:"></span>  ' + contrib_montant + ' XAF';
 			
+			var lenders = '<span class="glyphicon glyphicon-user  " style="color:"></span>  '
+			+ projet.contributions.length
+			+ ' Lenders';
+			
+			var attente = '<span class="glyphicon glyphicon-usd  " style="color:"></span> '
+			+ projet.montantAttendu
+			+ ' XAF';
+
+			
+			$("#collecte").html(recolte);
+			$("#nbre_lenders").html(lenders);
+			$("#mont_attendu").html(attente);
+			
+			//$('#contenu_contributions').html(contrib);
+			//$('#menu_contributions').html('<h5 class=" control-label text-center">Contributions <span class="badge" style="background-color: #595959">'+contrib_montant+' F CFA</span></h5>');
 			var pourcentage = (contrib_montant / projet.montantAttendu) * 100;
 			$('#test_progress').html(
 					'<h4>' + contrib_montant + ' FCFA Collectés par '
@@ -445,6 +471,7 @@ function loadprojetcontributions(){
 							+ ' Lenders sur '
 							+ projet.montantAttendu
 							+ ' FCFA attendus de la campagne</h4>');
+			$('#test_progress').hide();
 
 			$('#progress')
 					.html(

@@ -39,13 +39,11 @@
 			<div class="col-sm-1" id="" style="background-color: blue">12</div>
 		</div>
 		 -->
-		<div class="row" id="">
+		<div class="" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
 		<!-- Block de chargement des catégories des projets -->
-		<div class="row" style="background-color: #FBAF3F">
-			<div id="categorie"></div>
-		</div>
+		
 				<!-- Ligne contenant les projets -->
 		<div class="row" id="projets">
 			

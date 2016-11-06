@@ -26,7 +26,7 @@
 			<%@ include file="menu.jsp"%>
 		</div>
 		<!-- LOGO DE LENDO -->
-		<div class="row" id="">
+		<div class="" id="">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
 				style="background-color: #FBAF3F">
 				<a href="index"> <img alt="LOGO LENDO"

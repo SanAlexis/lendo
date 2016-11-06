@@ -244,13 +244,19 @@ public boolean checkEmail(String email) {
 @Override
 public Projet faireDon(Projet P, Don d, Utilisateur u) {
 	// TODO Auto-generated method stub
-	return null;
+	d.setProjet(P);
+	d.setUtilisateur(u);
+	lwdao.faireDon(d);
+	return P;
 }
 
 @Override
 public Projet faireDette(Projet P, Dette d, Utilisateur u) {
 	// TODO Auto-generated method stub
-	return null;
+	d.setProjet(P);
+	d.setUtilisateur(u);
+	lwdao.faireDette(d);
+	return P;
 }
 
 @Override
@@ -447,6 +453,48 @@ public List<Projet> getProjet() {
 public List<Projet> consulterProjets(String titre) {
 	// TODO Auto-generated method stub
 	return lwdao.consulterProjets(titre);
+}
+
+@Override
+public boolean checkTitre(String titre) {
+	// TODO Auto-generated method stub
+	return lwdao.checkTitre(titre);
+}
+
+@Override
+public ProjetFlexible deleteProjetFlexible(ProjetFlexible pf) {
+	// TODO Auto-generated method stub
+	return lwdao.deleteProjetFlexible(pf);
+}
+
+@Override
+public ProjetBusiness deleteProjetBusiness(ProjetBusiness pb) {
+	// TODO Auto-generated method stub
+	return lwdao.deleteProjetBusiness(pb);
+}
+
+@Override
+public void faireDon(Don d) {
+	// TODO Auto-generated method stub
+	lwdao.faireDon(d);
+}
+
+@Override
+public void faireDette(Dette d) {
+	lwdao.faireDette(d);
+	
+}
+
+@Override
+public void deleteMedia(Media m) {
+	// TODO Auto-generated method stub
+	lwdao.deleteMedia(m);
+}
+
+@Override
+public void delete(Commentaire c) {
+	// TODO Auto-generated method stub
+	lwdao.deleteCommentaire(c);
 }
 
 

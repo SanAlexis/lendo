@@ -15,7 +15,7 @@ $(function() {
 			'keyup click',
 			function() {
 				var a = $('#titre').val();
-				var b = longueur(a, 10, 30);
+				var b = longueur(a, 10, 90);
 				$('#a').attr('value', b);
 				check();
 				if (b == 1) {

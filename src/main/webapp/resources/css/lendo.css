@@ -2,16 +2,102 @@
 .cadre_projet{
  
 }
-.cadre_projet1_font{
-	background-color:red;
+.cadre_projet15646{
+	background-color: #EEE8CD;
 	
 }
+
+.ws_images{
+	margin: 10px;
+	margin-bottom: 30px;
+}
 .cadre_projet2{
-	
-	width:97%;
+	border-radius: 5px;
+	width:90%;
 	margin: 2px;
+	background-color: white;
+	border-width:2px;
+ border-style: groove;
+ border-color: #595959;
+ text-align: center;
+}
+
+#r_search{
+	position: fixed;
+	left:;
+	z-index:100;
+	background-color: #FBAF3F;
+	list-style-position: inside;
+	list-style-type: none;
+}
+
+#menudusite{
+	z-index:99;
+}
+
+.link_result{
+	z-index:101;
+}
+
+.link_result:hover{
+	background-color: #595959;
+	color: #FBAF3F;
+}
+
+.li_result{
+	z-index:101;
+}
+
+body{
+	font-family:TodaySBOP, "Trebuchet MS";
+}
+.progress-bar{
+	
+}
+
+.progress{
+background: #FBAF3F;
+color: white;
+border-style: groove;
+border-width:2px;
+border-color: #652C90;
+}
+.progress-bar{
+background: #652C90;
+color: white;
+ border-style: ;
+border-width:px;
+border-color: ;
+}
+
+.test{
+	
+	width: %;
+	background-color: red;
+	border-width:9px;
+ border-style: solid;
+ border-color: green;
+}
+
+.test20{
+	
+	width: %;
 	background-color: ;
 	border-width:2px;
  border-style: groove;
  border-color: #FBAF3F;
+}
+#mon_commentaire{
+	border-radius: 5px;
+	margin-top: 50px;
+	margin-bottom: 20px;
+	width: %;
+	background-color: ;
+	border-width:2px;
+ border-style: solid;
+ border-color: #595959;
+}
+
+.btn, .mon_boutton, input{
+	border-radius: 5px;
 }

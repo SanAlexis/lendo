@@ -19,6 +19,8 @@
 	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
 
 <link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
+<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
@@ -31,13 +33,13 @@
 
 		<input type="hidden" id="code_p"
 			value=<%=session.getAttribute("codeP")%>>
-		<div class="row" id="">
+		<div class="" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
 		<div class="row" id="">
 			<div class="col-lg-offset-1 col-xs-12 col-sm-12 col-md-2 col-lg-2"
-				id="" style="background-color: #FBAF3F; overflow: auto">
-				<img id="da" alt="IMAGE PROJET" class="img-responsive center-block"
+				id="" style="background-color: ">
+				<img id="da" alt="IMAGE PROJET" class="img-thumbnail img-responsive center-block"
 					src="">
 			</div>
 
@@ -432,7 +434,7 @@
 								<div
 									class="col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-sm-3 col-md-3 col-lg-3"
 									id="" style="">
-									<input type="reset" name="" value="X" class="form-control"
+									<input type="reset" name="" value="X" class="mon_boutton form-control"
 										style="color: red" id="annule_presentation">
 								</div>
 								<div class="col-sm-3 col-md-3 col-lg-3" id="" style="">

@@ -14,6 +14,8 @@ import org.nyx.lw.entities.ActiviteProfessionel;
 import org.nyx.lw.entities.Categorie;
 import org.nyx.lw.entities.Commentaire;
 import org.nyx.lw.entities.Contribution;
+import org.nyx.lw.entities.Dette;
+import org.nyx.lw.entities.Don;
 import org.nyx.lw.entities.LendoProjet;
 import org.nyx.lw.entities.LendoUtilisateur;
 import org.nyx.lw.entities.LendoWallet;
@@ -35,16 +37,7 @@ import org.springframework.stereotype.Repository;
 public class LendoWalletDaoImpl implements ILendoWalletDao{
 	@PersistenceContext
 	private EntityManager em;
-
-	protected SessionFactory sessionFactory ;
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
+	
 	@Override
 	public Utilisateur editUtilisateur (Utilisateur u) {
 			em.merge(u);
@@ -53,8 +46,24 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	
 	@Override
 	public Utilisateur deleteUtilisateur (Utilisateur u) {
-		em.remove(u);
-		return u;
+		List<Projet> projets=null;
+		List<Commentaire> commentaires=null;
+		projets=getProjetUtilisateur(u.getCodeUtilisateur());
+		commentaires=getCommentaireProjet(u.getCodeUtilisateur());
+		
+		if ((projets != null) && (projets.size() > 0)) {
+		for(Projet m:projets){
+			deleteProjet(m);
+		}
+		}
+		
+		if ((commentaires != null) && (commentaires.size() > 0)) {
+			for(Commentaire m:commentaires){
+				deleteCommentaire(m);
+			}
+			}
+		em.remove(em.contains(u) ? u : em.merge(u));
+		return null;
 	}
 	
 	@Override
@@ -422,7 +431,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	@Override
 	public Projet deleteProjet(Projet p) {
 		// TODO Auto-generated method stub
-		em.remove(p);
+		em.remove(em.contains(p) ? p : em.merge(p));
 		return p;
 	}
 
@@ -492,6 +501,87 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	public List<Projet> getProjet() {
 		Query req=em.createQuery("select p from Projet p");
 		return req.getResultList();
+	}
+
+	@Override
+	public boolean checkTitre(String titre) {
+		boolean userFound = false;
+		Query req=em.createQuery("select c from Projet c where c.titre=:x");
+		req.setParameter("x", "%"+titre+"%");
+		List list = req.getResultList();
+		if(!list.isEmpty()) userFound=true;
+		return userFound;
+	}
+
+	@Override
+	public ProjetFlexible deleteProjetFlexible(ProjetFlexible pf) {
+		List<Media> medias=null;
+		List<Commentaire> commentaires=null;
+		medias=getMediaByProject(pf.getCodeProjet());
+		commentaires=getCommentaireProjet(pf.getCodeProjet());
+		if ((medias != null) && (medias.size() > 0)) {
+		for(Media m:medias){
+			deleteMedia(m);
+		}
+		}
+		
+		if ((commentaires != null) && (commentaires.size() > 0)) {
+			for(Commentaire m:commentaires){
+				deleteCommentaire(m);
+			}
+			}
+		em.remove(em.contains(pf) ? pf : em.merge(pf));
+		return pf;
+	}
+
+	@Override
+	public ProjetBusiness deleteProjetBusiness(ProjetBusiness pb) {
+		
+		List<Media> medias=null;
+		List<Commentaire> commentaires=null;
+		medias=getMediaByProject(pb.getCodeProjet());
+		commentaires=getCommentaireProjet(pb.getCodeProjet());
+		if ((medias != null) && (medias.size() > 0)) {
+		for(Media m:medias){
+			deleteMedia(m);
+		}
+		}
+		
+		if ((commentaires != null) && (commentaires.size() > 0)) {
+			for(Commentaire m:commentaires){
+				deleteCommentaire(m);
+			}
+			}
+		
+		em.remove(em.contains(pb) ? pb : em.merge(pb));
+		/*Query req=em.createQuery("delete from Projet p where p.codeProjet=:x");
+		req.setParameter("x", pb.getCodeProjet());
+		 req.executeUpdate();*/
+		return null;
+	}
+
+	@Override
+	public void faireDon(Don d) {
+		// TODO Auto-generated method stub
+		em.persist(d);
+	}
+
+	@Override
+	public void faireDette(Dette de) {
+		// TODO Auto-generated method stub
+		em.persist(de);
+	}
+
+	@Override
+	public void deleteMedia(Media m) {
+		// TODO Auto-generated method stub
+		em.remove(em.contains(m) ? m : em.merge(m));
+	}
+
+	@Override
+	public void deleteCommentaire(Commentaire c) {
+		// TODO Auto-generated method stub
+		em.remove(em.contains(c) ? c : em.merge(c));
 	}
 
 }

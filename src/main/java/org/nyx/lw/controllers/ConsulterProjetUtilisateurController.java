@@ -11,10 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.nyx.lw.entities.Categorie;
 import org.nyx.lw.entities.Projet;
-import org.nyx.lw.entities.ProjetBusiness;
-import org.nyx.lw.entities.Utilisateur;
 import org.nyx.lw.metier.ILendoWalletMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +26,6 @@ public class ConsulterProjetUtilisateurController {
 	@Autowired
 	private ILendoWalletMetier metier;
 
-	@SuppressWarnings("unused")
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody
 	String consulterprojetutilisateur(HttpServletRequest request, HttpServletResponse response)

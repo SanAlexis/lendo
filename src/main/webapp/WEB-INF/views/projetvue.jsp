@@ -13,6 +13,9 @@
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
 <link rel="stylesheet" type="text/css"
@@ -23,186 +26,190 @@
 		<input type="hidden" id="code_p"
 			value=<%=session.getAttribute("codeP")%>> <input
 			type="hidden" id="df"> <input type="hidden" id="decal">
-		<div class="row" id="">
+		<div class="" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
 
 
 		<div class="row" id="">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
-				style="background-color:">
+			<div class="col-lg-offset-2 col-xs-12 col-sm-12 col-md-12 col-lg-8"
+				id="c_frame_video">
+				<div class="embed-responsive embed-responsive-16by9" id="" style="">
+					<iframe title="" class="embed-responsive-item"
+						src="http://www.youtube.com/embed/" frameborder="0"
+						allowfullscreen id="frame_video" width="" height=""></iframe>
+				</div>
+
+			</div>
+		</div>
 
 
-				<!-- Bloc contenant l'image, le titre,le slogan, la description, la catégorie du projet -->
+		<div class="row" id="">
+			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3" id="">
 				<div class="row" id="">
-					<div
-						class="col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-12 col-md-12 col-lg-12"
-						id="" style="background-color:">
-						<!-- IFRAME DE LA VIDEO DE PRESENTATION DU PROJET -->
-						<div class="row" id="">
-							<div
-								class="col-lg-offset-2 col-xs-12 col-sm-12 col-md-12 col-lg-6"
-								id="" style="background-color:">
-								<div class="embed-responsive embed-responsive-16by9" id=""
-									style="">
-									<iframe title="" class="embed-responsive-item"
-										src="http://www.youtube.com/embed/" frameborder="0"
-										allowfullscreen id="frame_video" width="" height=""></iframe>
-								</div>
-							</div>
-						</div>
-						<!-- Ligne contenant la catégorie -->
-						<div class="row" id="" style="background-color: #FBAF3F">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-								id="categorie" style="background-color:"></div>
-						</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
 
-						<div class="row" id="" style="background-color: #FBAF3F">
-							<!-- Colonne contenant l'image du projet-->
-							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2" id=""
-								style="background-color:">
-								<img alt="Image du projet" id="image"
-									class="img-responsive center-block" src="">
-							</div>
+						<img alt="Image du projet" id="image"
+							class="img-thumbnail img-responsive center-block" src="">
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 connecte" id="">
+						<input type="button" name="" value="Participer" placeholder=""
+							class="btn btn-default form-control" id="participer_projet">
 
-							<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10" id=""
-								style="background-color:">
-								<div class="row" id="">
-									<!-- Colonne contenant le titre du projet-->
-									<div
-										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
-										id="titre" style="background-color:"></div>
-									<!-- Colonne contenant le slogan du projet-->
-									<div
-										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
-										id="slogan" style="background-color:"></div>
-									<!-- Colonne contenant la description du projet-->
-									<div
-										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify"
-										id="description" style="background-color:"></div>
-
-									<!-- Barre de progression-->
-									<div
-										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-justify"
-										id="test_progress" style="background-color:"></div>
-									<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-justify"
-										id="progress" style="background-color:"></div>
-									<!-- Colonne contenant le boutton contribuerau projet-->
-									<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center"
-										id="" style="background-color:">
-										<input type="button" name="" value="Participer" placeholder=""
-											class="btn btn-default form-control" id="participer_projet">
-									</div>
-
-
-									<!-- Colonne contenant le type du projet-->
-									
-									<div
-										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
-										id="type_projet" style="background-color:">
-										
-									</div>
-
-
-									<!-- Colonne contenant le temps rstant du projet-->
-									<div
-										class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
-										id="temps_restant" style="background-color:"></div>
-
-
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
-				<!-- Bloc contenant la description, les contributions et les commentaires -->
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-9" id="">
 				<div class="row" id="">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
-						style="background-color:">
-						<!-- Bloc contenant le menu -->
-						<div class="row" id="" style="background-color: #595959">
-							<!-- Presentation detaillée -->
-							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"
-								id="menu_presentation" style="background-color:">
-								<h5 class=" control-label text-center">Présentation
-									détaillée</h5>
-							</div>
-							<!-- Commentaires -->
-							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"
-								id="menu_commentaires" style="background-color:">
-								<h5 class=" control-label text-center">Commentaires</h5>
-							</div>
-							<!-- Contributeurs -->
-							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"
-								id="menu_contributions" style="background-color:">
-								<h5 class=" control-label text-center">Contributions</h5>
-							</div>
-						</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="titre"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="categorie"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="slogan"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="description"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="test_progress"></p>
+						<p id="collecte"></p>
+						<p id="nbre_lenders"></p>
+						<p id="mont_attendu"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="progress"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="temps_restant"></p>
+					</div>
+				</div>
+			</div>
+		</div>
 
-						<!-- Bloc contenant la description détaillée-->
-						<div class="row description_détalliée" id=""
-							style="background-color:">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-								id="contenu_pésentation" style="background-color:"></div>
-						</div>
-						<!-- Bloc contenant la liste des commentaires -->
-						<div class="row liste_commentaires " id=""
-							style="background-color:">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-								id="contenu_commentaires" style="background-color:"></div>
+		<div class="row" id="menu_projet_vue" style="background-color: #FBAF3F">
+			<!-- Presentation detaillée -->
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"
+				id="menu_presentation" style="background-color:">
+				<h5 class=" control-label text-center">Présentation détaillée</h5>
+			</div>
+			<!-- Commentaires -->
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"
+				id="menu_commentaires" style="background-color:">
+				<h5 class=" control-label text-center">Commentaires</h5>
+			</div>
+			<!-- Contributeurs -->
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"
+				id="menu_contributions" style="background-color:">
+				<h5 class=" control-label text-center">Conditions sur le projet</h5>
+			</div>
+		</div>
+		<div class="row " id="" style="background-color:">
+			<div
+				class="description_détalliée col-xs-12 col-sm-12 col-md-12 col-lg-12"
+				id="contenu_pésentation" style="background-color:"></div>
 
+			<div class=" liste_commentaires " id="" style="background-color:">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+					id="contenu_commentaires" style="background-color:"></div>
+
+				<div
+					class="col-md-offset-1 col-lg-offset-1 col-xs-12 col-sm-12 col-md-11 col-lg-11"
+					id="ecrire_commentaires" style="background-color:">
+					<form action="" name="">
+						<div class="" id="" style="">
+							<textarea name="presentation" rows="8" cols=""
+								class="form-control"
+								placeholder="Veuillez entrer votre commentaire ici"
+								id="mon_commentaire"></textarea>
+						</div>
+						<div class=" row " id="" style="">
 							<div
-								class="col-md-offset-1 col-lg-offset-1 col-xs-12 col-sm-12 col-md-6 col-lg-6"
-								id="ecrire_commentaires" style="background-color:">
-								<form action="" name="">
-									<div class="" id="" style="">
-										<textarea name="presentation" rows="8" cols=""
-											class="form-control"
-											placeholder="Veuillez entrer votre commentaire ici"
-											id="mon_commentaire"></textarea>
-									</div>
-									<div class=" row " id="" style="">
-										<div
-											class="col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-sm-3 col-md-3 col-lg-3"
-											id="" style="">
-											<input type="reset" name="" value="X" class="form-control"
-												style="color: red" id="annule_commente">
-										</div>
-										<div class="col-sm-3 col-md-3 col-lg-3" id="" style="">
-											<input type="button" name="" value="ok" placeholder=""
-												class="btn btn-default form-control" id="ok_commente">
-										</div>
-									</div>
-								</form>
+								class="col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-sm-3 col-md-3 col-lg-3"
+								id="" style="">
+								<input type="reset" name="" value="Annuler"
+									class="mon_boutton form-control" style="color: red"
+									id="annule_commente">
+							</div>
+							<div class="col-sm-3 col-md-3 col-lg-3" id="" style="">
+								<button type="button" class="btn btn-default form-control"
+									id="ok_commente" style="font-size:">
+									<span class="glyphicon glyphicon-send  " style="color:white"></span> Commenter
+								</button>
 							</div>
 						</div>
-						<!-- Bloc contenant la liste des contributions-->
-						<div class="row liste_contributions" id=""
-							style="background-color:">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-								id="contenu_contributions" style="background-color:"></div>
+					</form>
+				</div>
+			</div>
+
+
+			<div class="liste_contributions" id="" style="background-color:">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+					id="contenu_contributions" style="background-color:"></div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="taux"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="date_remboursement"></p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">
+						<p id="types_conn"></p>
+					</div>
+				</div>
+
+
+
+
+			</div>
+
+
+
+
+
+			<div class="row" id=""></div>
+			<div class="row" id="">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""></div>
+			</div>
+
+			<div class="row" id="">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""
+					style="background-color:">
+
+
+					<!-- Bloc contenant l'image, le titre,le slogan, la description, la catégorie du projet -->
+					<div class="row" id="">
+						<div
+							class="col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-12 col-md-12 col-lg-12"
+							id="" style="background-color:">
+
+
+							<div class="row" id="" style="background-color: white">
+
+								<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10" id=""
+									style="background-color:">
+									<div class="row" id="">
+										<!-- Colonne contenant le type du projet-->
+
+										<div
+											class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"
+											id="type_projet" style="background-color:"></div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
 
 
 
-		<div class="row" id="">
-			<div class="col-sm-1" id="" style="background-color: black">1</div>
-			<div class="col-sm-1" id="" style="background-color:">2</div>
-			<div class="col-sm-1" id="" style="background-color: blue">3</div>
-			<div class="col-sm-1" id="" style="background-color: green">4</div>
-			<div class="col-sm-1" id="" style="background-color: yellow">5</div>
-			<div class="col-sm-1" id="" style="background-color: purple">6</div>
-			<div class="col-sm-1" id="" style="background-color: indigo">7</div>
-			<div class="col-sm-1" id="" style="background-color: black">8</div>
-			<div class="col-sm-1" id="" style="background-color: grey">9</div>
-			<div class="col-sm-1" id="" style="background-color: red">10</div>
-			<div class="col-sm-1" id="" style="background-color: green">11</div>
-			<div class="col-sm-1" id="" style="background-color: blue">12</div>
-		</div>
+
 
 
 
@@ -248,7 +255,5 @@
 	<script src="<%=request.getContextPath()%>/resources/js/projetvue.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/resources/ckeditor/ckeditor.js"></script>
-
-
 </body>
 </html>

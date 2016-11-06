@@ -6,6 +6,8 @@ import org.nyx.lw.entities.ActiviteProfessionel;
 import org.nyx.lw.entities.Categorie;
 import org.nyx.lw.entities.Commentaire;
 import org.nyx.lw.entities.Contribution;
+import org.nyx.lw.entities.Dette;
+import org.nyx.lw.entities.Don;
 import org.nyx.lw.entities.LendoProjet;
 import org.nyx.lw.entities.LendoUtilisateur;
 import org.nyx.lw.entities.LendoWallet;
@@ -27,9 +29,11 @@ public interface ILendoWalletDao {
 	public ProjetBusiness addProjetBusiness(ProjetBusiness pb);
 	public ProjetFlexible addProjetFlexible(ProjetFlexible pf);
 	public Commentaire addCommentaire(Commentaire c);
+	public void deleteCommentaire(Commentaire c);
 	public Contribution addContribution(Contribution c);
 	public LendoWallet addLendowallet(LendoWallet lw);
 	public Media addMedia(Media m);
+	public void deleteMedia(Media m);
 	public Motivation addMotivation(Motivation m);
 	public Operation addOperation(Operation op);
 	public TypeMedia addTypeMedia(TypeMedia tm);
@@ -68,10 +72,13 @@ public interface ILendoWalletDao {
 	public ProjetFlexible editProjetFlexible(ProjetFlexible pf);
 	public ProjetBusiness editProjetBusiness(ProjetBusiness pb);
 	public Projet deleteProjet(Projet p);
+	public ProjetFlexible deleteProjetFlexible(ProjetFlexible pf);
+	public ProjetBusiness deleteProjetBusiness(ProjetBusiness pb);
 	public boolean checkEmail(String email);
 	public Utilisateur deleteUtilisateur(Utilisateur u);
 	public ActiviteProfessionel consulterActivitePro(Long codeAct);
-	
+	public void faireDon(Don d);
+	public void faireDette(Dette de);
 	public List<Projet> getProjetUtilisateur(Long codeU);
 	public List<Categorie> getCategories();
 	public List<Contribution> getContributionProjetUtilisateur(Long codeU);
@@ -84,5 +91,6 @@ public interface ILendoWalletDao {
 	public boolean isDon(Contribution c);
 	public boolean isFlexible(Projet p);
 	public List<Projet> getProjet();
+	public boolean checkTitre(String titre);
 	
 }

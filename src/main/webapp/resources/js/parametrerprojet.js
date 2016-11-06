@@ -121,6 +121,7 @@ $(function() {
 					data : {codeu:$("#code_p").val()},
 					success : function(response) {
 						alert("Votre Projet a été supprimé avec succès");
+						document.location.href="index";
 					},
 					error : function() {
 						alert('Error while request..');

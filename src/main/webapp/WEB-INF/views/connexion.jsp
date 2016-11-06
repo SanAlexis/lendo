@@ -26,7 +26,7 @@
 <body>
 	<div class="container-ui" id="">
 	<!-- MENU DE LENDO -->
-		<div class="row" id="menur_bar">
+		<div class="" id="menur_bar">
 			<%@ include file="menu.jsp"%>
 		</div>
 		<!-- LOGO DE LENDO -->

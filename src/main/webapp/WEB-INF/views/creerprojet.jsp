@@ -24,7 +24,7 @@
 <body>
 	<div class="container-ui" id="">
 		<!-- MENU DE LENDO -->
-		<div class="row" id="">
+		<div class="" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
 		<!-- ENTETE  -->
@@ -60,7 +60,7 @@
 									placeholder="Veuillez entrer le titre de votre projet" />
 								<span class="glyphicon form-control-feedback" id="glyph-titre"></span>
 								<span class="help-block " id="error-titre">Le titre de votre
-									projet doit contenir entre 10 et 30 caractères</span>
+									projet doit contenir entre 10 et 90 caractères</span>
 							</div>
 							<p>
 								<input type="hidden" name="" value="" id="a" placeholder=""

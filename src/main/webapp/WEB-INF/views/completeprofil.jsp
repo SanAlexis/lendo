@@ -21,7 +21,7 @@
 <body>
 	<div class="container-ui" id="">
 
-		<div class="row" id="">
+		<div class="" id="">
 			<%@ include file="menu.jsp"%>
 		</div>
 		<!-- MENU 1 -->
