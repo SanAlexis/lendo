@@ -10,18 +10,16 @@
 <!-- Affichage de l'icone dans la barre d'adresse du navigateur -->
 <link rel="icon" type="image/png"
 	href="<%=request.getContextPath()%>/resources/fonts/icon.png" />
-<title>Bienvenue sur Lendo, Wake Up Your Dreams</title>
+<title>Bienvenue sur Lendo, Inscription</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.eot" />
 </head>
 <body>
-	<div class="container-ui" id="">
+	<div class="container" id="">
 		<div class="row" id="menur_bar">
 			<%@ include file="menu.jsp"%>
 		</div>

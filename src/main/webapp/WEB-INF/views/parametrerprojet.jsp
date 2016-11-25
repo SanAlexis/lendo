@@ -12,11 +12,9 @@
 <!-- Affichage de l'icone dans la barre d'adresse du navigateur -->
 <link rel="icon" type="image/png"
 	href="<%=request.getContextPath()%>/resources/fonts/icon.png" />
-<title>Complétez votre profil Lendo</title>
+<title>Paramétrez votre projet</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
@@ -28,7 +26,7 @@
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.eot" />
 </head>
 <body>
-	<div class="container-ui" id="">
+	<div class="container" id="">
 		<div class="row" id="s"></div>
 
 		<input type="hidden" id="code_p"
@@ -38,45 +36,45 @@
 		</div>
 		<div class="row" id="">
 			<div class="col-lg-offset-1 col-xs-12 col-sm-12 col-md-2 col-lg-2"
-				id="" style="background-color: ">
-				<img id="da" alt="IMAGE PROJET" class="img-thumbnail img-responsive center-block"
-					src="">
+				id="" style="background-color:">
+				<img id="da" alt="IMAGE PROJET"
+					class="img-thumbnail img-responsive center-block" src="">
+			<div
+				class="glyphicon glyphicon-camera"
+				id="modifier_photo" style="background-color: #595959; height: 25px">Modifier</div>
+	
 			</div>
 
 		</div>
+		<div class="row" id="">
+				</div>
 		<div class="row" id="">
 			<div
-				class="glyphicon glyphicon-camera col-lg-offset-1 col-xs-12 col-sm-12 col-md-12 col-lg-2"
-				id="modifier_photo" style="background-color: #595959; height: 25px">Modifier</div>
-		</div>
-		<div class="row" id="">
-		<div
-					class="col-xs-offset-0 col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-xs-12 col-sm-3 col-md-3 col-lg-3"
-					id="" style="background-color:">
+				class="col-xs-offset-0 col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-xs-12 col-sm-3 col-md-3 col-lg-3"
+				id="" style="background-color:">
 
-					<div class="form-group">
-						<input type="button" name="" value="Supprimer mon projet" placeholder=""
-							class="btn btn-default form-control" disabled="disabled"
-							id="delete_projet">
-					</div>
-				</div>
-				<div
-					class="col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-3 col-md-3 col-lg-3"
-					id="" style="background-color:">
-
-					<div class="form-group">
-						<input type="button" name="" value="Publier mon Projet" placeholder=""
-							class="btn btn-default form-control" disabled="disabled"
-							id="publier">
-					</div>
+				<div class="form-group">
+					<input type="button" name="" value="Supprimer mon projet"
+						placeholder="" class="btn btn-default form-control"
+						disabled="disabled" id="delete_projet">
 				</div>
 			</div>
-		
+			<div
+				class="col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 col-xs-12 col-sm-3 col-md-3 col-lg-3"
+				id="" style="background-color:">
+
+				<div class="form-group">
+					<input type="button" name="" value="Publier mon Projet"
+						placeholder="" class="btn btn-default form-control"
+						disabled="disabled" id="publier">
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" id="canvas_image"
 				style="background-color:">
-				<canvas id="image_canvas"
-					style="background-color: ; height: ; width: "></canvas>
+				<canvas id="image_canvas" style="background-color:; height:; width:"></canvas>
 				<div class="affiche col-xs-12 col-sm-12 col-md-12 col-lg-12"
 					id="affiche_image"></div>
 
@@ -113,7 +111,7 @@
 			</div>
 			<!-- ESPACE VIDE DE DROITE -->
 			<div class="hidden-xs col-sm-2 col-md-2 col-lg-2" id=""
-				style="background-color: ">
+				style="background-color:">
 				<h4 class="text-center"></h4>
 			</div>
 		</div>
@@ -121,9 +119,9 @@
 		<!-- Champs permettant de stocker le code du projet -->
 		<input type="hidden" name="" value=<%=session.getAttribute("codeP")%>
 			placeholder="Code projet" class="form-control" id="code_projet">
-	<input type="hidden" name="" value="" placeholder=""
-								id="check_debut" class="form-control"> <input type="hidden" name="" value="" placeholder=""
-			id="check_ifimage" class="form-control">
+		<input type="hidden" name="" value="" placeholder="" id="check_debut"
+			class="form-control"> <input type="hidden" name="" value=""
+			placeholder="" id="check_ifimage" class="form-control">
 		<div class="row" id="">
 			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10" id=""
 				style="background-color:">
@@ -434,8 +432,9 @@
 								<div
 									class="col-sm-offset-6 col-md-offset-6 col-lg-offset-6 col-sm-3 col-md-3 col-lg-3"
 									id="" style="">
-									<input type="reset" name="" value="X" class="mon_boutton form-control"
-										style="color: red" id="annule_presentation">
+									<input type="reset" name="" value="X"
+										class="mon_boutton form-control" style="color: red"
+										id="annule_presentation">
 								</div>
 								<div class="col-sm-3 col-md-3 col-lg-3" id="" style="">
 									<input type="button" name="" value="ok" placeholder=""
@@ -659,9 +658,9 @@
 			</div>
 			<!-- ESPACE VIDE DE DROITE -->
 			<div class="hidden-xs col-sm-2 col-md-2 col-lg-2" id=""
-				style="background-color: ">
+				style="background-color:">
 				<h4 class="text-center"></h4>
-				
+
 			</div>
 		</div>
 	</div>

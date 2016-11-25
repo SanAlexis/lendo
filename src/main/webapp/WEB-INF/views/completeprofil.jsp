@@ -12,14 +12,14 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
+	<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.eot" />
 </head>
 <body>
-	<div class="container-ui" id="">
+	<div class="container" id="">
 
 		<div class="" id="">
 			<%@ include file="menu.jsp"%>
@@ -145,7 +145,7 @@
 						<form action="" name="">
 							<div class="" id="" style="">
 								<input type="date" name="" value=""
-									placeholder="date de naissance" class="form-control" id="date">
+									placeholder="date de naissance" class="form-control" id="dateu">
 								<input type="hidden" name="" value="" placeholder=""
 									id="check_date" class="form-control">
 							</div>

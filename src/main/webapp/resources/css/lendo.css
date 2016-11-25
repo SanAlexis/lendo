@@ -6,6 +6,9 @@
 	background-color: #EEE8CD;
 	
 }
+.container{
+	width:100%;
+}
 
 .ws_images{
 	margin: 10px;
@@ -13,8 +16,8 @@
 }
 .cadre_projet2{
 	border-radius: 5px;
-	width:90%;
-	margin: 2px;
+	width:98%;
+	margin: 1px;
 	background-color: white;
 	border-width:2px;
  border-style: groove;
@@ -29,6 +32,11 @@
 	background-color: #FBAF3F;
 	list-style-position: inside;
 	list-style-type: none;
+}
+
+#modifier_photo{
+	position: fixed;
+	z-index:100;
 }
 
 #menudusite{

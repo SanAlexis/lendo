@@ -15,14 +15,14 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
+	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.svg" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.eot" />
 </head>
 <body>
-	<div class="container-ui" id="">
+	<div class="container" id="">
 		<!-- MENU DE LENDO -->
 		<div class="" id="">
 			<%@ include file="menu.jsp"%>
@@ -60,10 +60,14 @@
 									placeholder="Veuillez entrer le titre de votre projet" />
 								<span class="glyphicon form-control-feedback" id="glyph-titre"></span>
 								<span class="help-block " id="error-titre">Le titre de votre
-									projet doit contenir entre 10 et 90 caractères</span>
+									le titre doit contenir entre 10 et 90 caractères ou est déja utilisé</span>
 							</div>
 							<p>
 								<input type="hidden" name="" value="" id="a" placeholder=""
+									class="form-control" />
+							</p>
+							<p>
+								<input type="hidden" name="" value="" id="test_titre0" placeholder=""
 									class="form-control" />
 							</p>
 				</div>

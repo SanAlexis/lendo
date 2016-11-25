@@ -17,6 +17,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.nyx.lw.entities.Categorie;
+import org.nyx.lw.entities.Media;
 import org.nyx.lw.entities.ProjetBusiness;
 import org.nyx.lw.entities.ProjetFlexible;
 import org.nyx.lw.entities.Utilisateur;
@@ -105,6 +106,24 @@ public class CreerProjetController {
 		}
 		
 		
+	}
+	
+	
+	@RequestMapping(value = "/testtitredisponible", method = RequestMethod.POST)
+	// @RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String testtitredisponible(HttpServletRequest request,
+			HttpServletResponse response) throws JsonGenerationException,
+			JsonMappingException, IOException {
+		// Récupération du code de l'utilisateur
+		String titre = request.getParameter("titre").toUpperCase();
+		
+		boolean result = metier.checkTitre(titre);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		// transformation de l'objet java en json
+		String json = objectMapper.writeValueAsString(result);
+		return json;
 	}
 
 }

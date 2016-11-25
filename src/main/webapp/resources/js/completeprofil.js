@@ -154,8 +154,8 @@ function loaduser(){
 			/*
 			 * date de naissance
 			 */
-			checkinfo("check_date", "date", "", "affiche_date", "Entrez votre date de naissance"," Clickez pour modifier votre date de naissance","annule_date","ok_date");
-			updateinfo("ok_date","updateuserdatenaissance","POST","date","code_utilisateur","date","check_date","affiche_date","annule_date","Erreur : votre date de naissance n'a pas pu être mise à jour, veuillez reessayer plus tard");
+			checkinfo("check_date", "dateu", "", "affiche_date", "Entrez votre date de naissance"," Clickez pour modifier votre date de naissance","annule_date","ok_date");
+			updateinfo("ok_date","updateuserdatenaissance","POST","date","code_utilisateur","dateu","check_date","affiche_date","annule_date","Erreur : votre date de naissance n'a pas pu être mise à jour, veuillez reessayer plus tard");
 			/*
 			 * lieu de naissance
 			 */

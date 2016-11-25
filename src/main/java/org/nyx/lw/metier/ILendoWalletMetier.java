@@ -21,7 +21,6 @@ import org.nyx.lw.entities.ProjetBusiness;
 import org.nyx.lw.entities.ProjetFlexible;
 import org.nyx.lw.entities.SecteurActivite;
 import org.nyx.lw.entities.SecteurGeographique;
-import org.nyx.lw.entities.TypeMedia;
 import org.nyx.lw.entities.Utilisateur;
 
 

@@ -31,7 +31,7 @@
 				</form>
 
 			</div>
-			<div class=" col-sm-offset-1 col-md-offset-1 col-lg-1 col-xs-12 col-sm-1 col-md-1 col-lg-1"
+			<div class=" col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-12 col-sm-1 col-md-1 col-lg-1"
 				id="" style="background-color: ">
 				<ul class="nav navbar-nav">
 					<li class="connecte" ><a href="creerprojet"

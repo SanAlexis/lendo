@@ -17,13 +17,44 @@ $(function() {
 				var a = $('#titre').val();
 				var b = longueur(a, 10, 90);
 				$('#a').attr('value', b);
+				//testdisponibilitetitre(a,"test_titre0");
 				check();
 				if (b == 1) {
-					$('#div-titre').removeClass('has-warning').addClass(
-							'has-success').addClass('has-feedback');
-					$('#glyph-titre').removeClass('glyphicon-warning-sign')
-							.addClass('glyphicon-ok');
-					masque("#error-titre");
+					
+					
+					
+					$.ajax({
+						type : "post",
+						url : "testtitredisponible",
+						cache : false,
+						data : 'titre=' + a,
+						success : function(response) {
+							var r = eval('(' + response + ')');
+							$("#test_titre0").attr("value",r);
+							check();
+							if(r==true){
+								$('#div-titre').removeClass('has-success').addClass(
+								'has-warning').addClass('has-feedback');
+						$('#glyph-titre').removeClass('glyphicon-ok').addClass(
+								'glyphicon-warning-sign');
+						affiche("#error-titre");
+							}else{
+								$('#div-titre').removeClass('has-warning').addClass(
+								'has-success').addClass('has-feedback');
+						$('#glyph-titre').removeClass('glyphicon-warning-sign')
+								.addClass('glyphicon-ok');
+						masque("#error-titre");
+							}
+						},
+						error : function() {
+							alert('Error while request..');
+						}
+					});
+					
+					
+					
+					
+					
 				} else {
 					$('#div-titre').removeClass('has-success').addClass(
 							'has-warning').addClass('has-feedback');
@@ -171,7 +202,7 @@ function check() {
 	var remboursement = $('#periode').val();
 		var date = new Date();
 		var date1 = new Date(remboursement);
-	if ($('#a').val() == 1 && $('#b').val() == 1 && $('#c').val() == 1 && $('#d').val() == 1) {
+	if ($('#a').val() == 1 && $('#test_titre0').val()=="false" && $('#b').val() == 1 && $('#c').val() == 1 && $('#d').val() == 1) {
 		if($(':radio[name="type_contribution"]:checked').val()=="don"){
 			$("#submit").removeAttr("disabled");
 		}

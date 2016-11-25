@@ -292,6 +292,7 @@ function projet_temp_restant() {
 	 * décalage
 	 */
 	var diff = $('#df').val() - current - $('#decal').val();
+	
 	/*
 	 * nombre de jours restants
 	 */
@@ -323,17 +324,22 @@ function projet_temp_restant() {
 	var nbre_seconde = Math.floor(diff3);
 	// alert(nbre_jour+" Jours "+nbre_heure+" Heures "+nbre_minute+" Minutes
 	// "+nbre_seconde+ " Secondes");
-	
-	if(nbre_jour==0){
-		$('#temps_restant').html(
-				"<h4>Les contributions à ce projet seront cloturées dans: " + nbre_heure
-						+ " Heures " + nbre_minute + " Minutes " + nbre_seconde
-						+ " Secondes" + "</h4>");
+if($('#df').val() < $('#date').val()){
+	$("#participer_projet").attr("type","hidden");
+	$('#temps_restant').html(
+			"<h4>Projet cloturé</h4>");
 	}else{
-		$('#temps_restant').html(
-				"<h4>Les contributions à ce projet seront cloturées dans: " + nbre_jour + " Jours " + nbre_heure
-						+ " Heures " + nbre_minute + " Minutes " + nbre_seconde
-						+ " Secondes" + "</h4>");
+		if(nbre_jour==0){
+			$('#temps_restant').html(
+					"<h4>Cloture dans: " + nbre_heure
+							+ " Heures " + nbre_minute + " Minutes " + nbre_seconde
+							+ " Secondes" + "</h4>");
+		}else{
+			$('#temps_restant').html(
+					"<h4>Cloture dans: " + nbre_jour + " Jours " + nbre_heure
+							+ " Heures " + nbre_minute + " Minutes " + nbre_seconde
+							+ " Secondes" + "</h4>");
+		}
 	}
 	
 

@@ -217,6 +217,10 @@ $(function() {
 
 	$("#modifier_photo").hide();
 	$("#da").on('mouseover', function() {
+		$("#modifier_photo").css('left', $('#da').offset().left);
+		$("#modifier_photo").css('width', $('#da').innerWidth());
+		$("#modifier_photo").css('top', $('#da').offset().top+$('#da').innerHeight()-$('#modifier_photo').innerHeight());
+		
 		$("#modifier_photo").show();
 	});
 	$("#da").on('mouseout', function() {
@@ -224,6 +228,13 @@ $(function() {
 		setTimeout(function() {
 			$("#modifier_photo").hide();
 		}, 5000);
+	});
+	$("#modifier_photo").on('mouseover', function() {
+		$("#modifier_photo").css('left', $('#da').position().left);
+		$("#modifier_photo").css('width', $('#da').innerWidth());
+		$("#modifier_photo").css('top', $('#da').offset().top+$('#da').innerHeight()-$('#modifier_photo').innerHeight());
+		
+		$("#modifier_photo").show();
 	});
 	$("#modifier_photo").on('click', function() {
 

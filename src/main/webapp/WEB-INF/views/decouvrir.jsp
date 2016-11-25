@@ -11,8 +11,6 @@
 <title>Bienvenue sur Lendo, Wake Up Your Dreams</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/bootstrap-theme.min.css" />
 	<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/lendo.css" />
 <link rel="stylesheet" type="text/css"
@@ -21,7 +19,7 @@
 	href="<%=request.getContextPath()%>/resources/fonts/glyphicons-halflings-regular.eot" />
 </head>
 <body>
-	<div class="container-ui" id="">
+	<div class="container" id="">
 <input type="hidden" id="cat" value=<%=  session.getAttribute( "codecat" ) %>>
 		<!-- 
 		<div class="row" id="">

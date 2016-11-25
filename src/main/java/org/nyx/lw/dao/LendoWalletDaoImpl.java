@@ -507,7 +507,7 @@ public class LendoWalletDaoImpl implements ILendoWalletDao{
 	public boolean checkTitre(String titre) {
 		boolean userFound = false;
 		Query req=em.createQuery("select c from Projet c where c.titre=:x");
-		req.setParameter("x", "%"+titre+"%");
+		req.setParameter("x", titre);
 		List list = req.getResultList();
 		if(!list.isEmpty()) userFound=true;
 		return userFound;

@@ -44,6 +44,30 @@ function testformatemail(str) {
  * fonction permettant de tester la disponiblité d'une adresse email
  */
 
+function testdisponibilitetitre(titre,champ) {
+		$.ajax({
+			type : "post",
+			url : "testtitredisponible",
+			cache : false,
+			data : 'titre=' + titre,
+			success : function(response) {
+				var r = eval('(' + response + ')');
+				$("#" + champ).attr("value",r);
+			},
+			error : function() {
+				alert('Error while request..');
+			}
+		});
+	
+
+}
+
+
+
+/*
+ * fonction permettant de tester la disponiblité d'un titre de projet
+ */
+
 function testdisponibiliteemail(email) {
 	var a = testformatemail(email);
 	if (a == 1) {
@@ -66,6 +90,9 @@ function testdisponibiliteemail(email) {
 	}
 
 }
+
+
+
 /*
  * Fonction permettant de masquer un element
  */
@@ -1193,7 +1220,7 @@ function loadprojetallprojet() {
 						var date_fin = new Date(date_fin_campagne).toLocaleDateString();
 						var fin ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">Cloture : '+date_fin+'</div></div>';
 						var localisation ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">'+projet[id].ville+'-'+projet[id].pays+'</div></div>';
-						var catego ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id=""><a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
+						var catego ='<div class="row" id=""><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="">Catégorie: <a href="decouvrir?cat='+ projet[id].categorie.codeCategorie+'">'
 						+ projet[id].categorie.libelle
 						+ '</a></div></div>';
 						var i;
