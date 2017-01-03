@@ -1260,3 +1260,13 @@ function ajax_requete_lance_desactive_fenetre(){
 function ajax_requete_termine_active_fenetre(){
 	$("#ajax_req_desactive").modal("hide");
 }
+function menu(){alert();
+if (window.innerWidth < 992) {
+	$("#menudusite").addClass('collapse out');
+	$("#btn-menu-principal").click(function() {
+		$("#menudusite").collapse('toggle');
+	});
+} else {
+	$("#menudusite").removeClass('collapse out');
+}
+}

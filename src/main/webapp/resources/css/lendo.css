@@ -41,12 +41,18 @@
 
 #menudusite{
 	z-index:99;
+	background-color: #652C90;
 }
 
 .link_result{
 	z-index:101;
 }
 
+.affix {
+      top: 0;
+      width: 100%;
+  }
+  
 .link_result:hover{
 	background-color: #595959;
 	color: #FBAF3F;
